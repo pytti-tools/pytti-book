@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usage &#8212; Python Text-To-Image Tools</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="Settings.html" />
+    <link rel="prev" title="Setup" href="Setup.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Text-To-Image Tools</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to PyTTI
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Setup.html">
+   Setup
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Usage
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Usage.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/pytti-tools/pytti-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/pytti-tools/pytti-book/issues/new?title=Issue%20on%20page%20%2FUsage.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/pytti-tools/pytti-book/edit/master/docs/Usage.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#yaml-configuration-crash-course">
+   YAML Configuration Crash-Course
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#config-default-yaml">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       config/default.yaml
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#config-conf-yaml">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       config/conf/*.yaml
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-usage">
+   Notebook Usage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multirun-in-the-notebook-intermediate">
+     “Multirun” in the Notebook (Intermediate)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#specifying-multiple-override-configs">
+       Specifying multiple override configs
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#config-groups-advanced">
+     Config Groups (advanced)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli-usage">
+   CLI usage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cli-superpowers">
+     CLI Superpowers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Usage</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#yaml-configuration-crash-course">
+   YAML Configuration Crash-Course
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#config-default-yaml">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       config/default.yaml
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#config-conf-yaml">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       config/conf/*.yaml
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-usage">
+   Notebook Usage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multirun-in-the-notebook-intermediate">
+     “Multirun” in the Notebook (Intermediate)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#specifying-multiple-override-configs">
+       Specifying multiple override configs
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#config-groups-advanced">
+     Config Groups (advanced)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli-usage">
+   CLI usage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cli-superpowers">
+     CLI Superpowers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>If you are running pytti in google colab, <a class="reference external" href="https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb">this notebook</a> is recommended.</p>
+<p>If you would like a notebook experience but are not using colab, please use the <a class="reference external" href="https://github.com/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI_local.ipynb">“_local”</a> notebook instead.</p>
+<p>The following usage notes are written with the _local notebook and command-line (CLI) use in mind.</p>
+<div class="section" id="yaml-configuration-crash-course">
+<h2>YAML Configuration Crash-Course<a class="headerlink" href="#yaml-configuration-crash-course" title="Permalink to this headline">¶</a></h2>
+<p>PYTTI uses <a class="reference external" href="https://omegaconf.readthedocs.io/">OmegaConf</a>/<a class="reference external" href="https://hydra.cc/docs/">Hydra</a> for configuring experiments (i.e. “runs”, “renders”, “generating images”, etc.). In this framework, experiments are specified using text files that contain the parameters we want to use in our experiment.</p>
+<p>A starting set of <a class="reference external" href="https://github.com/pytti-tools/pytti-notebook/tree/main/config">configuration files</a> is provided with the notebook repository. If you followed the setup instructions above, this <code class="docutils literal notranslate"><span class="pre">config/</span></code> folder should be in the same directory as your notebooks. If you are using the CLI, create a “config” folder with a “conf” subfolder in your current working directory.</p>
+<div class="section" id="config-default-yaml">
+<h3><code class="docutils literal notranslate"><span class="pre">config/default.yaml</span></code><a class="headerlink" href="#config-default-yaml" title="Permalink to this headline">¶</a></h3>
+<p>This file contains the default settings for all available parameters. The colab notebook can be used as a reference for how to use individual settings and what options can be used for settings that expect specific values or formats.</p>
+<p>Entries in this file are in the form <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code>. Feel free to modify this file to specify defaults that are useful for you, but we recommend holding off on tampering with <code class="docutils literal notranslate"><span class="pre">default.yaml</span></code> until after you are comfortable specifying your experiments with an override config (discussed below).</p>
+</div>
+<div class="section" id="config-conf-yaml">
+<h3><code class="docutils literal notranslate"><span class="pre">config/conf/*.yaml</span></code><a class="headerlink" href="#config-conf-yaml" title="Permalink to this headline">¶</a></h3>
+<p>PYTTI requires that you specify a “config node” with the <code class="docutils literal notranslate"><span class="pre">conf</span></code> argument. The simplest use here is to add a yaml file in <code class="docutils literal notranslate"><span class="pre">config/conf/</span></code> with a name that somehow describes your experiment. A <code class="docutils literal notranslate"><span class="pre">demo.yaml</span></code> is provided.</p>
+<p><strong>IMPORTANT</strong>: The first line of any non-default YAML file you create needs to be:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># @package _global_
+</pre></div>
+</div>
+<p>for it to work properly in the current config scheme. See the <code class="docutils literal notranslate"><span class="pre">demo.yaml</span></code> as an example <a class="reference external" href="https://github.com/pytti-tools/pytti-notebook/blob/main/config/conf/demo.yaml#L1">here</a></p>
+<p>As with <code class="docutils literal notranslate"><span class="pre">default.yaml</span></code>, each parameter should appear on its own line in the form <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code>. Starting a line with ‘#’ is interpreted as a comment: you can use this to annotate your config file with your own personal notes, or deactivate settings you want ignored.</p>
+</div>
+</div>
+<div class="section" id="notebook-usage">
+<h2>Notebook Usage<a class="headerlink" href="#notebook-usage" title="Permalink to this headline">¶</a></h2>
+<p>The first code cell in the notebook tells PYTTI where to find your experiment configuration. The name of your configuration gets stored in the <code class="docutils literal notranslate"><span class="pre">CONFIG_OVERRIDES</span></code> variable. When you clone the notebook repo, the variable is set to <code class="docutils literal notranslate"><span class="pre">demo.yaml</span></code>.</p>
+<p>Executing the “RUN IT!” cell in the notebook will load the settings in <code class="docutils literal notranslate"><span class="pre">default.yaml</span></code> first, then the contents of the filename you gave to <code class="docutils literal notranslate"><span class="pre">CONFIG_OVERRIDES</span></code> are loaded and these settings will override the defaults. Therefore, you only need to explicitly specify settings you want to be different from the defaults given in <code class="docutils literal notranslate"><span class="pre">default.yaml</span></code>.</p>
+<div class="section" id="multirun-in-the-notebook-intermediate">
+<h3>“Multirun” in the Notebook (Intermediate)<a class="headerlink" href="#multirun-in-the-notebook-intermediate" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="specifying-multiple-override-configs">
+<h4>Specifying multiple override configs<a class="headerlink" href="#specifying-multiple-override-configs" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">CONFIG_OVERRIDES</span></code> variable can accept a list of filenames. All files should be located in <code class="docutils literal notranslate"><span class="pre">config/conf</span></code> and follow the override configuration conventions described above. If multiple config filenames are provided, they will be iterated over sequentially.</p>
+<p>As a simple example, let’s say we wanted try three different prompts against the default settings. To achieve this, we will treat each set of prompts as its own “experiment” we want to run, so we’ll need to create two override config files, one for each text prompt (“scene”) we want to specify:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/conf/experiment1.yaml</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># @package _global_
+scenes: fear is the mind killer
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/conf/experiment2.yaml</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># @package _global_
+scenes: it is by will alone I set my mind in motion
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Now to run both of these experiments, in the second cell of the notebook we change:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_OVERRIDES=&quot;demo.yaml&quot;
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_OVERRIDES= [ &quot;experiment1.yaml&quot; , &quot;experiment2.yaml&quot; ]
+</pre></div>
+</div>
+<p>(whitespace exaggerated for clarity.)</p>
+</div>
+</div>
+<div class="section" id="config-groups-advanced">
+<h3>Config Groups (advanced)<a class="headerlink" href="#config-groups-advanced" title="Permalink to this headline">¶</a></h3>
+<p>More details on this topic in the <a class="reference external" href="https://hydra.cc/docs/tutorials/basic/your_first_app/config_groups/">hydra docs</a> and great examples in the <a class="reference external" href="https://vissl.readthedocs.io/en/latest/hydra_config.html">vissl docs</a>.</p>
+<p>Hydra supports creating nested hierarchies of config files called “config groups”. The hierarchy is organized using subfolders. To select a particular config file from a group, you use the same <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> syntax as the normal pytti parameters, except here the <code class="docutils literal notranslate"><span class="pre">key</span></code> is the name of a subdirectory you created and <code class="docutils literal notranslate"><span class="pre">value</span></code> is the name of a yaml file (without the .yaml extension) or folder in that subdirectory.</p>
+<p>To demonstrate how this works, let’s create a <code class="docutils literal notranslate"><span class="pre">motion</span></code> parameter group for storing sets of animation transformations we like to use.</p>
+<p>First, we create a <code class="docutils literal notranslate"><span class="pre">motion</span></code> folder in <code class="docutils literal notranslate"><span class="pre">config/conf</span></code>, and add yaml files with the settings we want in that folder. So maybe something like:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/conf/motion/zoom_in_slow.yaml</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># @package _global_
+animation_mode: 3D
+translate_z_3D: 10
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/conf/motion/zoom_in_fast.yaml</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># @package _global_
+animation_mode: 3D
+translate_z_3D: 100
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/conf/motion/zoom_out_spinning.yaml</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># @package _global_
+animation_mode: 3D
+translate_z_3D: -50
+rotate_2D: 10
+</pre></div>
+</div>
+</li>
+</ul>
+<p>The config layout might look something like this now:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>├── pytti-notebook/
+│   ├── config/
+|   │   ├── default.yaml
+|   │   ├── conf/
+|   │   |   ├── demo.yaml
+|   │   |   ├── experiment1.yaml
+|   │   |   ├── experiment2.yaml
+|   │   |   ├── motion/
+|   │   |   |   ├── zoom_in_slow.yaml
+|   │   |   |   ├── zoom_in_fast.yaml
+|   │   |   |   └── zoom_out_spinng.yaml
+</pre></div>
+</div>
+<p>Now if we want to add one of these effects to an experiment, all we have to do is name it in the configuration like so:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/conf/experiment1.yaml</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># @package _global_
+scenes: fear is the mind killer
+motion: zoom_in_slow
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="cli-usage">
+<h2>CLI usage<a class="headerlink" href="#cli-usage" title="Permalink to this headline">¶</a></h2>
+<p>To e.g. run the configuration specified by <code class="docutils literal notranslate"><span class="pre">config/conf/demo.yaml</span></code>, our command would look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -m pytti.workhorse conf=demo
+</pre></div>
+</div>
+<p>Not that on the command line the convention is now <code class="docutils literal notranslate"><span class="pre">key=value</span></code> whereas it was <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> in the yaml files. Same keys and values work here, just need that <code class="docutils literal notranslate"><span class="pre">=</span></code> sign.</p>
+<p>We can actually override arguments from the command line directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># to make this easier to read, I&#39;m</span>
+<span class="c1"># using the line continuation character: &quot;\&quot;</span>
+
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytti</span><span class="o">.</span><span class="n">workhorse</span> \
+    <span class="n">conf</span><span class="o">=</span><span class="n">demo</span> \
+    <span class="n">steps_per_scene</span><span class="o">=</span><span class="mi">300</span> \
+    <span class="n">translate_x</span><span class="o">=</span><span class="mi">5</span> \
+    <span class="n">seed</span><span class="o">=</span><span class="mi">123</span>
+</pre></div>
+</div>
+<div class="section" id="cli-superpowers">
+<h3>CLI Superpowers<a class="headerlink" href="#cli-superpowers" title="Permalink to this headline">¶</a></h3>
+<hr class="docutils" />
+<p>WARNING: invoking multi-run from the CLI will likely re-download vgg weights for LPIPS. This will hopefully be patched soon, but until it is, please be aware that:</p>
+<ul class="simple">
+<li><p>downloading large files repeatedly may eat up your internet quota if that’s how your provider bills you.</p></li>
+<li><p>these files may consume disk space. To free up space, delete any vgg.pth files in subdirectories of the “outputs” folders pytti creates in multirun mode.</p></li>
+</ul>
+<hr class="docutils" />
+<p>A superpower commandline hydra gives us is the ability to specify multiple values for the same key, we just need to add the argument <code class="docutils literal notranslate"><span class="pre">--multirun</span></code>. For example, we can do this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -m pytti.workhorse \
+    --multirun \
+    conf=experiment1,experiment2
+</pre></div>
+</div>
+<p>This will first run <code class="docutils literal notranslate"><span class="pre">conf/experiment1.yaml</span></code> then <code class="docutils literal notranslate"><span class="pre">conf/experiment2.yaml</span></code>. Simple as that.</p>
+<p>The real magic here is that we can provide multiple values like this <em>to multiple keys</em>, creating permutations of settings.</p>
+<p>Lets say that we wanted to compare our two experiments across several different random seeds:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytti</span><span class="o">.</span><span class="n">workhorse</span> \
+  <span class="o">--</span><span class="n">multirun</span> \
+  <span class="n">conf</span><span class="o">=</span><span class="n">experiment1</span><span class="p">,</span><span class="n">experiment2</span> \
+  <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">1001</span>
+</pre></div>
+</div>
+<p>Simple as that, pytti will now run each experiment for all three seeds provided, giving us six experiments.</p>
+<p>This works for parameter groups as well (you may have already figured out that <code class="docutils literal notranslate"><span class="pre">conf</span></code> <em>is</em> a parameter group, so we’ve actually already been using this feature with parameter groups):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># to make this easier to read, I&#39;m</span>
+<span class="c1"># using the line continuation character: &quot;\&quot;</span>
+
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytti</span><span class="o">.</span><span class="n">workhorse</span> \
+  <span class="n">conf</span><span class="o">=</span><span class="n">experiment1</span><span class="p">,</span><span class="n">experiment2</span> \
+  <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">1001</span> \
+  <span class="n">motion</span><span class="o">=</span><span class="n">zoom_in_slow</span><span class="p">,</span><span class="n">zoom_in_fast</span><span class="p">,</span><span class="n">zoom_and_spin</span>
+</pre></div>
+</div>
+<p>And just like that, we’re permuting two prompts against 3 different motion transformations, and 3 random seeds. That tiny chunk of code is now generating 18 experiments for us.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Setup.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Setup</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Settings.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By David Marx<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
