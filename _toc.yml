@@ -9,4 +9,5 @@ parts:
     - file: Setup
     - file: Usage
   - caption: Reference
+    chapters:
     - file: Settings
