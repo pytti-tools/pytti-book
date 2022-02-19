@@ -11,3 +11,4 @@ parts:
   - caption: Reference
     chapters:
     - file: Settings
+    - file: MiscResources
