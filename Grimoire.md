@@ -19,6 +19,8 @@
 * If there are particular artists whose style is similar to what you are after, name the artist and/or style
   * "a sketch of a horse" vs.
   * "a minimalist line sketch of a horse by Pablo Picasso"
+* Use an `init_image` to promote a particular layout of structural elements of your image.
+  * Even a rough sketch can be surprisingly effective here.
 
 ## Why does this sort of thing work?
 
@@ -32,18 +34,14 @@ The following terms and phrases are potentially useful for promoting desired qua
 
 ## Prompting for Photorealism
 
-### Prefixes
-
 * A Photograph of
 * A photorealistic rendering of
 * An ultra-high resolution photograph of
-
-### Suffixes
-
 * trending on Artstation
 * 4k UHD
 * rendered in Unity
 * macrophotography
+* hyperrealistic
 
 ## Artists and styles
 
