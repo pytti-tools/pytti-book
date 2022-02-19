@@ -9,6 +9,7 @@ parts:
     - file: Setup
     - file: Usage
   - caption: Making Art
+    chapters:
     - file: Grimoire
   - caption: Reference
     chapters:
