@@ -1,3 +1,5 @@
+# Settings
+
 `scenes:` Descriptions of scenes you want generated, separated by `||`. Each scene can contain multiple prompts, separated by `|`.
 
 *Example:* `Winter sunrise | icy landscape || Winter day | snowy skyline || Winter sunset | chilly air || Winter night | clear sky` would go through several winter scenes.

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; Python Text-To-Image Tools</title>
+    <title>Settings &#8212; Python Text-To-Image Tools</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -117,6 +117,18 @@
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Settings
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -200,14 +212,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -215,26 +219,20 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><no title></h1>
+                <h1>Settings</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <p><code class="docutils literal notranslate"><span class="pre">scenes:</span></code> Descriptions of scenes you want generated, separated by <code class="docutils literal notranslate"><span class="pre">||</span></code>. Each scene can contain multiple prompts, separated by <code class="docutils literal notranslate"><span class="pre">|</span></code>.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="settings">
+<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">scenes:</span></code> Descriptions of scenes you want generated, separated by <code class="docutils literal notranslate"><span class="pre">||</span></code>. Each scene can contain multiple prompts, separated by <code class="docutils literal notranslate"><span class="pre">|</span></code>.</p>
 <p><em>Example:</em> <code class="docutils literal notranslate"><span class="pre">Winter</span> <span class="pre">sunrise</span> <span class="pre">|</span> <span class="pre">icy</span> <span class="pre">landscape</span> <span class="pre">||</span> <span class="pre">Winter</span> <span class="pre">day</span> <span class="pre">|</span> <span class="pre">snowy</span> <span class="pre">skyline</span> <span class="pre">||</span> <span class="pre">Winter</span> <span class="pre">sunset</span> <span class="pre">|</span> <span class="pre">chilly</span> <span class="pre">air</span> <span class="pre">||</span> <span class="pre">Winter</span> <span class="pre">night</span> <span class="pre">|</span> <span class="pre">clear</span> <span class="pre">sky</span></code> would go through several winter scenes.</p>
 <p><strong>Advanced:</strong> weight prompts with <code class="docutils literal notranslate"><span class="pre">description:weight</span></code>. Higher <code class="docutils literal notranslate"><span class="pre">weight</span></code> values will be prioritized by the optimizer, and negative <code class="docutils literal notranslate"><span class="pre">weight</span></code> values will remove the description from the image. The default weight is <span class="math notranslate nohighlight">\(1\)</span>. Weights can also be functions of <span class="math notranslate nohighlight">\(t\)</span> to change over the course of an animation.</p>
 <p><em>Example scene:</em> <code class="docutils literal notranslate"><span class="pre">blue</span> <span class="pre">sky:10|martian</span> <span class="pre">landscape|red</span> <span class="pre">sky:-1</span></code> would try to turn the martian sky blue.</p>
@@ -341,6 +339,7 @@
 <li><p>black: fill with black</p></li>
 <li><p>smear: sample closest pixel in image</p></li>
 </ul>
+</div>
 
     <script type="text/x-thebe-config">
     {
