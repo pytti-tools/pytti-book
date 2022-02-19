@@ -1,7 +1,7 @@
 # PyTTI: Python Text-To-Image Tools
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb)
-
+ 
 ## A brief history of
 
 The tools and techniques described here were pioneered in 2021 by a diverse and distributed collection of amazingly talented ML practitioners, researchers, and artists. The short version of this history is that Katherine Crowson ([@RiversHaveWings](https://twitter.com/RiversHaveWings)) published a notebook inspired by work done by [@advadnoun](https://twitter.com/advadnoun). Katherine's notebook spawned a litany of variants, each with their own twist on the technique or adding a feature to someone else's work. Henry Rachootin ([@sportsracer48](https://twitter.com/sportsracer48)) collected several of the most interesting notebooks and stuck the important bits together with bublegum and scotch tape. Thus was born PyTTI, and there was much rejoicing in sportsracer48's patreon, where it was shared in closed beta for several months so sportsracer48 wouldn't get buried under tech support requests (or so he hoped).
