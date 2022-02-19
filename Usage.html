@@ -95,7 +95,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Welcome to PyTTI
+   PyTTI: Python Text-To-Image Tools
   </a>
  </li>
 </ul>
@@ -508,13 +508,14 @@ motion: zoom_in_slow
 </div>
 <div class="section" id="cli-superpowers">
 <h3>CLI Superpowers<a class="headerlink" href="#cli-superpowers" title="Permalink to this headline">¶</a></h3>
-<hr class="docutils" />
-<p>WARNING: invoking multi-run from the CLI will likely re-download vgg weights for LPIPS. This will hopefully be patched soon, but until it is, please be aware that:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Invoking multi-run from the CLI will likely re-download vgg weights for LPIPS. This will hopefully be patched soon, but until it is, please be aware that:</p>
 <ul class="simple">
 <li><p>downloading large files repeatedly may eat up your internet quota if that’s how your provider bills you.</p></li>
-<li><p>these files may consume disk space. To free up space, delete any vgg.pth files in subdirectories of the “outputs” folders pytti creates in multirun mode.</p></li>
+<li><p>these are not small files and consume disk space. To free up space, delete any vgg.pth files in subdirectories of the “outputs” folders pytti creates in multirun mode.</p></li>
 </ul>
-<hr class="docutils" />
+</div>
 <p>A superpower commandline hydra gives us is the ability to specify multiple values for the same key, we just need to add the argument <code class="docutils literal notranslate"><span class="pre">--multirun</span></code>. For example, we can do this:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -m pytti.workhorse \
     --multirun \
