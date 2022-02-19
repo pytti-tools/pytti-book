@@ -8,6 +8,8 @@ parts:
     chapters:
     - file: Setup
     - file: Usage
+  - caption: Making Art
+    - file: Grimoire
   - caption: Reference
     chapters:
     - file: Settings
