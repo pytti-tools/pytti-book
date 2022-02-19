@@ -1,4 +1,6 @@
-# Welcome to PyTTI
+# PyTTI: Python Text-To-Image Tools
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb)
 
 ## A brief history of
 
@@ -6,22 +8,6 @@ The tools and techniques described here were pioneered in 2021 by a diverse and 
 
 PyTTI rapidly gained a reputation as one of the most powerful tools available for generating CLIP-guided images. In late November, @sportsracer48 released the last version in his closed beta: the "pytti 5 beta" notebook. David Marx ([@DigThatData](https://twitter.com/DigThatData)) offered to help tidy up the mess a few weeks later, and sportsracer48 encouraged him to run wild with it. Henry didn't realize he'd been speaking with someone who had recently quit their job and had a lot of time on their hands, and David's contributions snowballed into [PYTTI-Tools](https://github.com/pytti-tools)!
 
-## How is PyTTI-Tools different from PyTTI 5 Beta?
-
-Right now, not very. The main user-visible changes are:
-
-* Local use is now a first-class citizen
-* PyTTI is installable and can be run as a CLI tool
-* Using PyTTI on the command line gives you magic powers
-* PyTTI supports tensorboard, meaning it also integrates with tools like MLFlow and WandB
-* Bug fixes and slightly saner code
-
-## Call to action!
-
-My hope is that rather than continuing to fork off messy notebooks with minor changes between them, pytti-tools will become a central hub for organizing and sharing related techniques for this kind of generative art in a way that will enable methods to be shared and combined more fluidly than the 2021 paradigm of doing everything in colab permitted. 
+## How To Contribute
 
 If you're interested in contributing (even if you aren't a coder and just have an idea for something to add to the documentation), please visit our issue tracker: https://github.com/pytti-tools/pytti-core/issues
-
-Please help me untangle this thing before it swallows me whole. Thanks!
-
-`--The Management`
