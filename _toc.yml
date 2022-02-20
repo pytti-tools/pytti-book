@@ -10,6 +10,7 @@ parts:
     - file: Usage
   - caption: Making Art
     chapters:
+    - file: CrashCourse
     - file: Grimoire
   - caption: Reference
     chapters:
