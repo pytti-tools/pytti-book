@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic tutorial &#8212; Python Text-To-Image Tools</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The AI Artist Mindset" href="Grimoire.html" />
+    <link rel="prev" title="Usage" href="Usage.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Text-To-Image Tools</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   PyTTI: Python Text-To-Image Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Setup.html">
+   Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Usage.html">
+   Usage
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Making Art
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Basic tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Grimoire.html">
+   The AI Artist Mindset
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Settings.html">
+   Settings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="MiscResources.html">
+   Miscellaneous Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/CrashCourse.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/pytti-tools/pytti-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/pytti-tools/pytti-book/issues/new?title=Issue%20on%20page%20%2FCrashCourse.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/pytti-tools/pytti-book/edit/master/docs/CrashCourse.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/pytti-tools/pytti-book/master?urlpath=tree/docs/CrashCourse.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb/github/pytti-tools/pytti-book/blob/master/docs/CrashCourse.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Basic tutorial</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="basic-tutorial">
+<h1>Basic tutorial<a class="headerlink" href="#basic-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>The next cell just creates the default configs and folders if they aren’t already present.
+You normally shouldn’t need to do this, but if you want to “factory reset” to the defaults pytti ships with, delete the <code class="docutils literal notranslate"><span class="pre">config/</span></code> directory and run the following command. If you have config files, don’t worry: it won’t overwrite them. It’ll just do nothing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!rm -rf config/
+!rm -rf images_out/
+!rm -rf outputs/
+!python -m pytti.warmup
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll author a config *.yaml file containing the settings that describe the experiment we want to run.</p>
+<p>The file needs to go in the <code class="docutils literal notranslate"><span class="pre">config/conf</span></code> subdirectory and can be named whatever we want.</p>
+<p>Under the current config system, the first line of the file needs to be: <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">&#64;package</span> <span class="pre">_global_</span></code></p>
+<p>After that, each setting goes on its own line. The order in which they appear does not matter, as long as each setting appears on a line of its own.</p>
+<p>We’ll start by specifying a text prompt and see what happens. We’ll also specify a random seed as well, just to ensure the outputs are deterministic. This helps us understand exactly how changing a setting modifies the generated image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
+<span class="c1"># @package _global_</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span>
+<span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing config/conf/my_first_pytti_art.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll pass this config file to the CLI to generate an image using the <code class="docutils literal notranslate"><span class="pre">conf</span></code> argument. Note that the name of this argument is actually the name of the subfolder the file is in. See the “Usage” article for details on precisely what’s going on here.</p>
+<p>We just need to provide the CLI the name of the file without the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> file extension.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python -m pytti.workhorse <span class="nv">conf</span><span class="o">=</span>my_first_pytti_art
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:47.654</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">13</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+<span class=" -Color -Color-Green">2022-02-19 19:28:47.654</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">27</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+<span class=" -Color -Color-Green">2022-02-19 19:28:47.654</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">ensure_configs_exist</span>:<span class=" -Color -Color-Cyan">43</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Local config directory detected.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:49.232</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">35</span> - <span class=" -Color -Color-Bold">Loading pytti...</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:50.938</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">77</span> - <span class=" -Color -Color-Bold">pytti loaded.</span>
+<span class=" -Color -Color-Green">2022-02-19 19:28:50.938</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">81</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">[&#39;/home/dmarx/proj/pytti-book&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python39.zip&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/lib-dynload&#39;, &#39;/home/dmarx/.local/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/proj/hypernerf&#39;, &#39;/home/dmarx/proj/disco-diffusion/CLIP&#39;, &#39;/home/dmarx/proj/disco-diffusion/guided-diffusion&#39;, &#39;/home/dmarx/proj/disco-diffusion/taming-transformers&#39;]</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:50.945</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">hydra_plugins.pytti_local_config_searchpath_plugin.searchpath_append_cwd</span>:<span class=" -Color -Color-Cyan">manipulate_search_path</span>:<span class=" -Color -Color-Cyan">18</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/config/</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:51.032</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">99</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;}</span>
+<span class=" -Color -Color-Green">2022-02-19 19:28:51.033</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">100</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;}</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:51.140</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">225</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Loading CLIP...</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:55.869</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">227</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">CLIP loaded.</span>
+<span class=" -Color -Color-Green">2022-02-19 19:28:55.871</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">151</span> - <span class=" -Color -Color-Bold">Loading prompts...</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:56.275</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">163</span> - <span class=" -Color -Color-Bold">Prompts loaded.</span>
+<span class=" -Color -Color-Green">2022-02-19 19:28:56.276</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">652</span> - <span class=" -Color -Color-Bold">Settings saved to /home/dmarx/proj/pytti-book/images_out//default/default_settings.txt</span>
+<span class=" -Color -Color-Green">2022-02-19 19:28:56.280</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">663</span> - <span class=" -Color -Color-Bold">Running prompt:</span>
+
+  0%|                                                   | 0/100 [00:00&lt;?, ?it/s]<span class=" -Color -Color-Green">2022-02-19 19:28:56.281</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">422</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 0 losses:</span>
+&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7EFCDFE66CA0&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  /opt/conda/conda-bld/pytorch_1639180487213/work/aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|▍                                          | 1/100 [00:00&lt;00:31,  3.15it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|█▎                                         | 3/100 [00:00&lt;00:14,  6.93it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|██▏                                        | 5/100 [00:00&lt;00:10,  8.78it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|███                                        | 7/100 [00:00&lt;00:09, 10.03it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|███▊                                       | 9/100 [00:00&lt;00:08, 10.88it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|████▌                                     | 11/100 [00:01&lt;00:07, 11.39it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█████▍                                    | 13/100 [00:01&lt;00:07, 11.78it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|██████▎                                   | 15/100 [00:01&lt;00:07, 11.97it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|███████▏                                  | 17/100 [00:01&lt;00:06, 12.13it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|███████▉                                  | 19/100 [00:01&lt;00:06, 12.16it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|████████▊                                 | 21/100 [00:01&lt;00:06, 12.05it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|█████████▋                                | 23/100 [00:02&lt;00:06, 12.05it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██████████▌                               | 25/100 [00:02&lt;00:06, 12.12it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|███████████▎                              | 27/100 [00:02&lt;00:06, 12.16it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 29%|████████████▏                             | 29/100 [00:02&lt;00:05, 12.23it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 31%|█████████████                             | 31/100 [00:02&lt;00:05, 12.23it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|█████████████▊                            | 33/100 [00:02&lt;00:05, 12.42it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|██████████████▋                           | 35/100 [00:03&lt;00:05, 12.47it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 37%|███████████████▌                          | 37/100 [00:03&lt;00:05, 12.42it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 39%|████████████████▍                         | 39/100 [00:03&lt;00:04, 12.23it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|█████████████████▏                        | 41/100 [00:03&lt;00:04, 12.18it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|██████████████████                        | 43/100 [00:03&lt;00:04, 12.08it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|██████████████████▉                       | 45/100 [00:03&lt;00:04, 12.03it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 47%|███████████████████▋                      | 47/100 [00:04&lt;00:04, 12.18it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 49%|████████████████████▌                     | 49/100 [00:04&lt;00:04, 12.14it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:29:00.602</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">422</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 50 losses:</span>
+<span class=" -Color -Color-Green">2022-02-19 19:29:00.602</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">425</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Everybody knows that.. word    0.870568</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">Name: 49, dtype: float64</span>
+&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7EFCDFDC36A0&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████████████████████▍                    | 51/100 [00:04&lt;00:04, 11.27it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|██████████████████████▎                   | 53/100 [00:04&lt;00:04, 11.55it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|███████████████████████                   | 55/100 [00:04&lt;00:03, 11.69it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 57%|███████████████████████▉                  | 57/100 [00:04&lt;00:03, 11.85it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 59%|████████████████████████▊                 | 59/100 [00:05&lt;00:03, 11.83it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|█████████████████████████▌                | 61/100 [00:05&lt;00:03, 11.70it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████████████████████████▍               | 63/100 [00:05&lt;00:03, 11.62it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|███████████████████████████▎              | 65/100 [00:05&lt;00:03, 11.60it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 67%|████████████████████████████▏             | 67/100 [00:05&lt;00:02, 11.55it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 69%|████████████████████████████▉             | 69/100 [00:05&lt;00:02, 11.65it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|█████████████████████████████▊            | 71/100 [00:06&lt;00:02, 11.62it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 73%|██████████████████████████████▋           | 73/100 [00:06&lt;00:02, 11.62it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████████████████████████████▌          | 75/100 [00:06&lt;00:02, 11.61it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 77%|████████████████████████████████▎         | 77/100 [00:06&lt;00:01, 11.63it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|█████████████████████████████████▏        | 79/100 [00:06&lt;00:01, 11.63it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 81%|██████████████████████████████████        | 81/100 [00:07&lt;00:01, 11.58it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|██████████████████████████████████▊       | 83/100 [00:07&lt;00:01, 11.53it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 85%|███████████████████████████████████▋      | 85/100 [00:07&lt;00:01, 11.50it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 87%|████████████████████████████████████▌     | 87/100 [00:07&lt;00:01, 11.44it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 89%|█████████████████████████████████████▍    | 89/100 [00:07&lt;00:00, 11.47it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 91%|██████████████████████████████████████▏   | 91/100 [00:07&lt;00:00, 11.57it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 93%|███████████████████████████████████████   | 93/100 [00:08&lt;00:00, 11.58it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|███████████████████████████████████████▉  | 95/100 [00:08&lt;00:00, 11.68it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|████████████████████████████████████████▋ | 97/100 [00:08&lt;00:00, 11.58it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|█████████████████████████████████████████▌| 99/100 [00:08&lt;00:00, 11.63it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████| 100/100 [00:08&lt;00:00, 11.56it/s]
+<span class=" -Color -Color-Green">2022-02-19 19:29:04.932</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">716</span> - <span class=" -Color -Color-Bold">Complete.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have an <code class="docutils literal notranslate"><span class="pre">images_out/</span></code> subdirectory (if one didn’t already exist). Among the log messages above, we can see a collection of settings. The <code class="docutils literal notranslate"><span class="pre">scenes</span></code> argument we provided is among them, the rest came from <code class="docutils literal notranslate"><span class="pre">config/default.yaml</span></code>. The filename we provided to the <code class="docutils literal notranslate"><span class="pre">conf=</span></code> argument above specified the parameters we wanted to <em>override</em> relative to the default parameters. If we don’t specify a parameter, the default gets used. If we forget to add <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">&#64;package</span> <span class="pre">_global_</span></code> to the top of the file, the overrides we want won’t take effect and only default values will be passed to the PyTTI “workhorse” renderer.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code> parameter determines where our generated images go and what they will be named. Because we didn’t specify otherwise, our experiment ran with <code class="docutils literal notranslate"><span class="pre">file_namespace:</span> <span class="pre">default</span></code>. This means our images will appear in a folder named <code class="docutils literal notranslate"><span class="pre">images_out/default</span></code>. Let’s see what’s in there:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="n">images_out</span><span class="o">/</span><span class="n">default</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Magenta">default_1.png</span>  default_settings.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our run generated a single image, <code class="docutils literal notranslate"><span class="pre">default_1.png</span></code>, and saved our settings as well, <code class="docutils literal notranslate"><span class="pre">default_settings.txt</span></code>. Both output files are named “default” here because we didn’t provide a <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code> parameter. Let’s see what we generated!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">path_to_image</span> <span class="o">=</span> <span class="s2">&quot;images_out/default/default_1.png&quot;</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">path_to_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/CrashCourse_10_0.png" src="_images/CrashCourse_10_0.png" />
+</div>
+</div>
+<p>I see some hints of birds in that image, but mostly it’s pretty chaotic. This is because we didn’t give PyTTI much opportunity to generate an image for us, and we didn’t provide an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> as a starting place. Without an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> the process defaults to initializing from random noise. This isn’t necessarily a bad thing, but because we didn’t give PyTTI time to do its thing, we mostly got random noise back out. Let’s let it run a bit longer, say <code class="docutils literal notranslate"><span class="pre">steps_per_scene:</span> <span class="pre">500</span></code> (the default was 50).</p>
+<p>To better understand how the step number affects the image, we’ll tell PyTTI to show us the current state of the image periodically with <code class="docutils literal notranslate"><span class="pre">display_every:</span> <span class="pre">50</span></code>: we’re generating for 500 steps, so checking progress every 50 steps let’s us see check in on our progress at 10% increments, which feels about right. For the purpose of this tutorial though, we’ll suppress the output to the notebook with the <code class="docutils literal notranslate"><span class="pre">%%capture</span></code> command at the top of the cell and just look at the results after.</p>
+<p>Just to make sure there’s nothing unexpected in the defaults, I’ll also suppress any animations by setting the <code class="docutils literal notranslate"><span class="pre">pre_animation_steps</span></code> to a value greater than or equal to our <code class="docutils literal notranslate"><span class="pre">steps_per_scene</span></code>. Also, that whole “default” namespace thing was confusing, so let’s specify a namespace too.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
+<span class="c1"># @package _global_</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span>
+
+<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
+<span class="n">save_every</span><span class="p">:</span> <span class="mi">50</span>
+<span class="n">display_every</span><span class="p">:</span> <span class="mi">50</span>
+<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
+
+<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird</span>
+<span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting config/conf/my_first_pytti_art.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!python -m pytti.workhorse conf=my_first_pytti_art
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just in case the image output is being finnicky, let’s pull up those images here:</p>
+<p><img alt="50 steps" src="_images/bird_1.png" />
+<img alt="100 steps" src="_images/bird_2.png" />
+<img alt="150 steps" src="_images/bird_3.png" />
+<img alt="200 steps" src="_images/bird_4.png" />
+<img alt="250 steps" src="_images/bird_5.png" />
+<img alt="300 steps" src="_images/bird_6.png" />
+<img alt="350 steps" src="_images/bird_7.png" />
+<img alt="400 steps" src="_images/bird_8.png" />
+<img alt="450 steps" src="_images/bird_9.png" /></p>
+<p>Great! We have some birds! ….and we also have a bunch of words. This isn’t surprising: PyTTI likes to draw text into images, and also we had “word” in our prompt, biasing our image even more towards having “words” in it. But I don’t want to see words, I just like that song lyric and want to see the AI draw birds. The bird is already “the word” (or haven’t you heard?).</p>
+<p>We can tell PyTTI we want a particular prompt to influence it more or less by applying a weight to the prompt. If we don’t specify a weight, the default weight value is <code class="docutils literal notranslate"><span class="pre">1</span></code>. To try to get rid of the text in the image, let’s try adding the prompt <code class="docutils literal notranslate"><span class="pre">&quot;text:-1&quot;</span></code> to our scene.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
+<span class="c1"># @package _global_</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span> <span class="o">|</span> <span class="n">text</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span>
+
+<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
+<span class="c1">#save_every: 500</span>
+<span class="c1">#display_every: 500</span>
+<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
+
+<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird2</span>
+<span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting config/conf/my_first_pytti_art.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!python -m pytti.workhorse conf=my_first_pytti_art
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compare the same step from those two runs and see the difference:</p>
+<p><img alt="Text unsuppressed" src="_images/bird_9.png" />
+<img alt="Text suppressed" src="_images/bird2_9.png" /></p>
+<p>Much Better! And quite difference! Obviously, the change we made affected the whole image, not just the text that was popping up. We can try to be more surgical with our modifications by using “semantic mask”. The semantic mask is a prompt which PyTTI uses to score the image, and masks out the image where the semantic prompt doesn’t match. We attach a semantic prompt with an underscore. Let’s see if instead of “subtracting” the text from the image like we did before, we can convert it into something else. We’ve got birds already: let’s try eggs. That feels on-theme.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
+<span class="c1"># @package _global_</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span> <span class="o">|</span> <span class="n">eggs</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">nest_text</span>
+
+<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
+<span class="c1">#save_every: 500</span>
+<span class="c1">#display_every: 500</span>
+<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
+
+<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird3</span>
+<span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting config/conf/my_first_pytti_art.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!python -m pytti.workhorse conf=my_first_pytti_art
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="Text unsuppressed" src="_images/bird_9.png" />
+<img alt="Text suppressed" src="_images/bird2_9.png" />
+<img alt="Text suppressed" src="_images/bird3_9.png" /></p>
+<p>Ok, so that sort of worked, but I liked the other way better. Let’s try using both methods, but reduce the weight on each to try to let the original version of the image dominate a bit more.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
+<span class="c1"># @package _global_</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span><span class="p">:</span><span class="mi">2</span> <span class="o">|</span> <span class="n">eggs</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">nest</span><span class="p">:</span><span class="mf">.5</span><span class="n">_text</span> <span class="o">|</span> <span class="n">test</span><span class="p">:</span><span class="o">-</span><span class="mf">.8</span>
+
+<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
+<span class="c1">#save_every: 500</span>
+<span class="c1">#display_every: 500</span>
+<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
+
+<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird4</span>
+<span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting config/conf/my_first_pytti_art.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!python -m pytti.workhorse conf=my_first_pytti_art
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="Text unsuppressed" src="_images/bird_9.png" />
+<img alt="Text suppressed" src="_images/bird2_9.png" />
+<img alt="Text suppressed" src="_images/bird3_9.png" />
+<img alt="Text suppressed" src="_images/bird4_9.png" /></p>
+<p>Much better! I’m not really feeling the pixel art thing though: let’s try switching from the default “Limited Palette” image model to <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">VQGAN</span></code> and see what that looks like. I’m feeling lazy though, so instead of modifying the config file like we were before, I’m just gonna use the same config from last time but override the <code class="docutils literal notranslate"><span class="pre">image_model</span></code> and <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code> arguments directly from the command line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!python -m pytti.workhorse conf=my_first_pytti_art image_model=VQGAN file_namespace=bird5
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="Text suppressed" src="_images/bird5_9.png" /></p>
+<p>As you can see, changing the image model doesn’t just add realism: it basically changes everything. Bye bye nests, bye bye eggs, hello chicks?</p>
+<p>Moral of the story: your prompt-engineering will largely be image-model-dependent. Now that we’ve changed our image model, we need to re-tune our prompt for that model.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Usage.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Usage</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Grimoire.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The AI Artist Mindset</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By David Marx<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

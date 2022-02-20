@@ -1,6 +1,13 @@
-# Prompt Engineering
+# The AI Artist Mindset
 
-## General tips for Prompt Engineering
+When we call a particular technology an "AI", we are being extremely generous. It helps a lot to understand a bit about how they work.
+
+* How PyTTI relates text to images: https://openai.com/blog/clip/
+* How AI models "perceive" images (hierarchical feature learning): https://distill.pub/2017/feature-visualization/
+* How AI models "perceive" text (contextualized token embeddings, masked language modeling): https://jalammar.github.io/illustrated-bert/
+
+
+## Tips for Prompt Engineering
 
 * Use terms that are associated with websites/forums where you would find images that have properties similar to what you are trying to generate. 
   * Naming niche online artistic forums can be extremely powerful.
@@ -13,6 +20,7 @@
 * Say the same thing in multiple different ways.
   * "queen" vs
   * "queen | princess | royal woman | victorian queen | fairytale princess | disney princess | cinderella | elegant woman wearing a ballroom gown and tiara | beautiful lady wearing a dress and crown"
+  * It can be useful to built up prompts like this iteratively, playing with the weights as you add or remove phrases.
 * Inventing words and portmanteaus can actually be very effective when done meaningfully.
   * PyTTI language models generally use "sub-word units" for tokenizing text.
   * Use primarily linguistic components that are common in English etymology (e.g. words that have greek, latin, or germanic origin)
@@ -21,6 +29,13 @@
   * "a minimalist line sketch of a horse by Pablo Picasso"
 * Use an `init_image` to promote a particular layout of structural elements of your image.
   * Even a rough sketch can be surprisingly effective here.
+
+## Semantic Algebra
+
+* Use negative weights to remove generation artifacts that you don't want.
+  * It's common for text or faces to be generated unexpectedly. 
+  * You can often repair this behavior with prompts like "text:-.9:-1"
+
 
 ## Why does this sort of thing work?
 

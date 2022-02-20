@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prompt Engineering &#8212; Python Text-To-Image Tools</title>
+    <title>The AI Artist Mindset &#8212; Python Text-To-Image Tools</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Settings" href="Settings.html" />
-    <link rel="prev" title="Usage" href="Usage.html" />
+    <link rel="prev" title="Basic tutorial" href="CrashCourse.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -122,9 +122,14 @@
  </span>
 </p>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CrashCourse.html">
+   Basic tutorial
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Prompt Engineering
+   The AI Artist Mindset
   </a>
  </li>
 </ul>
@@ -235,12 +240,17 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Prompt Engineering
+   The AI Artist Mindset
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-tips-for-prompt-engineering">
-     General tips for Prompt Engineering
+    <a class="reference internal nav-link" href="#tips-for-prompt-engineering">
+     Tips for Prompt Engineering
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semantic-algebra">
+     Semantic Algebra
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -277,7 +287,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Prompt Engineering</h1>
+                <h1>The AI Artist Mindset</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -289,12 +299,17 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Prompt Engineering
+   The AI Artist Mindset
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-tips-for-prompt-engineering">
-     General tips for Prompt Engineering
+    <a class="reference internal nav-link" href="#tips-for-prompt-engineering">
+     Tips for Prompt Engineering
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semantic-algebra">
+     Semantic Algebra
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -330,10 +345,16 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="prompt-engineering">
-<h1>Prompt Engineering<a class="headerlink" href="#prompt-engineering" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="general-tips-for-prompt-engineering">
-<h2>General tips for Prompt Engineering<a class="headerlink" href="#general-tips-for-prompt-engineering" title="Permalink to this headline">¶</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-ai-artist-mindset">
+<h1>The AI Artist Mindset<a class="headerlink" href="#the-ai-artist-mindset" title="Permalink to this headline">¶</a></h1>
+<p>When we call a particular technology an “AI”, we are being extremely generous. It helps a lot to understand a bit about how they work.</p>
+<ul class="simple">
+<li><p>How PyTTI relates text to images: <a class="reference external" href="https://openai.com/blog/clip/">https://openai.com/blog/clip/</a></p></li>
+<li><p>How AI models “perceive” images (hierarchical feature learning): <a class="reference external" href="https://distill.pub/2017/feature-visualization/">https://distill.pub/2017/feature-visualization/</a></p></li>
+<li><p>How AI models “perceive” text (contextualized token embeddings, masked language modeling): <a class="reference external" href="https://jalammar.github.io/illustrated-bert/">https://jalammar.github.io/illustrated-bert/</a></p></li>
+</ul>
+<div class="section" id="tips-for-prompt-engineering">
+<h2>Tips for Prompt Engineering<a class="headerlink" href="#tips-for-prompt-engineering" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Use terms that are associated with websites/forums where you would find images that have properties similar to what you are trying to generate.</p>
 <ul>
@@ -353,6 +374,7 @@
 <ul>
 <li><p>“queen” vs</p></li>
 <li><p>“queen | princess | royal woman | victorian queen | fairytale princess | disney princess | cinderella | elegant woman wearing a ballroom gown and tiara | beautiful lady wearing a dress and crown”</p></li>
+<li><p>It can be useful to built up prompts like this iteratively, playing with the weights as you add or remove phrases.</p></li>
 </ul>
 </li>
 <li><p>Inventing words and portmanteaus can actually be very effective when done meaningfully.</p>
@@ -370,6 +392,17 @@
 <li><p>Use an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> to promote a particular layout of structural elements of your image.</p>
 <ul>
 <li><p>Even a rough sketch can be surprisingly effective here.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="semantic-algebra">
+<h2>Semantic Algebra<a class="headerlink" href="#semantic-algebra" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Use negative weights to remove generation artifacts that you don’t want.</p>
+<ul>
+<li><p>It’s common for text or faces to be generated unexpectedly.</p></li>
+<li><p>You can often repair this behavior with prompts like “text:-.9:-1”</p></li>
 </ul>
 </li>
 </ul>
@@ -427,11 +460,11 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="Usage.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="CrashCourse.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Usage</p>
+            <p class="prev-next-title">Basic tutorial</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Settings.html" title="next page">
