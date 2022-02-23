@@ -53,4 +53,4 @@ html:
   use_multitoc_numbering: true
 
 launch_buttons:
-  colab_url: https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb
+  colab_url: https://colab.research.google.com/
