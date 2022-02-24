@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basic tutorial &#8212; Python Text-To-Image Tools</title>
+    <title>PyTTI Crash Course &#8212; Python Text-To-Image Tools</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -45,6 +45,8 @@
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -124,7 +126,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Basic tutorial
+   PyTTI Crash Course
   </a>
  </li>
  <li class="toctree-l1">
@@ -135,7 +137,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Reference
+  Settings
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -144,6 +146,13 @@
    Settings
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="MiscResources.html">
    Miscellaneous Resources
@@ -241,7 +250,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb/github/pytti-tools/pytti-book/blob/master/docs/CrashCourse.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com//github/pytti-tools/pytti-book/blob/master/docs/CrashCourse.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -262,7 +271,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Basic tutorial</h1>
+                <h1>PyTTI Crash Course</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -273,8 +282,8 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="basic-tutorial">
-<h1>Basic tutorial<a class="headerlink" href="#basic-tutorial" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="pytti-crash-course">
+<h1>PyTTI Crash Course<a class="headerlink" href="#pytti-crash-course" title="Permalink to this headline">¶</a></h1>
 <p>The next cell just creates the default configs and folders if they aren’t already present.
 You normally shouldn’t need to do this, but if you want to “factory reset” to the defaults pytti ships with, delete the <code class="docutils literal notranslate"><span class="pre">config/</span></code> directory and run the following command. If you have config files, don’t worry: it won’t overwrite them. It’ll just do nothing.</p>
 <div class="cell docutils container">
@@ -317,202 +326,351 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:47.654</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">13</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
-<span class=" -Color -Color-Green">2022-02-19 19:28:47.654</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">27</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
-<span class=" -Color -Color-Green">2022-02-19 19:28:47.654</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">ensure_configs_exist</span>:<span class=" -Color -Color-Cyan">43</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Local config directory detected.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:30.036</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">13</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:30.036</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">27</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:30.036</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">ensure_configs_exist</span>:<span class=" -Color -Color-Cyan">43</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Local config directory detected.</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:49.232</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">35</span> - <span class=" -Color -Color-Bold">Loading pytti...</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:31.563</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">30</span> - <span class=" -Color -Color-Bold">Loading pytti...</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:50.938</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">77</span> - <span class=" -Color -Color-Bold">pytti loaded.</span>
-<span class=" -Color -Color-Green">2022-02-19 19:28:50.938</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">81</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">[&#39;/home/dmarx/proj/pytti-book&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python39.zip&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/lib-dynload&#39;, &#39;/home/dmarx/.local/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/proj/hypernerf&#39;, &#39;/home/dmarx/proj/disco-diffusion/CLIP&#39;, &#39;/home/dmarx/proj/disco-diffusion/guided-diffusion&#39;, &#39;/home/dmarx/proj/disco-diffusion/taming-transformers&#39;]</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:33.176</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">66</span> - <span class=" -Color -Color-Bold">pytti loaded.</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:33.177</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">70</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">[&#39;/home/dmarx/proj/pytti-book&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python39.zip&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/lib-dynload&#39;, &#39;/home/dmarx/.local/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/proj/hypernerf&#39;, &#39;/home/dmarx/proj/disco-diffusion/guided-diffusion&#39;, &#39;/home/dmarx/proj/disco-diffusion/taming-transformers&#39;]</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:33.185</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">hydra_plugins.pytti_local_config_searchpath_plugin.searchpath_append_cwd</span>:<span class=" -Color -Color-Cyan">manipulate_search_path</span>:<span class=" -Color -Color-Cyan">18</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/config/</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:50.945</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">hydra_plugins.pytti_local_config_searchpath_plugin.searchpath_append_cwd</span>:<span class=" -Color -Color-Cyan">manipulate_search_path</span>:<span class=" -Color -Color-Cyan">18</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/config/</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:33.273</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">187</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1}</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:33.273</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">188</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1}</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:51.032</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">99</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;}</span>
-<span class=" -Color -Color-Green">2022-02-19 19:28:51.033</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">100</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;}</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:33.385</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">242</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Loading CLIP...</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:51.140</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">225</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Loading CLIP...</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.099</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">244</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">CLIP loaded.</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:38.099</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">242</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">40</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:38.101</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">parse_scenes</span>:<span class=" -Color -Color-Cyan">110</span> - <span class=" -Color -Color-Bold">Loading prompts...</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:55.869</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">227</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">CLIP loaded.</span>
-<span class=" -Color -Color-Green">2022-02-19 19:28:55.871</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">151</span> - <span class=" -Color -Color-Bold">Loading prompts...</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.516</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">parse_scenes</span>:<span class=" -Color -Color-Cyan">120</span> - <span class=" -Color -Color-Bold">Prompts loaded.</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:38.517</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">520</span> - <span class=" -Color -Color-Bold">Settings saved to /home/dmarx/proj/pytti-book/images_out//default/default_settings.txt</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:28:56.275</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">163</span> - <span class=" -Color -Color-Bold">Prompts loaded.</span>
-<span class=" -Color -Color-Green">2022-02-19 19:28:56.276</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">652</span> - <span class=" -Color -Color-Bold">Settings saved to /home/dmarx/proj/pytti-book/images_out//default/default_settings.txt</span>
-<span class=" -Color -Color-Green">2022-02-19 19:28:56.280</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">663</span> - <span class=" -Color -Color-Bold">Running prompt:</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.522</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">533</span> - <span class=" -Color -Color-Bold">Running prompt:</span>
 
-  0%|                                                   | 0/100 [00:00&lt;?, ?it/s]<span class=" -Color -Color-Green">2022-02-19 19:28:56.281</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">422</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 0 losses:</span>
-&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7EFCDFE66CA0&gt;
+  0%|                                                   | 0/100 [00:00&lt;?, ?it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:38.523</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:38.523</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">report_out</span>:<span class=" -Color -Color-Cyan">364</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 0 losses:</span>
+&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7F97D81881F0&gt;
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  /opt/conda/conda-bld/pytorch_1639180487213/work/aten/src/ATen/native/TensorShape.cpp:2157.)
   return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|▍                                          | 1/100 [00:00&lt;00:31,  3.15it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|▍                                          | 1/100 [00:00&lt;00:36,  2.71it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:38.893</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|█▎                                         | 3/100 [00:00&lt;00:14,  6.93it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.988</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|██▏                                        | 5/100 [00:00&lt;00:10,  8.78it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|█▎                                         | 3/100 [00:00&lt;00:15,  6.09it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.077</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|███                                        | 7/100 [00:00&lt;00:09, 10.03it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.175</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|███▊                                       | 9/100 [00:00&lt;00:08, 10.88it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|██▏                                        | 5/100 [00:00&lt;00:12,  7.87it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.261</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|████▌                                     | 11/100 [00:01&lt;00:07, 11.39it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.345</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█████▍                                    | 13/100 [00:01&lt;00:07, 11.78it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|███                                        | 7/100 [00:00&lt;00:10,  9.23it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.427</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|██████▎                                   | 15/100 [00:01&lt;00:07, 11.97it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.509</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|███████▏                                  | 17/100 [00:01&lt;00:06, 12.13it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|███▊                                       | 9/100 [00:01&lt;00:09, 10.06it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.596</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|███████▉                                  | 19/100 [00:01&lt;00:06, 12.16it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.689</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|████████▊                                 | 21/100 [00:01&lt;00:06, 12.05it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|████▌                                     | 11/100 [00:01&lt;00:08, 10.31it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.782</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|█████████▋                                | 23/100 [00:02&lt;00:06, 12.05it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.872</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██████████▌                               | 25/100 [00:02&lt;00:06, 12.12it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█████▍                                    | 13/100 [00:01&lt;00:08, 10.55it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.962</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|███████████▎                              | 27/100 [00:02&lt;00:06, 12.16it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.051</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 29%|████████████▏                             | 29/100 [00:02&lt;00:05, 12.23it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|██████▎                                   | 15/100 [00:01&lt;00:07, 10.72it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.142</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 31%|█████████████                             | 31/100 [00:02&lt;00:05, 12.23it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.233</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|█████████████▊                            | 33/100 [00:02&lt;00:05, 12.42it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|███████▏                                  | 17/100 [00:01&lt;00:07, 10.78it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.325</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|██████████████▋                           | 35/100 [00:03&lt;00:05, 12.47it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.419</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 37%|███████████████▌                          | 37/100 [00:03&lt;00:05, 12.42it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|███████▉                                  | 19/100 [00:01&lt;00:07, 10.78it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.511</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 39%|████████████████▍                         | 39/100 [00:03&lt;00:04, 12.23it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.598</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|█████████████████▏                        | 41/100 [00:03&lt;00:04, 12.18it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|████████▊                                 | 21/100 [00:02&lt;00:07, 10.96it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.687</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|██████████████████                        | 43/100 [00:03&lt;00:04, 12.08it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.774</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|██████████████████▉                       | 45/100 [00:03&lt;00:04, 12.03it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|█████████▋                                | 23/100 [00:02&lt;00:06, 11.04it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.865</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 47%|███████████████████▋                      | 47/100 [00:04&lt;00:04, 12.18it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.956</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 49%|████████████████████▌                     | 49/100 [00:04&lt;00:04, 12.14it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██████████▌                               | 25/100 [00:02&lt;00:06, 11.09it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.043</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-19 19:29:00.602</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">422</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 50 losses:</span>
-<span class=" -Color -Color-Green">2022-02-19 19:29:00.602</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">425</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Everybody knows that.. word    0.870568</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.129</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|███████████▎                              | 27/100 [00:02&lt;00:06, 11.21it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.217</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.305</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 29%|████████████▏                             | 29/100 [00:02&lt;00:06, 11.32it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.390</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.478</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 31%|█████████████                             | 31/100 [00:03&lt;00:06, 11.33it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.566</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.649</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|█████████████▊                            | 33/100 [00:03&lt;00:05, 11.47it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.735</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.822</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|██████████████▋                           | 35/100 [00:03&lt;00:05, 11.45it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.911</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.998</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 37%|███████████████▌                          | 37/100 [00:03&lt;00:05, 11.48it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.084</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.174</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 39%|████████████████▍                         | 39/100 [00:03&lt;00:05, 11.41it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.262</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.350</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|█████████████████▏                        | 41/100 [00:03&lt;00:05, 11.43it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.436</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.523</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|██████████████████                        | 43/100 [00:04&lt;00:05, 11.39it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.613</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.701</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|██████████████████▉                       | 45/100 [00:04&lt;00:04, 11.38it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.789</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.874</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 47%|███████████████████▋                      | 47/100 [00:04&lt;00:04, 11.46it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.961</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.047</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 49%|████████████████████▌                     | 49/100 [00:04&lt;00:04, 11.42it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.137</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:43.140</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">save_out</span>:<span class=" -Color -Color-Cyan">416</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/images_out//default/default_1.png</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.274</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:43.274</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">report_out</span>:<span class=" -Color -Color-Cyan">364</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 50 losses:</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:43.275</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">report_out</span>:<span class=" -Color -Color-Cyan">367</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Everybody knows that.. word    0.867234</span>
 <span class=" -Color -Color-Bold -Color-Bold-Blue">Name: 49, dtype: float64</span>
-&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7EFCDFDC36A0&gt;
+&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7F97D8132C70&gt;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████████████████████▍                    | 51/100 [00:04&lt;00:04, 11.27it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████████████████████▍                    | 51/100 [00:04&lt;00:04, 10.52it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.362</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|██████████████████████▎                   | 53/100 [00:04&lt;00:04, 11.55it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.448</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|███████████████████████                   | 55/100 [00:04&lt;00:03, 11.69it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|██████████████████████▎                   | 53/100 [00:05&lt;00:04, 10.84it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.534</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 57%|███████████████████████▉                  | 57/100 [00:04&lt;00:03, 11.85it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.622</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 59%|████████████████████████▊                 | 59/100 [00:05&lt;00:03, 11.83it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|███████████████████████                   | 55/100 [00:05&lt;00:04, 11.01it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.709</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|█████████████████████████▌                | 61/100 [00:05&lt;00:03, 11.70it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.797</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████████████████████████▍               | 63/100 [00:05&lt;00:03, 11.62it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 57%|███████████████████████▉                  | 57/100 [00:05&lt;00:03, 11.12it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.884</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|███████████████████████████▎              | 65/100 [00:05&lt;00:03, 11.60it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.969</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 67%|████████████████████████████▏             | 67/100 [00:05&lt;00:02, 11.55it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 59%|████████████████████████▊                 | 59/100 [00:05&lt;00:03, 11.24it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.058</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 69%|████████████████████████████▉             | 69/100 [00:05&lt;00:02, 11.65it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.147</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|█████████████████████████████▊            | 71/100 [00:06&lt;00:02, 11.62it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|█████████████████████████▌                | 61/100 [00:05&lt;00:03, 11.26it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.235</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 73%|██████████████████████████████▋           | 73/100 [00:06&lt;00:02, 11.62it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.325</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████████████████████████████▌          | 75/100 [00:06&lt;00:02, 11.61it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████████████████████████▍               | 63/100 [00:05&lt;00:03, 11.27it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.412</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 77%|████████████████████████████████▎         | 77/100 [00:06&lt;00:01, 11.63it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.502</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|█████████████████████████████████▏        | 79/100 [00:06&lt;00:01, 11.63it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|███████████████████████████▎              | 65/100 [00:06&lt;00:03, 11.25it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.591</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 81%|██████████████████████████████████        | 81/100 [00:07&lt;00:01, 11.58it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.677</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|██████████████████████████████████▊       | 83/100 [00:07&lt;00:01, 11.53it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 67%|████████████████████████████▏             | 67/100 [00:06&lt;00:02, 11.25it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.769</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 85%|███████████████████████████████████▋      | 85/100 [00:07&lt;00:01, 11.50it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.855</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 87%|████████████████████████████████████▌     | 87/100 [00:07&lt;00:01, 11.44it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 69%|████████████████████████████▉             | 69/100 [00:06&lt;00:02, 11.35it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.941</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 89%|█████████████████████████████████████▍    | 89/100 [00:07&lt;00:00, 11.47it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.029</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 91%|██████████████████████████████████████▏   | 91/100 [00:07&lt;00:00, 11.57it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|█████████████████████████████▊            | 71/100 [00:06&lt;00:02, 11.35it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.117</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 93%|███████████████████████████████████████   | 93/100 [00:08&lt;00:00, 11.58it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.204</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|███████████████████████████████████████▉  | 95/100 [00:08&lt;00:00, 11.68it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 73%|██████████████████████████████▋           | 73/100 [00:06&lt;00:02, 11.22it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.300</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|████████████████████████████████████████▋ | 97/100 [00:08&lt;00:00, 11.58it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.386</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|█████████████████████████████████████████▌| 99/100 [00:08&lt;00:00, 11.63it/s]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████████████████████████████▌          | 75/100 [00:06&lt;00:02, 11.37it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.470</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████| 100/100 [00:08&lt;00:00, 11.56it/s]
-<span class=" -Color -Color-Green">2022-02-19 19:29:04.932</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">716</span> - <span class=" -Color -Color-Bold">Complete.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.555</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 77%|████████████████████████████████▎         | 77/100 [00:07&lt;00:01, 11.53it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.638</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.721</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|█████████████████████████████████▏        | 79/100 [00:07&lt;00:01, 11.69it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.804</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.889</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 81%|██████████████████████████████████        | 81/100 [00:07&lt;00:01, 11.76it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.972</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.052</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|██████████████████████████████████▊       | 83/100 [00:07&lt;00:01, 11.86it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.137</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.220</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 85%|███████████████████████████████████▋      | 85/100 [00:07&lt;00:01, 11.94it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.302</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.386</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 87%|████████████████████████████████████▌     | 87/100 [00:07&lt;00:01, 11.94it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.469</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.553</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 89%|█████████████████████████████████████▍    | 89/100 [00:08&lt;00:00, 12.00it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.634</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.717</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 91%|██████████████████████████████████████▏   | 91/100 [00:08&lt;00:00, 12.05it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.798</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.884</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 93%|███████████████████████████████████████   | 93/100 [00:08&lt;00:00, 11.99it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.967</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:47.050</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|███████████████████████████████████████▉  | 95/100 [00:08&lt;00:00, 12.04it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:47.132</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:47.217</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|████████████████████████████████████████▋ | 97/100 [00:08&lt;00:00, 11.99it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:47.300</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:47.382</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|█████████████████████████████████████████▌| 99/100 [00:08&lt;00:00, 11.99it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:47.467</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
+<span class=" -Color -Color-Green">2022-02-23 19:48:47.469</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">save_out</span>:<span class=" -Color -Color-Cyan">416</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/images_out//default/default_2.png</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████| 100/100 [00:09&lt;00:00, 11.03it/s]
+<span class=" -Color -Color-Green">2022-02-23 19:48:47.594</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">587</span> - <span class=" -Color -Color-Bold">Complete.</span>
 </pre></div>
 </div>
 </div>
@@ -526,7 +684,7 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Magenta">default_1.png</span>  default_settings.txt
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Magenta">default_1.png</span>  <span class=" -Color -Color-Bold -Color-Bold-Magenta">default_2.png</span>  default_settings.txt
 </pre></div>
 </div>
 </div>
@@ -623,7 +781,7 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 <p>Let’s compare the same step from those two runs and see the difference:</p>
 <p><img alt="Text unsuppressed" src="_images/bird_9.png" />
 <img alt="Text suppressed" src="_images/bird2_9.png" /></p>
-<p>Much Better! And quite difference! Obviously, the change we made affected the whole image, not just the text that was popping up. We can try to be more surgical with our modifications by using “semantic mask”. The semantic mask is a prompt which PyTTI uses to score the image, and masks out the image where the semantic prompt doesn’t match. We attach a semantic prompt with an underscore. Let’s see if instead of “subtracting” the text from the image like we did before, we can convert it into something else. We’ve got birds already: let’s try eggs. That feels on-theme.</p>
+<p>Much Better! And quite difference! Obviously, the change we made affected the whole image, not just the text that was popping up. We can try to be more surgical with our modifications by using “semantic mask”. The semantic mask is a prompt which PyTTI uses to score the image, and masks out the image where the semantic mask’s prompt doesn’t match. We attach a semantic mask with an underscore. Let’s see if instead of “subtracting” the text from the image like we did before, we can convert it into something else. We’ve got birds already: let’s try eggs. That feels on-theme.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
@@ -703,7 +861,7 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 </div>
 <p><img alt="Text suppressed" src="_images/bird5_9.png" /></p>
 <p>As you can see, changing the image model doesn’t just add realism: it basically changes everything. Bye bye nests, bye bye eggs, hello chicks?</p>
-<p>Moral of the story: your prompt-engineering will largely be image-model-dependent. Now that we’ve changed our image model, we need to re-tune our prompt for that model.</p>
+<p>Moral of the story: your prompt-engineering will largely be model-dependent. Now that we’ve changed our image model, we need to re-tune our prompt for that model.</p>
 </div>
 
     <script type="text/x-thebe-config">

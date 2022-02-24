@@ -1,0 +1,1521 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study: Cutouts vs. Steps Per Frame &#8212; Python Text-To-Image Tools</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Miscellaneous Resources" href="MiscResources.html" />
+    <link rel="prev" title="Settings" href="Settings.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Text-To-Image Tools</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   PyTTI: Python Text-To-Image Tools
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Setup.html">
+   Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Usage.html">
+   Usage
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Making Art
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="CrashCourse.html">
+   PyTTI Crash Course
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Grimoire.html">
+   The AI Artist Mindset
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Settings
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Settings.html">
+   Settings
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Study: Cutouts vs. Steps Per Frame
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="MiscResources.html">
+   Miscellaneous Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/StudyMatrix.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/pytti-tools/pytti-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/pytti-tools/pytti-book/issues/new?title=Issue%20on%20page%20%2FStudyMatrix.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/pytti-tools/pytti-book/edit/master/docs/StudyMatrix.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/pytti-tools/pytti-book/master?urlpath=tree/docs/StudyMatrix.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com//github/pytti-tools/pytti-book/blob/master/docs/StudyMatrix.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Study: Cutouts vs. Steps Per Frame</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="study-cutouts-vs-steps-per-frame">
+<h1>Study: Cutouts vs. Steps Per Frame<a class="headerlink" href="#study-cutouts-vs-steps-per-frame" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment and put `%%capture` at top of cell to silently re-install pytti-core</span>
+
+<span class="c1">#%%capture</span>
+<span class="c1">#%pip uninstall -y ./pytti-core/vendor/AdaBins</span>
+<span class="c1">#%pip uninstall -y ./pytti-core/vendor/CLIP</span>
+<span class="c1">#%pip uninstall -y ./pytti-core/vendor/GMA</span>
+<span class="c1">#%pip uninstall -y ./pytti-core/vendor/taming-transformers</span>
+<span class="c1">#%pip uninstall -y pyttitools-core;</span>
+<span class="c1">#!rm -rf build; rm -rf config;</span>
+<span class="c1">#!rm -rf pytti-core</span>
+<span class="c1">#</span>
+<span class="c1">#!git clone --recurse-submodules -j8 https://github.com/pytti-tools/pytti-core</span>
+
+<span class="c1">#%pip install ./pytti-core/vendor/AdaBins</span>
+<span class="c1">#%pip install ./pytti-core/vendor/CLIP</span>
+<span class="c1">#%pip install ./pytti-core/vendor/GMA</span>
+<span class="c1">#%pip install ./pytti-core/vendor/taming-transformers</span>
+<span class="c1">#%pip install ./pytti-core</span>
+<span class="c1">#!python -m pytti.warmup</span>
+
+<span class="c1">#### NB: probably a good idea to restart kernel after running this cell</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<style>
+    .jupyter-widgets {color: #d5d5d5 !important;}
+    .widget-label {color: #d5d5d5 !important;}
+</style>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>touch config/conf/empty.yaml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">product</span><span class="p">,</span> 
+    <span class="n">combinations</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># jfc... DAVID!! JUST USE SAVE_EVERY!!!! duuuuuh..... </span>
+<span class="c1"># yeesh.</span>
+<span class="n">cross_product__quality0</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s2">&quot;cutouts&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">160</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;steps_per_frame&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">160</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">invariants0</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;scenes&#39;</span><span class="p">:</span><span class="s1">&#39;&quot;portrait of a man, oil on canvas&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;image_model&#39;</span><span class="p">:</span><span class="s1">&#39;VQGAN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;conf&#39;</span><span class="p">:</span><span class="s1">&#39;empty&#39;</span><span class="p">,</span> <span class="c1"># I should just not require conf here...</span>
+    <span class="s1">&#39;seed&#39;</span><span class="p">:</span><span class="mi">12345</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<span class="c1"># variable imputation doesn&#39;t seem to work in the overrides</span>
+<span class="n">map_kv</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s1">&#39;steps_per_frame&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;steps_per_scene&#39;</span><span class="p">,</span><span class="s1">&#39;pre_animation_steps&#39;</span><span class="p">,</span> <span class="s1">&#39;display_every&#39;</span><span class="p">,</span> <span class="s1">&#39;save_every&#39;</span><span class="p">)),</span>
+<span class="p">)</span>
+
+<span class="n">kargs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">NAME</span><span class="p">,</span> <span class="n">VALUE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">param0</span><span class="p">,</span> <span class="n">param1</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">cross_product__quality0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">p0_name</span><span class="p">,</span> <span class="n">p1_name</span> <span class="o">=</span> <span class="n">param0</span><span class="p">[</span><span class="n">NAME</span><span class="p">],</span> <span class="n">param1</span><span class="p">[</span><span class="n">NAME</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p0_val</span><span class="p">,</span> <span class="n">p1_val</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">param0</span><span class="p">[</span><span class="n">VALUE</span><span class="p">],</span> <span class="n">param1</span><span class="p">[</span><span class="n">VALUE</span><span class="p">]):</span>
+        <span class="n">kw</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">invariants0</span><span class="p">)</span>
+        <span class="n">kw</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="n">p0_name</span><span class="p">:</span><span class="n">p0_val</span><span class="p">,</span>
+            <span class="n">p1_name</span><span class="p">:</span><span class="n">p1_val</span><span class="p">,</span>
+            <span class="s1">&#39;file_namespace&#39;</span><span class="p">:</span><span class="sa">f</span><span class="s2">&quot;matrix_</span><span class="si">{</span><span class="n">p0_name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">p0_val</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">p1_name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">p1_val</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">})</span>
+        <span class="c1"># map in &quot;variable imputations&quot;</span>
+        <span class="k">for</span> <span class="n">k0</span><span class="p">,</span> <span class="n">krest</span> <span class="ow">in</span> <span class="n">map_kv</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k1</span> <span class="ow">in</span> <span class="n">krest</span><span class="p">:</span>
+                <span class="n">kw</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="p">[</span><span class="n">k0</span><span class="p">]</span>
+        <span class="n">kargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kw</span><span class="p">)</span>
+<span class="c1">#kargs</span>
+
+<span class="n">kws</span> <span class="o">=</span> <span class="p">[[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kw</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">kargs</span><span class="p">]</span>
+<span class="c1">#kws</span>
+<span class="n">kws</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<style>
+    .jupyter-widgets {color: #d5d5d5 !important;}
+    .widget-label {color: #d5d5d5 !important;}
+</style>
+</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;,
+ &#39;image_model=VQGAN&#39;,
+ &#39;conf=empty&#39;,
+ &#39;seed=12345&#39;,
+ &#39;cutouts=10&#39;,
+ &#39;steps_per_frame=20&#39;,
+ &#39;file_namespace=matrix_cutouts-10_steps_per_frame-20&#39;,
+ &#39;steps_per_scene=20&#39;,
+ &#39;pre_animation_steps=20&#39;,
+ &#39;display_every=20&#39;,
+ &#39;save_every=20&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">hydra</span> <span class="kn">import</span> <span class="n">initialize</span><span class="p">,</span> <span class="n">initialize_config_module</span><span class="p">,</span> <span class="n">initialize_config_dir</span><span class="p">,</span> <span class="n">compose</span>
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
+<span class="kn">from</span> <span class="nn">pytti.workhorse</span> <span class="kn">import</span> <span class="n">_main</span> <span class="k">as</span> <span class="n">render_frames</span>
+
+<span class="n">CONFIG_BASE_PATH</span> <span class="o">=</span> <span class="s2">&quot;config&quot;</span>
+<span class="n">CONFIG_DEFAULTS</span> <span class="o">=</span> <span class="s2">&quot;default.yaml&quot;</span>
+
+<span class="c1"># https://github.com/facebookresearch/hydra/blob/main/examples/jupyter_notebooks/compose_configs_in_notebook.ipynb</span>
+<span class="c1"># https://omegaconf.readthedocs.io/</span>
+<span class="c1"># https://hydra.cc/docs/intro/</span>
+<span class="k">with</span> <span class="n">initialize</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="n">CONFIG_BASE_PATH</span><span class="p">):</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kws</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">cfg</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="n">CONFIG_DEFAULTS</span><span class="p">,</span> 
+                      <span class="n">overrides</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">render_frames</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<style>
+    .jupyter-widgets {color: #d5d5d5 !important;}
+    .widget-label {color: #d5d5d5 !important;}
+</style>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:58:58.465 | DEBUG    | hydra_plugins.pytti_local_config_searchpath_plugin.searchpath_append_cwd:manipulate_search_path:18 - /home/dmarx/proj/pytti-book/config/
+2022-02-23 18:58:58.466 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=20
+2022-02-23 18:58:58.467 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=10&#39;, &#39;steps_per_frame=20&#39;, &#39;file_namespace=matrix_cutouts-10_steps_per_frame-20&#39;, &#39;steps_per_scene=20&#39;, &#39;pre_animation_steps=20&#39;, &#39;display_every=20&#39;, &#39;save_every=20&#39;]
+2022-02-23 18:58:58.525 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 20, &#39;steps_per_frame&#39;: 20, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 10, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 20, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-10_steps_per_frame-20&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 20, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 20, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 18:58:58.526 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 20, &#39;steps_per_frame&#39;: 20, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 10, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 20, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-10_steps_per_frame-20&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 20, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 20, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 18:58:58.675 | DEBUG    | pytti.workhorse:do_run:242 - 10
+2022-02-23 18:58:58.677 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 18:58:58.696 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 18:58:58.697 | INFO     | pytti.Image.VQGANImage:init_vqgan:230 - /home/dmarx/.cache/vqgan
+2022-02-23 18:58:58.697 | DEBUG    | pytti.Image.VQGANImage:init_vqgan:234 - /home/dmarx/.cache/vqgan/sflckr.yaml
+2022-02-23 18:58:58.698 | DEBUG    | pytti.Image.VQGANImage:init_vqgan:235 - /home/dmarx/.cache/vqgan/sflckr.ckpt
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working with z of shape (1, 256, 16, 16) = 65536 dimensions.
+Working with z of shape (1, 256, 16, 16) = 65536 dimensions.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:59:05.571 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-10_steps_per_frame-20/matrix_cutouts-10_steps_per_frame-20_settings.txt
+2022-02-23 18:59:05.576 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Restored from /home/dmarx/.cache/vqgan/sflckr.ckpt
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "75d445dbdf4b4e91a9dfc099cbb44d75", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:59:05.587 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:05.587 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_7.png" src="_images/StudyMatrix_4_7.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:59:06.003 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:06.252 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:06.510 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:06.760 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:07.011 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:07.264 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:07.516 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:07.751 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:07.989 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:08.226 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:08.472 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:08.727 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:08.967 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:09.221 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:09.459 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:09.714 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:09.956 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:10.198 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:10.452 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:10.562 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-10_steps_per_frame-20/matrix_cutouts-10_steps_per_frame-20_1.png
+2022-02-23 18:59:10.962 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 18:59:11.241 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=80
+2022-02-23 18:59:11.242 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=10&#39;, &#39;steps_per_frame=80&#39;, &#39;file_namespace=matrix_cutouts-10_steps_per_frame-80&#39;, &#39;steps_per_scene=80&#39;, &#39;pre_animation_steps=80&#39;, &#39;display_every=80&#39;, &#39;save_every=80&#39;]
+2022-02-23 18:59:11.299 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 80, &#39;steps_per_frame&#39;: 80, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 10, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 80, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-10_steps_per_frame-80&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 80, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 80, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 18:59:11.301 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 80, &#39;steps_per_frame&#39;: 80, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 10, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 80, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-10_steps_per_frame-80&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 80, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 80, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 18:59:11.438 | DEBUG    | pytti.workhorse:do_run:242 - 10
+2022-02-23 18:59:11.440 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 18:59:11.453 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 18:59:11.456 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-10_steps_per_frame-80/matrix_cutouts-10_steps_per_frame-80_settings.txt
+2022-02-23 18:59:11.461 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "d8c2babe8b7d48d3b6bb2f89b88e9fa0", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:59:11.473 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:11.473 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_11.png" src="_images/StudyMatrix_4_11.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:59:11.885 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:12.129 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:12.368 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:12.609 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:12.850 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:13.106 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:13.349 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:13.605 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:13.852 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:14.112 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:14.351 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:14.589 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:14.837 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:15.081 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:15.336 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:15.587 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:15.826 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:16.065 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:16.303 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:16.542 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:16.782 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:17.018 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:17.252 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:17.493 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:17.728 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:17.966 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:18.204 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:18.444 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:18.680 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:18.918 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:19.154 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:19.391 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:19.625 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:19.862 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:20.099 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:20.333 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:20.567 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:20.803 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:21.040 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:21.275 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:21.508 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:21.745 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:21.981 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:22.217 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:22.455 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:22.695 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:22.932 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:23.170 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:23.410 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:23.646 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:23.903 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:24.144 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:24.380 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:24.621 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:24.880 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:25.140 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:25.377 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:25.628 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:25.872 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:26.134 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:26.373 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:26.614 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:26.871 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:27.111 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:27.366 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:27.607 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:27.851 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:28.096 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:28.357 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:28.613 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:28.850 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:29.092 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:29.331 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:29.566 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:29.802 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:30.038 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:30.272 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:30.525 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:30.775 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:30.883 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-10_steps_per_frame-80/matrix_cutouts-10_steps_per_frame-80_1.png
+2022-02-23 18:59:31.283 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 18:59:31.556 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=160
+2022-02-23 18:59:31.556 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=10&#39;, &#39;steps_per_frame=160&#39;, &#39;file_namespace=matrix_cutouts-10_steps_per_frame-160&#39;, &#39;steps_per_scene=160&#39;, &#39;pre_animation_steps=160&#39;, &#39;display_every=160&#39;, &#39;save_every=160&#39;]
+2022-02-23 18:59:31.612 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 160, &#39;steps_per_frame&#39;: 160, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 10, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 160, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-10_steps_per_frame-160&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 160, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 160, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 18:59:31.613 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 160, &#39;steps_per_frame&#39;: 160, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 10, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 160, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-10_steps_per_frame-160&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 160, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 160, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 18:59:31.747 | DEBUG    | pytti.workhorse:do_run:242 - 10
+2022-02-23 18:59:31.750 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 18:59:31.761 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 18:59:31.765 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-10_steps_per_frame-160/matrix_cutouts-10_steps_per_frame-160_settings.txt
+2022-02-23 18:59:31.770 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "309c09101c7e403cb3bce23dd3eccb74", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:59:31.783 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:31.783 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_15.png" src="_images/StudyMatrix_4_15.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 18:59:32.183 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:32.437 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:32.698 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:32.952 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:33.202 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:33.446 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:33.689 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:33.927 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:34.170 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:34.408 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:34.647 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:34.888 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:35.131 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:35.375 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:35.613 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:35.856 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:36.101 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:36.346 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:36.591 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:36.838 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:37.084 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:37.323 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:37.563 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:37.806 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:38.048 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:38.292 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:38.534 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:38.776 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:39.015 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:39.256 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:39.495 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:39.731 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:39.970 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:40.209 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:40.449 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:40.695 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:40.932 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:41.170 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:41.417 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:41.665 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:41.910 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:42.149 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:42.403 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:42.652 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:42.917 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:43.155 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:43.394 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:43.632 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:43.870 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:44.110 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:44.350 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:44.589 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:44.825 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:45.064 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:45.301 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:45.537 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:45.788 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:46.050 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:46.307 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:46.552 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:46.788 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:47.029 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:47.269 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:47.507 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:47.747 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:48.000 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:48.258 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:48.520 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:48.765 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:49.012 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:49.273 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:49.530 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:49.787 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:50.026 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:50.269 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:50.519 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:50.760 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:50.996 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:51.236 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:51.477 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:51.715 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:51.952 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:52.191 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:52.431 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:52.670 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:52.907 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:53.148 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:53.393 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:53.645 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:53.894 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:54.154 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:54.413 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:54.660 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:54.897 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:55.154 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:55.416 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:55.671 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:55.929 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:56.178 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:56.416 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:56.655 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:56.894 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:57.130 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:57.394 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:57.663 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:57.926 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:58.183 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:58.424 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:58.663 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:58.900 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:59.139 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:59.381 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:59.620 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 18:59:59.860 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:00.099 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:00.335 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:00.575 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:00.812 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:01.050 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:01.294 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:01.541 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:01.781 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:02.019 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:02.256 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:02.495 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:02.732 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:02.970 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:03.205 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:03.448 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:03.682 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:03.919 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:04.158 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:04.390 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:04.627 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:04.878 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:05.117 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:05.365 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:05.597 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:05.857 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:06.114 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:06.370 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:06.620 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:06.856 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:07.091 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:07.334 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:07.570 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:07.806 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:08.046 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:08.286 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:08.525 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:08.762 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:09.001 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:09.240 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:09.478 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:09.719 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:09.957 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:10.196 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:10.439 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:10.678 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:10.787 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-10_steps_per_frame-160/matrix_cutouts-10_steps_per_frame-160_1.png
+2022-02-23 19:00:11.195 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 19:00:11.482 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=20
+2022-02-23 19:00:11.482 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=40&#39;, &#39;steps_per_frame=20&#39;, &#39;file_namespace=matrix_cutouts-40_steps_per_frame-20&#39;, &#39;steps_per_scene=20&#39;, &#39;pre_animation_steps=20&#39;, &#39;display_every=20&#39;, &#39;save_every=20&#39;]
+2022-02-23 19:00:11.536 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 20, &#39;steps_per_frame&#39;: 20, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 20, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-40_steps_per_frame-20&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 20, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 20, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:00:11.538 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 20, &#39;steps_per_frame&#39;: 20, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 20, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-40_steps_per_frame-20&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 20, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 20, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:00:11.672 | DEBUG    | pytti.workhorse:do_run:242 - 40
+2022-02-23 19:00:11.674 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 19:00:11.686 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 19:00:11.689 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-40_steps_per_frame-20/matrix_cutouts-40_steps_per_frame-20_settings.txt
+2022-02-23 19:00:11.694 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "0df97fa512284138989fa7aa1851b8fe", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:00:11.705 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:11.705 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_19.png" src="_images/StudyMatrix_4_19.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:00:12.150 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:12.440 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:12.725 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:13.011 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:13.296 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:13.576 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:13.861 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:14.138 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:14.425 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:14.704 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:14.980 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:15.261 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:15.540 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:15.816 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:16.094 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:16.370 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:16.649 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:16.929 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:17.209 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:17.322 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-40_steps_per_frame-20/matrix_cutouts-40_steps_per_frame-20_1.png
+2022-02-23 19:00:17.759 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 19:00:18.023 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=80
+2022-02-23 19:00:18.024 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=40&#39;, &#39;steps_per_frame=80&#39;, &#39;file_namespace=matrix_cutouts-40_steps_per_frame-80&#39;, &#39;steps_per_scene=80&#39;, &#39;pre_animation_steps=80&#39;, &#39;display_every=80&#39;, &#39;save_every=80&#39;]
+2022-02-23 19:00:18.076 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 80, &#39;steps_per_frame&#39;: 80, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 80, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-40_steps_per_frame-80&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 80, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 80, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:00:18.077 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 80, &#39;steps_per_frame&#39;: 80, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 80, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-40_steps_per_frame-80&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 80, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 80, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:00:18.199 | DEBUG    | pytti.workhorse:do_run:242 - 40
+2022-02-23 19:00:18.201 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 19:00:18.213 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 19:00:18.219 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-40_steps_per_frame-80/matrix_cutouts-40_steps_per_frame-80_settings.txt
+2022-02-23 19:00:18.223 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "9375afd918224125aab98b4c88a86e78", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:00:18.235 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:18.235 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_23.png" src="_images/StudyMatrix_4_23.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:00:18.675 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:18.962 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:19.243 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:19.521 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:19.796 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:20.075 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:20.357 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:20.634 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:20.918 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:21.197 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:21.475 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:21.757 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:22.037 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:22.318 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:22.598 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:22.878 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:23.163 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:23.439 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:23.716 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:23.997 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:24.277 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:24.587 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:24.895 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:25.189 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:25.466 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:25.755 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:26.047 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:26.331 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:26.616 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:26.916 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:27.209 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:27.499 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:27.784 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:28.067 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:28.362 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:28.659 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:28.935 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:29.214 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:29.488 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:29.768 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:30.044 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:30.320 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:30.597 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:30.874 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:31.151 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:31.429 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:31.707 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:31.983 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:32.272 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:32.555 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:32.830 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:33.110 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:33.394 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:33.677 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:33.976 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:34.278 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:34.577 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:34.883 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:35.184 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:35.484 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:35.779 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:36.073 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:36.378 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:36.684 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:36.985 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:37.292 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:37.589 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:37.886 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:38.184 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:38.484 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:38.782 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:39.082 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:39.382 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:39.677 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:39.971 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:40.270 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:40.569 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:40.866 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:41.162 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:41.279 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-40_steps_per_frame-80/matrix_cutouts-40_steps_per_frame-80_1.png
+2022-02-23 19:00:41.737 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 19:00:42.001 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=160
+2022-02-23 19:00:42.001 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=40&#39;, &#39;steps_per_frame=160&#39;, &#39;file_namespace=matrix_cutouts-40_steps_per_frame-160&#39;, &#39;steps_per_scene=160&#39;, &#39;pre_animation_steps=160&#39;, &#39;display_every=160&#39;, &#39;save_every=160&#39;]
+2022-02-23 19:00:42.054 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 160, &#39;steps_per_frame&#39;: 160, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 160, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-40_steps_per_frame-160&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 160, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 160, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:00:42.055 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 160, &#39;steps_per_frame&#39;: 160, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 160, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-40_steps_per_frame-160&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 160, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 160, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:00:42.178 | DEBUG    | pytti.workhorse:do_run:242 - 40
+2022-02-23 19:00:42.181 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 19:00:42.192 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 19:00:42.196 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-40_steps_per_frame-160/matrix_cutouts-40_steps_per_frame-160_settings.txt
+2022-02-23 19:00:42.200 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "baffb07e88df404ba839a83c11be8970", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:00:42.211 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:42.211 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_27.png" src="_images/StudyMatrix_4_27.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:00:42.674 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:42.975 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:43.277 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:43.574 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:43.868 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:44.167 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:44.465 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:44.760 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:45.057 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:45.353 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:45.650 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:45.947 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:46.244 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:46.542 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:46.838 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:47.135 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:47.433 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:47.727 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:48.023 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:48.321 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:48.620 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:48.915 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:49.211 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:49.509 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:49.812 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:50.134 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:50.452 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:50.758 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:51.047 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:51.343 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:51.640 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:51.932 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:52.237 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:52.533 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:52.843 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:53.159 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:53.466 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:53.768 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:54.072 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:54.350 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:54.625 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:54.908 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:55.189 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:55.472 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:55.754 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:56.030 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:56.313 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:56.598 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:56.876 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:57.154 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:57.434 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:57.716 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:58.011 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:58.293 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:58.569 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:58.858 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:59.149 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:59.428 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:00:59.716 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:00.002 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:00.278 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:00.563 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:00.841 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:01.125 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:01.415 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:01.694 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:01.973 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:02.261 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:02.542 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:02.829 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:03.107 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:03.393 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:03.671 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:03.950 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:04.222 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:04.503 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:04.776 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:05.059 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:05.338 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:05.622 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:05.902 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:06.178 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:06.462 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:06.745 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:07.033 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:07.314 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:07.597 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:07.877 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:08.161 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:08.442 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:08.726 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:09.009 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:09.292 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:09.568 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:09.853 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:10.130 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:10.415 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:10.697 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:10.973 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:11.260 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:11.539 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:11.817 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:12.100 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:12.380 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:12.660 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:12.939 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:13.219 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:13.504 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:13.783 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:14.070 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:14.351 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:14.638 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:14.916 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:15.203 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:15.481 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:15.774 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:16.060 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:16.341 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:16.621 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:16.909 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:17.188 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:17.476 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:17.762 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:18.046 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:18.321 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:18.604 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:18.893 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:19.175 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:19.467 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:19.745 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:20.036 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:20.320 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:20.599 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:20.874 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:21.155 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:21.437 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:21.726 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:22.013 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:22.300 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:22.579 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:22.861 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:23.145 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:23.428 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:23.711 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:23.998 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:24.276 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:24.557 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:24.837 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:25.118 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:25.403 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:25.683 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:25.963 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:26.246 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:26.523 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:26.809 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:27.089 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:27.372 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:27.657 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:27.952 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:28.062 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-40_steps_per_frame-160/matrix_cutouts-40_steps_per_frame-160_1.png
+2022-02-23 19:01:28.512 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 19:01:28.782 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=20
+2022-02-23 19:01:28.782 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=160&#39;, &#39;steps_per_frame=20&#39;, &#39;file_namespace=matrix_cutouts-160_steps_per_frame-20&#39;, &#39;steps_per_scene=20&#39;, &#39;pre_animation_steps=20&#39;, &#39;display_every=20&#39;, &#39;save_every=20&#39;]
+2022-02-23 19:01:28.834 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 20, &#39;steps_per_frame&#39;: 20, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 160, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 20, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-160_steps_per_frame-20&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 20, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 20, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:01:28.835 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 20, &#39;steps_per_frame&#39;: 20, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 160, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 20, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-160_steps_per_frame-20&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 20, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 20, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:01:28.969 | DEBUG    | pytti.workhorse:do_run:242 - 160
+2022-02-23 19:01:28.971 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 19:01:28.983 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 19:01:28.985 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-160_steps_per_frame-20/matrix_cutouts-160_steps_per_frame-20_settings.txt
+2022-02-23 19:01:28.989 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "07e624601a9d4ff79e2509cccb990d45", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:01:29.000 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:29.001 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_31.png" src="_images/StudyMatrix_4_31.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:01:29.631 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:30.098 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:30.562 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:31.031 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:31.492 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:31.949 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:32.405 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:32.868 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:33.328 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:33.790 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:34.251 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:34.710 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:35.172 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:35.643 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:36.100 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:36.554 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:37.017 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:37.477 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:37.947 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:38.055 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-160_steps_per_frame-20/matrix_cutouts-160_steps_per_frame-20_1.png
+2022-02-23 19:01:38.667 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 19:01:39.062 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=80
+2022-02-23 19:01:39.063 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=160&#39;, &#39;steps_per_frame=80&#39;, &#39;file_namespace=matrix_cutouts-160_steps_per_frame-80&#39;, &#39;steps_per_scene=80&#39;, &#39;pre_animation_steps=80&#39;, &#39;display_every=80&#39;, &#39;save_every=80&#39;]
+2022-02-23 19:01:39.116 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 80, &#39;steps_per_frame&#39;: 80, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 160, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 80, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-160_steps_per_frame-80&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 80, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 80, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:01:39.117 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 80, &#39;steps_per_frame&#39;: 80, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 160, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 80, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-160_steps_per_frame-80&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 80, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 80, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:01:39.239 | DEBUG    | pytti.workhorse:do_run:242 - 160
+2022-02-23 19:01:39.241 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 19:01:39.253 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 19:01:39.258 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-160_steps_per_frame-80/matrix_cutouts-160_steps_per_frame-80_settings.txt
+2022-02-23 19:01:39.262 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "7f60824c06f242409fc58d0937f36758", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:01:39.274 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:39.274 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_35.png" src="_images/StudyMatrix_4_35.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:01:39.899 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:40.361 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:40.834 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:41.303 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:41.764 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:42.230 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:42.698 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:43.154 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:43.615 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:44.079 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:44.546 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:45.012 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:45.471 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:45.939 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:46.403 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:46.862 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:47.329 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:47.797 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:48.263 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:48.725 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:49.189 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:49.649 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:50.103 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:50.558 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:51.024 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:51.486 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:51.948 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:52.404 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:52.862 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:53.328 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:53.819 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:54.337 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:54.826 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:55.329 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:55.836 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:56.307 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:56.773 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:57.256 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:57.755 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:58.240 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:58.703 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:59.168 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:01:59.638 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:00.108 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:00.579 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:01.054 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:01.552 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:02.066 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:02.577 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:03.092 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:03.588 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:04.066 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:04.544 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:05.042 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:05.550 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:06.037 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:06.541 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:07.052 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:07.519 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:08.066 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:08.568 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:09.101 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:09.623 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:10.122 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:10.617 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:11.118 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:11.624 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:12.121 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:12.609 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:13.073 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:13.553 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:14.057 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:14.525 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:15.000 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:15.463 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:15.935 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:16.409 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:16.873 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:17.345 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:17.456 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-160_steps_per_frame-80/matrix_cutouts-160_steps_per_frame-80_1.png
+2022-02-23 19:02:18.089 | INFO     | pytti.workhorse:_main:587 - Complete.
+2022-02-23 19:02:18.487 | DEBUG    | __main__:&lt;module&gt;:17 - save_every=160
+2022-02-23 19:02:18.487 | DEBUG    | __main__:&lt;module&gt;:18 - [&#39;scenes=&quot;portrait of a man, oil on canvas&quot;&#39;, &#39;image_model=VQGAN&#39;, &#39;conf=empty&#39;, &#39;seed=12345&#39;, &#39;cutouts=160&#39;, &#39;steps_per_frame=160&#39;, &#39;file_namespace=matrix_cutouts-160_steps_per_frame-160&#39;, &#39;steps_per_scene=160&#39;, &#39;pre_animation_steps=160&#39;, &#39;display_every=160&#39;, &#39;save_every=160&#39;]
+2022-02-23 19:02:18.545 | DEBUG    | pytti.workhorse:_main:187 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 160, &#39;steps_per_frame&#39;: 160, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 160, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 160, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-160_steps_per_frame-160&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 160, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 160, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:02:18.547 | DEBUG    | pytti.workhorse:_main:188 - {&#39;scenes&#39;: &#39;portrait of a man, oil on canvas&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;VQGAN&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 160, &#39;steps_per_frame&#39;: 160, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 12345, &#39;cutouts&#39;: 160, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 160, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;matrix_cutouts-160_steps_per_frame-160&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 160, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 160, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1, &#39;conf&#39;: {}}
+2022-02-23 19:02:18.707 | DEBUG    | pytti.workhorse:do_run:242 - 160
+2022-02-23 19:02:18.709 | INFO     | pytti.workhorse:parse_scenes:110 - Loading prompts...
+2022-02-23 19:02:18.721 | INFO     | pytti.workhorse:parse_scenes:120 - Prompts loaded.
+2022-02-23 19:02:18.726 | INFO     | pytti.workhorse:do_run:520 - Settings saved to /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-160_steps_per_frame-160/matrix_cutouts-160_steps_per_frame-160_settings.txt
+2022-02-23 19:02:18.730 | INFO     | pytti.workhorse:do_run:533 - Running prompt:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "0fcbaad8b9fa48d2980c8eef8c179120", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:02:18.744 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:18.745 | DEBUG    | pytti.ImageGuide:report_out:364 - Step 0 losses:
+</pre></div>
+</div>
+<img alt="_images/StudyMatrix_4_39.png" src="_images/StudyMatrix_4_39.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-02-23 19:02:19.379 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:19.863 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:20.333 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:20.810 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:21.286 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:21.756 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:22.218 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:22.688 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:23.160 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:23.629 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:24.105 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:24.574 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:25.040 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:25.509 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:25.970 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:26.447 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:26.910 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:27.373 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:27.845 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:28.343 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:28.842 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:29.336 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:29.837 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:30.357 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:30.873 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:31.376 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:31.882 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:32.373 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:32.843 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:33.331 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:33.835 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:34.326 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:34.820 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:35.354 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:35.863 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:36.367 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:36.893 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:37.393 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:37.896 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:38.388 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:38.891 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:39.389 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:39.894 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:40.394 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:40.902 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:41.430 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:41.926 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:42.407 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:42.872 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:43.354 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:43.852 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:44.354 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:44.849 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:45.344 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:45.847 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:46.314 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:46.807 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:47.285 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:47.744 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:48.199 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:48.670 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:49.157 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:49.629 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:50.106 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:50.561 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:51.023 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:51.494 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:51.950 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:52.413 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:52.876 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:53.350 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:53.811 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:54.272 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:54.741 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:55.213 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:55.681 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:56.162 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:56.626 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:57.102 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:57.573 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:58.044 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:58.506 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:58.967 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:59.444 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:02:59.913 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:00.394 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:00.866 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:01.342 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:01.817 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:02.290 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:02.773 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:03.243 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:03.711 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:04.196 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:04.687 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:05.166 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:05.637 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:06.107 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:06.570 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:07.051 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:07.511 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:07.980 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:08.456 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:08.917 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:09.389 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:09.863 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:10.337 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:10.807 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:11.270 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:11.743 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:12.205 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:12.668 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:13.141 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:13.613 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:14.084 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:14.552 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:15.017 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:15.490 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:15.959 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:16.429 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:16.899 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:17.355 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:17.813 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:18.280 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:18.744 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:19.209 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:19.674 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:20.143 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:20.601 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:21.063 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:21.528 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:21.992 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:22.450 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:22.908 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:23.366 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:23.833 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:24.306 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:24.763 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:25.225 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:25.694 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:26.161 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:26.627 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:27.106 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:27.568 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:28.040 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:28.509 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:28.979 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:29.448 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:29.907 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:30.376 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:30.846 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:31.308 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:31.776 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:32.255 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:32.717 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:33.190 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:33.662 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:34.133 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:34.602 | DEBUG    | pytti.ImageGuide:update:456 - model.update called
+2022-02-23 19:03:34.713 | DEBUG    | pytti.ImageGuide:save_out:416 - /home/dmarx/proj/pytti-book/images_out//matrix_cutouts-160_steps_per_frame-160/matrix_cutouts-160_steps_per_frame-160_1.png
+2022-02-23 19:03:35.338 | INFO     | pytti.workhorse:_main:587 - Complete.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://pytorch.org/vision/master/auto_examples/plot_visualization_utils.html#visualizing-a-grid-of-images</span>
+<span class="c1"># sphinx_gallery_thumbnail_path = &quot;../../gallery/assets/visualization_utils_thumbnail2.png&quot;</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">torchvision.io</span> <span class="kn">import</span> <span class="n">read_image</span>
+<span class="kn">import</span> <span class="nn">torchvision.transforms.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">torchvision.utils</span> <span class="kn">import</span> <span class="n">make_grid</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;savefig.bbox&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span><span class="mi">20</span>
+
+<span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">imgs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">imgs</span> <span class="o">=</span> <span class="p">[</span><span class="n">imgs</span><span class="p">]</span>
+    <span class="n">fix</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">imgs</span><span class="p">),</span> <span class="n">squeeze</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">imgs</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_pil_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+        <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xticklabels</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[],</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+    <span class="k">return</span> <span class="n">fix</span><span class="p">,</span> <span class="n">axs</span>
+
+
+<span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kargs</span><span class="p">:</span>
+    <span class="n">fpath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;images_out&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span><span class="p">[</span><span class="s1">&#39;file_namespace&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="s1">&#39;file_namespace&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_1.png&quot;</span>
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">read_image</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fpath</span><span class="p">)))</span>
+
+<span class="n">nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cross_product__quality0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">make_grid</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">nrow</span><span class="o">=</span><span class="n">nr</span><span class="p">)</span>
+<span class="n">fix</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">show</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+<span class="n">ax0_name</span><span class="p">,</span> <span class="n">ax1_name</span> <span class="o">=</span> <span class="n">cross_product__quality0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cross_product__quality0</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">fix</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TestMatrix_</span><span class="si">{</span><span class="n">ax0_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">ax1_name</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+
+<span class="c1"># to do: </span>
+<span class="c1"># * label axes and values</span>
+<span class="c1"># * track and report runtimes for each experiment</span>
+<span class="c1"># * track and report runtime of notebook</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<style>
+    .jupyter-widgets {color: #d5d5d5 !important;}
+    .widget-label {color: #d5d5d5 !important;}
+</style>
+</div><img alt="_images/StudyMatrix_5_1.png" src="_images/StudyMatrix_5_1.png" />
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="Settings.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Settings</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="MiscResources.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Miscellaneous Resources</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By David Marx<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

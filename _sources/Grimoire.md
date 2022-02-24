@@ -55,9 +55,15 @@ The following terms and phrases are potentially useful for promoting desired qua
 * trending on Artstation
 * 4k UHD
 * rendered in Unity
-* macrophotography
 * hyperrealistic
+* cgsociety
 
-## Artists and styles
+## Artists, styles, media
 
-...
+* oil on canvas
+* watercoller
+* abstract
+* surrealism
+* #pixelart
+* macrophotography
+* sketch
