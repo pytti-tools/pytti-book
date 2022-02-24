@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# https://pytorch.org/vision/master/auto_examples/plot_visualization_utils.html#visualizing-a-grid-of-images
+# sphinx_gallery_thumbnail_path = "../../gallery/assets/visualization_utils_thumbnail2.png"
+from pathlib import Path
+
+import numpy as np
+import matplotlib.pyplot as plt
+from torchvision.io import read_image
+import torchvision.transforms.functional as F
+from torchvision.utils import make_grid
+
+
+plt.rcParams["savefig.bbox"] = 'tight'
+plt.rcParams['figure.figsize'] = 20,20
+
+def show(imgs):
+    if not isinstance(imgs, list):
+        imgs = [imgs]
+    fix, axs = plt.subplots(ncols=len(imgs), squeeze=False)
+    for i, img in enumerate(imgs):
+        img = img.detach()
+        img = F.to_pil_image(img)
+        axs[0, i].imshow(np.asarray(img))
+        axs[0, i].set(xticklabels=[], yticklabels=[], xticks=[], yticks=[])
+    return fix, axs
+
+
+images = []
+for k in kargs:
+    fpath = Path("images_out") / k['file_namespace'] / f"{k['file_namespace']}_1.png"
+    images.append(read_image(str(fpath)))
+
+nr = len(cross_product__quality0[0][-1])
+grid = make_grid(images, nrow=nr)
+fix, axs = show(grid)
+
+ax0_name, ax1_name = cross_product__quality0[0][0], cross_product__quality0[1][0]
+fix.savefig(f"TestMatrix_{ax0_name}_{ax1_name}.png")
+
+# to do: 
+# * label axes and values
+# * track and report runtimes for each experiment
+# * track and report runtime of notebook
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Input [0;32mIn [4][0m, in [0;36m<module>[0;34m[0m
+[1;32m     24[0m     [38;5;28;01mreturn[39;00m fix, axs
+[1;32m     27[0m images [38;5;241m=[39m []
+[0;32m---> 28[0m [38;5;28;01mfor[39;00m k [38;5;129;01min[39;00m [43mkargs[49m:
+[1;32m     29[0m     fpath [38;5;241m=[39m Path([38;5;124m"[39m[38;5;124mimages_out[39m[38;5;124m"[39m) [38;5;241m/[39m k[[38;5;124m'[39m[38;5;124mfile_namespace[39m[38;5;124m'[39m] [38;5;241m/[39m [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00mk[[38;5;124m'[39m[38;5;124mfile_namespace[39m[38;5;124m'[39m][38;5;132;01m}[39;00m[38;5;124m_1.png[39m[38;5;124m"[39m
+[1;32m     30[0m     images[38;5;241m.[39mappend(read_image([38;5;28mstr[39m(fpath)))
+
+[0;31mNameError[0m: name 'kargs' is not defined
+NameError: name 'kargs' is not defined
+
