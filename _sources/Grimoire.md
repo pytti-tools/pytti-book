@@ -74,3 +74,220 @@ The following terms and phrases are potentially useful for promoting desired qua
 * depth shading
 * tilt shift
 * fisheye
+
+## Materials
+
+* Ammonite
+* Cactus
+* Ceruleite
+* Neutrino Particles
+* Rose Quartz
+* Spider Webs
+* Will-O'-The-Wisp
+* acid
+* acrylic pour
+* air
+* alocohol
+* antimatter
+* ants
+* ash
+* balloons
+* bamboo
+* barnacles
+* bismuth
+* bones
+* bosons
+* bubblegum
+* bubbles
+* butter
+* butterflies
+* calcium
+* camouflage
+* candy syrup
+* cannabis
+* carnivorous plants
+* ceramic
+* chalk
+* cherry blossoms
+* chlorine
+* chocolate
+* christmas
+* citrine
+* clay
+* clouds
+* coins
+* copper
+* coral
+* cosmic energy
+* cotton candy
+* crystal
+* crystalline fractals
+* crystals
+* dark energy
+* darkness
+* datara
+* decay
+* doors
+* dragonscales
+* dream-wood
+* dreamcotton
+* dreamfrost
+* dry ice
+* dust
+* earth
+* easter
+* ectoplasm
+* electrons
+* emerald
+* essentia
+* explosions
+* feathers
+* fire
+* fire and ice
+* flowers
+* foam
+* fruit juice
+* fungus
+* fur
+* gamma rays
+* gargoyles
+* gas
+* geodes
+* ghosts
+* glaciers
+* glass
+* gloop and sludge
+* gold
+* granite
+* grass
+* gravity
+* halite
+* halloween
+* heat
+* hematite
+* herbs
+* honey
+* ice
+* ice cream
+* illusions
+* ink
+* insects
+* iridium
+* jade
+* jelly
+* lapis lazuli
+* leather
+* lifeblood
+* light
+* lightning
+* liquid metal
+* love
+* lubricant
+* magic
+* magma
+* magnetic forces
+* malachite
+* maple syrup
+* mercury
+* metal
+* mirrors
+* mist
+* mochi
+* moonlight
+* moonstone
+* moss
+* mud
+* music
+* nature
+* nightmares
+* nothing
+* obsidian
+* oil
+* onyx
+* opal
+* orbs
+* osmium
+* ozone
+* paint
+* paper
+* particles
+* peanut butter
+* peat moss
+* peppermint
+* pine
+* pineapple
+* plasma
+* plastic
+* poison
+* polonium
+* prism stones
+* protons
+* quartz
+* quicksand
+* radiation
+* rain
+* rainbows
+* ripples
+* rock
+* rubber
+* ruby
+* rust
+* sakura flowers
+* salt
+* sand
+* sap
+* sapphire
+* seaweed
+* secrets
+* shadow
+* shadows
+* shatterblast
+* shattuckite
+* shockwaves
+* silicon
+* silk
+* silver
+* slime
+* slow motion
+* slush
+* smoke
+* snow
+* soap
+* soot
+* souls
+* sound
+* spacetime
+* spheres
+* spikes
+* springs
+* stardust
+* strange matter
+* straw
+* string
+* sunrays
+* superheated steam
+* swamp
+* tar
+* tech
+* tentacles
+* the fabric of space
+* the void
+* timber
+* time
+* topaz
+* translucent material
+* trash
+* tree resin
+* unicorn-horns
+* vines
+* vines and thornes
+* vortex
+* voxels
+* water
+* waves
+* wax
+* wine
+* wire
+* wood
+* wool
+* wrought iron
