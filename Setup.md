@@ -83,3 +83,48 @@ Your local directory structure probably looks like this now:
     pip install ./pytti-core/vendor/GMA
     pip install ./pytti-core/vendor/taming-transformers
     pip install ./pytti-core
+
+### 12. (optional) Build local configs
+
+If you skip this step, PyTTI will do it for you anyway the first time you import it.
+
+```
+python -m pytti.warmup
+```
+
+If you want to "factory reset" your default.yaml, just delete the config folder and run the command above to rebuild it with PyTTI's shipped defaults.
+
+
+# Uninstalling and/or Updating
+
+### 1. Uninstall PyTTI
+
+```
+pip uninstall -y ./pytti-core/vendor/AdaBins
+pip uninstall -y ./pytti-core/vendor/CLIP
+pip uninstall -y ./pytti-core/vendor/GMA
+pip uninstall -y ./pytti-core/vendor/taming-transformers
+pip uninstall -y pyttitools-core;
+```
+
+### 2. Delete PyTTI and any remaining build artifacts from installing it
+
+```
+rm -rf build
+rm -rf config
+rm -rf pytti-core
+```
+
+### 3. Downloaded the latest pytti-core and re-install
+
+```
+git clone --recurse-submodules -j8 https://github.com/pytti-tools/pytti-core
+
+pip install ./pytti-core/vendor/AdaBins
+pip install ./pytti-core/vendor/CLIP
+pip install ./pytti-core/vendor/GMA
+pip install ./pytti-core/vendor/taming-transformers
+pip install ./pytti-core
+
+python -m pytti.warmup
+```
