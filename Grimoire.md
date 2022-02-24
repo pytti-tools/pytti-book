@@ -65,5 +65,12 @@ The following terms and phrases are potentially useful for promoting desired qua
 * abstract
 * surrealism
 * #pixelart
-* macrophotography
 * sketch
+
+## Visual effects
+
+* macrophotography
+* iridescent
+* depth shading
+* tilt shift
+* fisheye
