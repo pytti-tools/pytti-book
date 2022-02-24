@@ -6,11 +6,15 @@ author: David Marx
 logo: logo.png
 copyright: "2021"
 
+only_build_toc_files: true
+
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
-  exclude_patterns: []
+#  execute_notebooks: force
+  execute_notebooks: cache
+  exclude_patterns:
+    - '*pytti-core/vendor/*'
   timeout: 300    # The maximum time (in seconds) each notebook cell is allowed to run.
   stderr_output             : show  # One of 'show', 'remove', 'remove-warn', 'warn', 'error', 'severe'
 

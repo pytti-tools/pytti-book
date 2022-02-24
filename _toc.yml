@@ -12,7 +12,11 @@ parts:
     chapters:
     - file: CrashCourse
     - file: Grimoire
-  - caption: Reference
+  - caption: Settings
     chapters:
     - file: Settings
+    - file: StudyMatrix
+      title: "Study: Cutouts vs. Steps Per Frame"
+  - caption: Reference
+    chapters:
     - file: MiscResources
