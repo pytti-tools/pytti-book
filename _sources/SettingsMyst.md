@@ -1,6 +1,69 @@
-# Settings
+# Scene Syntax
 
-`scenes:` Descriptions of scenes you want generated, separated by `||`. Each scene can contain multiple prompts, separated by `|`. See [](SceneDSL) for details on scene specification syntax and usage examples.
+prompts `|`
+: Each scene can contain multiple prompts, separated by `|`
+
+
+:::{admonition} Example: A single scene with multiple prompts
+```
+Winter sunrise | icy landscape | snowy skyline 
+```
+Would generate a wintry scene.
+:::
+
+
+scenes `||`
+: Scenes are separated by `||`
+
+:::{admonition} Example: Multiple scenes with multiple prompts each
+```
+Winter sunrise | icy landscape || Winter day | snowy skyline || Winter sunset | chilly air || Winter night | clear sky` 
+```
+would go through 4 winter scenes, with two prompts each:
+
+1. `Winter sunrise` + `icy landscape`
+2. `Winter day` + `snowy skyline`
+3. `Winter sunset` + `chilly air`
+4. `Winter night` + `clear sky`
+:::
+
+weights `:`
+: Apply weights to prompts using the syntx `this is a prompt:weight`
+
+  Higher `weight` values will have more influence on the image, and negative `weight` values will "subtract" the prompt from the image. The default weight is $1$. Weights can also be functions of $t$ to change over the course of an animation.
+
+:::{admonition} Example: Prompts with weights
+```
+blue sky:10|martian landscape|red sky:-1
+``` 
+would try to turn the martian sky blue.
+:::
+
+**Advanced:** stop prompts once the image matches them sufficiently with `description:weight:stop`. `stop` should be between $0$ and $1$ for positive prompts, or between $-1$ and $0$ for negative prompts. Lower `stop` values will have more effect on the image (remember that $-1<-0.5<0$). A prompt with a negative `weight` will often go haywire without a stop. Stops can also be functions of $t$ to change over the course of an animation.
+
+:::{admonition} Example: Prompts with stop weights
+```
+Feathered dinosaurs|birds:1:0.87|scales:-1:-.9|text:-1:-.9
+``` 
+Would try to make feathered dinosaurs, lightly like birds, without scales or text, but without making 'anti-scales' or 'anti-text.'
+:::
+
+
+**Advanced:** Use `description:weight_mask description` with a text prompt as `mask`. The prompt will only be applied to areas of the image that match `mask description` according to CLIP.
+
+*Example scene:* `Khaleesi Daenerys Targaryen | mother of dragons | dragon:3_baby` would only apply the weight `dragon` to parts of the image that match `baby`, thus turning the babies that `mother` tends to make into dragons (hopefully).
+
+**Advanced:** Use `description:weight_[mask]` with a URL or path to an image, or a path to a .mp4 video to use as a `mask`. The prompt will only be applied to the masked (white) areas of the mask image. Use `description:weight_[-mask]` to apply the prompt to the black areas instead.
+
+*Example scene:* `sunlight:3_[mask.mp4]|midnight:3_[-mask.mp4]` Would apply `sunlight` in the white areas of `mask.mp4`, and `midnight` in the black areas.
+
+**Legacy:** Directional weights will still work as before, but they aren't as good as masks.
+
+**Advanced:** Use `[path or url]` as a prompt to add a semantic image prompt. This will be read by CLIP and understood as a near perfect text description of the image.
+
+*Example scene:* `[artist signature.png]:-1:-.95|[https://i.redd.it/ewpeykozy7e71.png]:3|fractal clouds|hole in the sky`
+
+---
 
 `scene_prefix:` text prepended to the beginning of each scene.
 
