@@ -252,6 +252,44 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prompt-controls">
+   Prompt Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-representation-controls">
+   Image Representation Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#animation-controls">
+   Animation Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motion-controls">
+   Motion Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output-controls">
+   Output controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptor-settings">
+   Perceptor Settings
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -264,6 +302,44 @@
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prompt-controls">
+   Prompt Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-representation-controls">
+   Image Representation Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#animation-controls">
+   Animation Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motion-controls">
+   Motion Controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output-controls">
+   Output controls
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perceptor-settings">
+   Perceptor Settings
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -272,92 +348,189 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="settings">
 <h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">scenes:</span></code> Descriptions of scenes you want generated, separated by <code class="docutils literal notranslate"><span class="pre">||</span></code>. Each scene can contain multiple prompts, separated by <code class="docutils literal notranslate"><span class="pre">|</span></code>. See <a class="reference internal" href="SceneDSL.html#scenedsl"><span class="std std-ref">Scene Syntax</span></a> for details on scene specification syntax and usage examples.</p>
-<p><code class="docutils literal notranslate"><span class="pre">scene_prefix:</span></code> text prepended to the beginning of each scene.</p>
-<p><em>Example:</em> <code class="docutils literal notranslate"><span class="pre">Trending</span> <span class="pre">on</span> <span class="pre">Arstation|</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">scene_suffix:</span></code> text appended to the end of each scene.</p>
-<p><em>Example:</em> <code class="docutils literal notranslate"> <span class="pre">by</span> <span class="pre">James</span> <span class="pre">Gurney</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">interpolation_steps:</span></code> number of steps to spend smoothly transitioning from the last scene at the start of each scene. <span class="math notranslate nohighlight">\(200\)</span> is a good default. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable.</p>
-<p><code class="docutils literal notranslate"><span class="pre">steps_per_scene:</span></code> total number of steps to spend rendering each scene. Should be at least <code class="docutils literal notranslate"><span class="pre">interpolation_steps</span></code>. This will indirectly control the total length of an animation.</p>
-<hr class="docutils" />
-<p>#<strong>NEW</strong>:
-<code class="docutils literal notranslate"><span class="pre">direct_image_prompts:</span></code> paths or urls of images that you want your image to look like in a literal sense, along with <code class="docutils literal notranslate"><span class="pre">weight_mask</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> values, separated by <code class="docutils literal notranslate"><span class="pre">|</span></code>.</p>
+<div class="section" id="prompt-controls">
+<h2>Prompt Controls<a class="headerlink" href="#prompt-controls" title="Permalink to this headline">¶</a></h2>
+<dl class="simple myst">
+<dt>scenes</dt><dd><p>Descriptions of scenes you want generated, separated by <code class="docutils literal notranslate"><span class="pre">||</span></code>. Each scene can contain multiple prompts, separated by <code class="docutils literal notranslate"><span class="pre">|</span></code>. See <a class="reference internal" href="SceneDSL.html#scenedsl"><span class="std std-ref">Scene Syntax</span></a> for details on scene specification syntax and usage examples.</p>
+</dd>
+<dt>scene_prefix</dt><dd><p>Prompts prepended to the beginning of each scene.</p>
+</dd>
+<dt>scene_suffix</dt><dd><p>prompts appended to the end of each scene.</p>
+</dd>
+<dt>interpolation_steps</dt><dd><p>Number of steps to use smoothly transitioning from the last scene at the start of each scene. <span class="math notranslate nohighlight">\(200\)</span> is a good default. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable. Transitions are performed by linearly interpolating between the prompts of the two scenes in semantic (CLIP) space.</p>
+</dd>
+<dt>steps_per_scene</dt><dd><p>Total number of steps to spend rendering each scene. Should be at least <code class="docutils literal notranslate"><span class="pre">interpolation_steps</span></code>. Along with <code class="docutils literal notranslate"><span class="pre">save_every</span></code>, this will control the total length of an animation.</p>
+</dd>
+<dt>direct_image_prompts</dt><dd><p>Paths or urls of images that you want your image to look like in a literal sense, along with <code class="docutils literal notranslate"><span class="pre">weight_mask</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> values, separated by <code class="docutils literal notranslate"><span class="pre">|</span></code>.</p>
 <p>Apply masks to direct image prompts with <code class="docutils literal notranslate"><span class="pre">path</span> <span class="pre">or</span> <span class="pre">url</span> <span class="pre">of</span> <span class="pre">image:weight_path</span> <span class="pre">or</span> <span class="pre">url</span> <span class="pre">of</span> <span class="pre">mask</span></code> For video masks it must be a path to an mp4 file.</p>
-<p><strong>Legacy</strong> latent image prompts are no more. They are now rolled into direct image prompts.</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">init_image:</span></code> path or url of start image. Works well for creating a central focus.</p>
-<p><code class="docutils literal notranslate"><span class="pre">direct_init_weight:</span></code> Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Use the initial image as a direct image prompt. Equivalent to adding <code class="docutils literal notranslate"><span class="pre">init_image:direct_init_weight</span></code> as a <code class="docutils literal notranslate"><span class="pre">direct_image_prompt</span></code>. Supports weights, masks, and stops.</p>
-<p><code class="docutils literal notranslate"><span class="pre">semantic_init_weight:</span></code> Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Use the initial image as a semantic image prompt. Equivalent to adding <code class="docutils literal notranslate"><span class="pre">[init_image]:direct_init_weight</span></code> as a prompt to each scene in <code class="docutils literal notranslate"><span class="pre">scenes</span></code>. Supports weights, masks, and stops. <strong>IMPORTANT</strong> since this is a semantic prompt, you still need to put the mask in <code class="docutils literal notranslate"><span class="pre">[</span></code> <code class="docutils literal notranslate"><span class="pre">]</span></code> to denote it as a path or url, otherwise it will be read as text instead of a file.</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">height:</span></code> image size. Set one of these <span class="math notranslate nohighlight">\(-1\)</span> to derive it from the aspect ratio of the init image.</p>
-<p><code class="docutils literal notranslate"><span class="pre">pixel_size:</span></code> integer image scale factor. Makes the image bigger. Set to <span class="math notranslate nohighlight">\(1\)</span> for VQGAN or face VRAM issues.</p>
-<p><code class="docutils literal notranslate"><span class="pre">smoothing_weight:</span></code> makes the image smoother. Defaults to <span class="math notranslate nohighlight">\(0\)</span> (no smoothing). Can also be negative for that deep fried look.</p>
-<p><code class="docutils literal notranslate"><span class="pre">image_model:</span></code> select how your image will be represented.</p>
-<p><code class="docutils literal notranslate"><span class="pre">vqgan_model:</span></code> select your VQGAN version (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">VQGAN</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">random_initial_palette:</span></code> if checked, palettes will start out with random colors. Otherwise they will start out as grayscale. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">palette_size:</span></code> number of colors in each palette. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">palettes:</span></code> total number of palettes. The image will have <code class="docutils literal notranslate"><span class="pre">palette_size*palettes</span></code> colors total. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">gamma:</span></code> relative gamma value. Higher values make the image darker and higher contrast, lower values make the image lighter and lower contrast. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>). <span class="math notranslate nohighlight">\(1\)</span> is a good default.</p>
-<p><code class="docutils literal notranslate"><span class="pre">hdr_weight:</span></code> how strongly the optimizer will maintain the <code class="docutils literal notranslate"><span class="pre">gamma</span></code>. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">palette_normalization_weight:</span></code> how strongly the optimizer will maintain the palettes’ presence in the image. Prevents the image from losing palettes. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">show_palette:</span></code> check this box to see the palette each time the image is displayed. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">target_pallete:</span></code> path or url of an image which the model will use to make the palette it uses.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lock_pallete:</span></code> force the model to use the initial palette (most useful from restore, but will force a grayscale image or a wonky palette otherwise).</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">animation_mode:</span></code> select animation mode or disable animation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">sampling_mode:</span></code> how pixels are sampled during animation. <code class="docutils literal notranslate"><span class="pre">nearest</span></code> will keep the image sharp, but may look bad. <code class="docutils literal notranslate"><span class="pre">bilinear</span></code> will smooth the image out, and <code class="docutils literal notranslate"><span class="pre">bicubic</span></code> is untested :)</p>
-<p><code class="docutils literal notranslate"><span class="pre">infill_mode:</span></code> select how new pixels should be filled if they come in from the edge.</p>
+</dd>
+<dt>init_image</dt><dd><p>Path or url to an image that will be used to seed the initialization of the image generation process. Useful for creating a central focus or imposing a particular layout on the generated images. If not provided, random noise will be used instead</p>
+</dd>
+<dt>direct_init_weight</dt><dd><p>Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Use the initial image as a direct image prompt. Equivalent to adding <code class="docutils literal notranslate"><span class="pre">init_image:direct_init_weight</span></code> as a <code class="docutils literal notranslate"><span class="pre">direct_image_prompt</span></code>. Supports weights, masks, and stops.</p>
+</dd>
+<dt>semantic_init_weight</dt><dd><p>Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Use the initial image as a semantic image prompt. Equivalent to adding <code class="docutils literal notranslate"><span class="pre">[init_image]:direct_init_weight</span></code> as a prompt to each scene in <code class="docutils literal notranslate"><span class="pre">scenes</span></code>. Supports weights, masks, and stops.</p>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Since this is a semantic prompt, you still need to put the mask in <code class="docutils literal notranslate"><span class="pre">[</span></code> <code class="docutils literal notranslate"><span class="pre">]</span></code> to denote it as a path or url, otherwise it will be read as text instead of a file.</p>
+</div>
+</div>
+<div class="section" id="image-representation-controls">
+<h2>Image Representation Controls<a class="headerlink" href="#image-representation-controls" title="Permalink to this headline">¶</a></h2>
+<dl class="simple myst">
+<dt>width, height</dt><dd><p>Image size. Set one of these <span class="math notranslate nohighlight">\(-1\)</span> to derive it from the aspect ratio of the init image.</p>
+</dd>
+<dt>pixel_size</dt><dd><p>Integer image scale factor. Makes the image bigger. Set to <span class="math notranslate nohighlight">\(1\)</span> for VQGAN or face VRAM issues.</p>
+</dd>
+<dt>smoothing_weight</dt><dd><p>Makes the image smoother. Defaults to <span class="math notranslate nohighlight">\(0\)</span> (no smoothing). Can also be negative for that deep fried look.</p>
+</dd>
+<dt>image_model</dt><dd><p>Select how your image will be represented. Supported image models are:</p>
+<ul class="simple">
+<li><p>Limited Palette - Use CLIP to optimize image pixels directly, constrained to a fix number of colors. Generally used for pixel art.</p></li>
+<li><p>Unlimited Palette - Use CLIP to optimize image pixels directly</p></li>
+<li><p>VQGAN - Use CLIP to optimize a VQGAN’s latent representation of an image</p></li>
+</ul>
+</dd>
+<dt>vqgan_model</dt><dd><p>Select which VQGAN model to use (only considered for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">VQGAN</span></code>)</p>
+</dd>
+<dt>random_initial_palette</dt><dd><p>If checked, palettes will start out with random colors. Otherwise they will start out as grayscale. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
+</dd>
+<dt>palette_size</dt><dd><p>Number of colors in each palette. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
+</dd>
+<dt>palettes</dt><dd><p>total number of palettes. The image will have <code class="docutils literal notranslate"><span class="pre">palette_size*palettes</span></code> colors total. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
+</dd>
+<dt>gamma</dt><dd><p>Relative gamma value. Higher values make the image darker and higher contrast, lower values make the image lighter and lower contrast. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>). <span class="math notranslate nohighlight">\(1\)</span> is a good default.</p>
+</dd>
+<dt>hdr_weight</dt><dd><p>How strongly the optimizer will maintain the <code class="docutils literal notranslate"><span class="pre">gamma</span></code>. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
+</dd>
+<dt>palette_normalization_weight</dt><dd><p>How strongly the optimizer will maintain the palettes’ presence in the image. Prevents the image from losing palettes. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
+</dd>
+<dt>show_palette</dt><dd><p>Display a palette sample each time the image is displayed. (only for <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">Limited</span> <span class="pre">Palette</span></code>)</p>
+</dd>
+<dt>target_pallete</dt><dd><p>Path or url of an image which the model will use to make the palette it uses.</p>
+</dd>
+<dt>lock_pallete</dt><dd><p>Force the model to use the initial palette (most useful from restore, but will force a grayscale image or a wonky palette otherwise).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="animation-controls">
+<h2>Animation Controls<a class="headerlink" href="#animation-controls" title="Permalink to this headline">¶</a></h2>
+<dl class="simple myst">
+<dt>animation_mode</dt><dd><p>Select animation mode or disable animation. Supported animation modes are:</p>
+<ul class="simple">
+<li><p>off</p></li>
+<li><p>2D</p></li>
+<li><p>3D</p></li>
+<li><p>Video Source</p></li>
+</ul>
+</dd>
+<dt>sampling_mode</dt><dd><p>How pixels are sampled during animation. <code class="docutils literal notranslate"><span class="pre">nearest</span></code> will keep the image sharp, but may look bad. <code class="docutils literal notranslate"><span class="pre">bilinear</span></code> will smooth the image out, and <code class="docutils literal notranslate"><span class="pre">bicubic</span></code> is untested :)</p>
+</dd>
+<dt>infill_mode</dt><dd><p>Select how new pixels should be filled if they come in from the edge.</p>
 <ul class="simple">
 <li><p>mirror: reflect image over boundary</p></li>
 <li><p>wrap: pull pixels from opposite side</p></li>
 <li><p>black: fill with black</p></li>
 <li><p>smear: sample closest pixel in image</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">pre_animation_steps:</span></code> number of steps to run before animation starts, to begin with a stable image. <span class="math notranslate nohighlight">\(250\)</span> is a good default.</p>
-<p><code class="docutils literal notranslate"><span class="pre">steps_per_frame:</span></code> number of steps between each image move. <span class="math notranslate nohighlight">\(50\)</span> is a good default.</p>
-<p><code class="docutils literal notranslate"><span class="pre">frames_per_second:</span></code> number of frames to render each second. Controls how <span class="math notranslate nohighlight">\(t\)</span> is scaled.</p>
-<p><code class="docutils literal notranslate"><span class="pre">direct_stabilization_weight:</span> </code> keeps the current frame as a direct image prompt. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a direct image prompt. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">semantic_stabilization_weight:</span> </code> keeps the current frame as a semantic image prompt. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a direct image prompt. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_[mask.mp4]</span></code> or <code class="docutils literal notranslate"><span class="pre">weight_mask</span> <span class="pre">phrase</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">depth_stabilization_weight:</span> </code> keeps the depth model output somewhat consistent at a <em>VERY</em> steep performance cost. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a semantic image prompt. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">edge_stabilization_weight:</span> </code> keeps the images contours somewhat consistent at very little performance cost. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a direct image prompt with a sobel filter. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">flow_stabilization_weight:</span> </code> used for <code class="docutils literal notranslate"><span class="pre">animation_mode:</span> <span class="pre">3D</span></code> and <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> to prevent flickering. Comes with a slight performance cost for <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code>, and a great one for <code class="docutils literal notranslate"><span class="pre">3D</span></code>, due to implementation differences. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>. For video source, the mask should select the part of the frame you want to move, and the rest will be treated as a still background.</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">video_path:</span> </code> path to mp4 file for <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">frame_stride</span></code> advance this many frames in the video for each output frame. This is surprisingly useful. Set to <span class="math notranslate nohighlight">\(1\)</span> to render each frame. Video masks will also step at this rate.</p>
-<p><code class="docutils literal notranslate"><span class="pre">reencode_each_frame:</span> </code> check this box to use each video frame as an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> instead of warping each output frame into the init for the next. Cuts will still be detected and trigger a reencode.</p>
-<p><code class="docutils literal notranslate"><span class="pre">flow_long_term_samples:</span> </code> Sample multiple frames into the past for consistent interpolation even with disocclusion, as described by <a class="reference external" href="https://arxiv.org/abs/1604.08610">Manuel Ruder, Alexey Dosovitskiy, and Thomas Brox (2016)</a>. Each sample is twice as far back in the past as the last, so the earliest sampled frame is <span class="math notranslate nohighlight">\(2^{\text{long_term_flow_samples}}\)</span> frames in the past. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable.</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">translate_x:</span></code> horizontal image motion as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds.</p>
-<p><code class="docutils literal notranslate"><span class="pre">translate_y:</span></code> vertical image motion as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds.</p>
-<p><code class="docutils literal notranslate"><span class="pre">translate_z_3d:</span></code> forward image motion as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">rotate_3d:</span></code> image rotation as a quaternion <span class="math notranslate nohighlight">\(\left[r,x,y,z\right]\)</span> as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">rotate_2d:</span></code> image rotation in degrees as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:2D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">zoom_x_2d:</span></code> horizontal image zoom as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:2D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">zoom_y_2d:</span></code> vertical image zoom as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:2D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">lock_camera:</span></code> check this box to prevent all scrolling or drifting. Makes for more stable 3D rotations. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">field_of_view:</span></code> vertical field of view in degrees. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">near_plane:</span></code> closest depth distance in pixels. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
-<p><code class="docutils literal notranslate"><span class="pre">far_plane:</span></code> farthest depth distance in pixels. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">file_namespace:</span></code> output directory name.</p>
-<p><code class="docutils literal notranslate"><span class="pre">allow_overwrite:</span></code> check to overwrite existing files in <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">display_every:</span></code> how many steps between each time the image is displayed in the notebook.</p>
-<p><code class="docutils literal notranslate"><span class="pre">clear_every:</span></code> how many steps between each time notebook console is cleared.</p>
-<p><code class="docutils literal notranslate"><span class="pre">display_scale:</span></code> image display scale in notebook. <span class="math notranslate nohighlight">\(1\)</span> will show the image at full size. Does not affect saved images.</p>
-<p><code class="docutils literal notranslate"><span class="pre">save_every:</span></code> how many steps between each time the image is saved. Set to <code class="docutils literal notranslate"><span class="pre">steps_per_frame</span></code> for consistent animation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">backups:</span></code> number of backups to keep (only the oldest backups are deleted). Large images make very large backups, so be warned. Set to <code class="docutils literal notranslate"><span class="pre">all</span></code> to save all backups. These are used for the <code class="docutils literal notranslate"><span class="pre">flow_long_term_samples</span></code> so be sure that this is at least <span class="math notranslate nohighlight">\(2^{\text{flow_long_term_samples}}+1\)</span> for <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> mode.</p>
-<p><code class="docutils literal notranslate"><span class="pre">show_graphs:</span></code> check this to see graphs of the loss values each time the image is displayed. Disable this for local runtimes.</p>
-<p><code class="docutils literal notranslate"><span class="pre">approximate_vram_usage:</span></code> currently broken. Don’t believe its lies.</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">ViTB32,</span> <span class="pre">ViTB16,</span> <span class="pre">RN50,</span> <span class="pre">RN50x4:</span></code> select your CLIP models. These take a lot of VRAM.</p>
-<p><code class="docutils literal notranslate"><span class="pre">learning_rate:</span></code> how quickly the image changes.</p>
-<p><code class="docutils literal notranslate"><span class="pre">reset_lr_each_frame:</span></code> the optimizer will adaptively change the learning rate, so this will thwart it.</p>
-<p><code class="docutils literal notranslate"><span class="pre">seed:</span></code> pseudorandom seed.</p>
-<hr class="docutils" />
-<p><code class="docutils literal notranslate"><span class="pre">cutouts:</span></code> number of cutouts. Reduce this to use less VRAM at the cost of quality and speed.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cut_pow:</span></code> should be positive. Large values shrink cutouts, making the image more detailed, small values expand the cutouts, making it more coherent. <span class="math notranslate nohighlight">\(1\)</span> is a good default. <span class="math notranslate nohighlight">\(3\)</span> or higher can cause crashes.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cutout_border:</span></code> should be between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>. Allows cutouts to poke out over the edges of the image by this fraction of the image size, allowing better detail around the edges of the image. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable. <span class="math notranslate nohighlight">\(0.25\)</span> is a good default.</p>
-<p><code class="docutils literal notranslate"><span class="pre">border_mode:</span></code> how to fill cutouts that stick out over the edge of the image. Match with <code class="docutils literal notranslate"><span class="pre">infill_mode</span></code> for consistent infill.</p>
+</dd>
+<dt>pre_animation_steps</dt><dd><p>Number of steps to run before animation starts, to begin with a stable image. <span class="math notranslate nohighlight">\(250\)</span> is a good default.</p>
+</dd>
+<dt>steps_per_frame</dt><dd><p>number of steps between each image move. <span class="math notranslate nohighlight">\(50\)</span> is a good default.</p>
+</dd>
+<dt>frames_per_second</dt><dd><p>Number of frames to render each second. Controls how <span class="math notranslate nohighlight">\(t\)</span> is scaled.</p>
+</dd>
+<dt>direct_stabilization_weight</dt><dd><p>Keeps the current frame as a direct image prompt. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a direct image prompt. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>.</p>
+</dd>
+<dt>semantic_stabilization_weight</dt><dd><p>Keeps the current frame as a semantic image prompt. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a direct image prompt. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_[mask.mp4]</span></code> or <code class="docutils literal notranslate"><span class="pre">weight_mask</span> <span class="pre">phrase</span></code>.</p>
+</dd>
+<dt>depth_stabilization_weight</dt><dd><p>Keeps the depth model output somewhat consistent at a <em>VERY</em> steep performance cost. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a semantic image prompt. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>.</p>
+</dd>
+<dt>edge_stabilization_weight</dt><dd><p>Keeps the images contours somewhat consistent at very little performance cost. For <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> this will use the current frame of the video as a direct image prompt with a sobel filter. For <code class="docutils literal notranslate"><span class="pre">2D</span></code> and <code class="docutils literal notranslate"><span class="pre">3D</span></code> this will use the shifted version of the previous frame. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>.</p>
+</dd>
+<dt>flow_stabilization_weight</dt><dd><p>Used for <code class="docutils literal notranslate"><span class="pre">animation_mode:</span> <span class="pre">3D</span></code> and <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> to prevent flickering. Comes with a slight performance cost for <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code>, and a great one for <code class="docutils literal notranslate"><span class="pre">3D</span></code>, due to implementation differences. Also supports masks: <code class="docutils literal notranslate"><span class="pre">weight_mask.mp4</span></code>. For video source, the mask should select the part of the frame you want to move, and the rest will be treated as a still background.</p>
+</dd>
+<dt>video_path</dt><dd><p>path to mp4 file for <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code></p>
+</dd>
+<dt>frame_stride</dt><dd><p>Advance this many frames in the video for each output frame. This is surprisingly useful. Set to <span class="math notranslate nohighlight">\(1\)</span> to render each frame. Video masks will also step at this rate.</p>
+</dd>
+<dt>reencode_each_frame</dt><dd><p>Use each video frame as an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> instead of warping each output frame into the init for the next. Cuts will still be detected and trigger a reencode.</p>
+</dd>
+<dt>flow_long_term_samples</dt><dd><p>Sample multiple frames into the past for consistent interpolation even with disocclusion, as described by <a class="reference external" href="https://arxiv.org/abs/1604.08610">Manuel Ruder, Alexey Dosovitskiy, and Thomas Brox (2016)</a>. Each sample is twice as far back in the past as the last, so the earliest sampled frame is <span class="math notranslate nohighlight">\(2^{\text{long_term_flow_samples}}\)</span> frames in the past. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="motion-controls">
+<h2>Motion Controls<a class="headerlink" href="#motion-controls" title="Permalink to this headline">¶</a></h2>
+<dl class="simple myst">
+<dt>translate_x</dt><dd><p>Horizontal image motion as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds.</p>
+</dd>
+<dt>translate_y</dt><dd><p>Vertical image motion as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds.</p>
+</dd>
+<dt>translate_z_3d</dt><dd><p>Forward image motion as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
+</dd>
+<dt>rotate_3d</dt><dd><p>Image rotation as a quaternion <span class="math notranslate nohighlight">\(\left[r,x,y,z\right]\)</span> as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
+</dd>
+<dt>rotate_2d</dt><dd><p>Image rotation in degrees as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:2D</span></code>)</p>
+</dd>
+<dt>zoom_x_2d</dt><dd><p>Horizontal image zoom as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:2D</span></code>)</p>
+</dd>
+<dt>zoom_y_2d</dt><dd><p>Vertical image zoom as a function of time <span class="math notranslate nohighlight">\(t\)</span> in seconds. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:2D</span></code>)</p>
+</dd>
+<dt>lock_camera</dt><dd><p>Prevents scrolling or drifting. Makes for more stable 3D rotations. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
+</dd>
+<dt>field_of_view</dt><dd><p>Vertical field of view in degrees. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
+</dd>
+<dt>near_plane</dt><dd><p>Closest depth distance in pixels. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
+</dd>
+<dt>far_plane</dt><dd><p>Farthest depth distance in pixels. (only for <code class="docutils literal notranslate"><span class="pre">animation_mode:3D</span></code>)</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="output-controls">
+<h2>Output controls<a class="headerlink" href="#output-controls" title="Permalink to this headline">¶</a></h2>
+<dl class="simple myst">
+<dt>file_namespace</dt><dd><p>Output directory name.</p>
+</dd>
+<dt>allow_overwrite</dt><dd><p>Check to overwrite existing files in <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code>.</p>
+</dd>
+<dt>display_every</dt><dd><p>How many steps between each time the image is displayed in the notebook.</p>
+</dd>
+<dt>clear_every</dt><dd><p>How many steps between each time notebook console is cleared.</p>
+</dd>
+<dt>display_scale</dt><dd><p>Image display scale in notebook. <span class="math notranslate nohighlight">\(1\)</span> will show the image at full size. Does not affect saved images.</p>
+</dd>
+<dt>save_every</dt><dd><p>How many steps between each time the image is saved. Set to <code class="docutils literal notranslate"><span class="pre">steps_per_frame</span></code> for consistent animation.</p>
+</dd>
+<dt>backups</dt><dd><p>Number of backups to keep (only the oldest backups are deleted). Large images make very large backups, so be warned. Set to <code class="docutils literal notranslate"><span class="pre">all</span></code> to save all backups. These are used for the <code class="docutils literal notranslate"><span class="pre">flow_long_term_samples</span></code> so be sure that this is at least <span class="math notranslate nohighlight">\(2^{\text{flow_long_term_samples}}+1\)</span> for <code class="docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code> mode.</p>
+</dd>
+<dt>show_graphs</dt><dd><p>Display graphs of the loss values each time the image is displayed. Disable this for local runtimes.</p>
+</dd>
+<dt>approximate_vram_usage</dt><dd><p>Currently broken. Don’t believe its lies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="perceptor-settings">
+<h2>Perceptor Settings<a class="headerlink" href="#perceptor-settings" title="Permalink to this headline">¶</a></h2>
+<dl class="simple myst">
+<dt>ViTB32, ViTB16, RN50, RN50x4…</dt><dd><p>Select which CLIP models to use for semantic perception. Multiple models may be selected. Each model requires significant VRAM.</p>
+</dd>
+<dt>learning_rate</dt><dd><p>How quickly the image changes.</p>
+</dd>
+<dt>reset_lr_each_frame</dt><dd><p>The optimizer will adaptively change the learning rate, so this will thwart it.</p>
+</dd>
+<dt>seed</dt><dd><p>Pseudorandom seed. Using a fixed seed will make your process more deterministic, which can be useful for comparing how change specific settings impacts the generated images</p>
+</dd>
+<dt>cutouts</dt><dd><p>The number of cutouts from the image that will be scored by the perceiver. Think of each cutout as a “glimpse” at the image. The more glimpses you give the perceptor, the better it will understand what it is looking at. Reduce this to use less VRAM at the cost of quality and speed.</p>
+</dd>
+<dt>cut_pow</dt><dd><p>Should be positive. Large values shrink cutouts, making the image more detailed, small values expand the cutouts, making it more coherent. <span class="math notranslate nohighlight">\(1\)</span> is a good default. <span class="math notranslate nohighlight">\(3\)</span> or higher can cause crashes.</p>
+</dd>
+<dt>cutout_border</dt><dd><p>Should be between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>. Allows cutouts to poke out over the edges of the image by this fraction of the image size, allowing better detail around the edges of the image. Set to <span class="math notranslate nohighlight">\(0\)</span> to disable. <span class="math notranslate nohighlight">\(0.25\)</span> is a good default.</p>
+</dd>
+<dt>border_mode</dt><dd><p>how to fill cutouts that stick out over the edge of the image. Match with <code class="docutils literal notranslate"><span class="pre">infill_mode</span></code> for consistent infill.</p>
+</dd>
+</dl>
 <ul class="simple">
 <li><p>clamp: move cutouts back onto image</p></li>
 <li><p>mirror: reflect image over boundary</p></li>
@@ -365,6 +538,13 @@
 <li><p>black: fill with black</p></li>
 <li><p>smear: sample closest pixel in image</p></li>
 </ul>
+<dl class="simple myst">
+<dt>gradient_accumulation_steps</dt><dd><p>How many batches to use to process cutouts. Must divide <code class="docutils literal notranslate"><span class="pre">cutouts</span></code> evenly, defaults to <span class="math notranslate nohighlight">\(1\)</span>. If you are using high cutouts and receiving VRAM errors, increasing <code class="docutils literal notranslate"><span class="pre">gradient_accumulation_steps</span></code> may permit you to generate images without reducing the cutouts setting. Setting this higher than <span class="math notranslate nohighlight">\(1\)</span> will slow down the process proportionally.</p>
+</dd>
+<dt>models_parent_dir</dt><dd><p>Parent directory beneath which models will be downloaded. Defaults to <code class="docutils literal notranslate"><span class="pre">~/.cache/</span></code>, a hidden folder in your user namespace. E.g. the default storage location for the AdaBins model is <code class="docutils literal notranslate"><span class="pre">~/.cache/adabins/AdaBins_nyu.pt</span></code></p>
+</dd>
+</dl>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
