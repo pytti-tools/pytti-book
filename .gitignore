@@ -1,1 +1,5 @@
 _build/
+backup/
+config/
+images_out/
+logs/
