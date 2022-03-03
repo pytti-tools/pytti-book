@@ -4,6 +4,9 @@
 format: jb-book
 root: intro
 parts:
+  - caption: About
+    chapters:
+    - file: history
   - caption: Getting Started
     chapters:
     - file: Setup
