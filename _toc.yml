@@ -4,13 +4,12 @@
 format: jb-book
 root: root
 parts:
-  - caption: About
-    chapters:
-    - file: history
   - caption: Getting Started
     chapters:
+    - file: intro
     - file: Setup
     - file: Usage
+    - file: history
   - caption: Making Art
     chapters:
     - file: CrashCourse
