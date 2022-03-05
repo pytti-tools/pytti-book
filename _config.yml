@@ -15,7 +15,8 @@ execute:
   execute_notebooks: cache
   exclude_patterns:
     - '*pytti-core/vendor/*'
-  timeout: 300    # The maximum time (in seconds) each notebook cell is allowed to run.
+  #timeout: 300    # The maximum time (in seconds) each notebook cell is allowed to run.
+  timeout: 3600
   stderr_output             : show  # One of 'show', 'remove', 'remove-warn', 'warn', 'error', 'severe'
 
 parse:
