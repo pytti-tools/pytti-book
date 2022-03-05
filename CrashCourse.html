@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PyTTI Crash Course &#8212; Python Text-To-Image Tools</title>
+    <title>PyTTI (local) Crash Course &#8212; PyTTI-Tools</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -45,8 +45,6 @@
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -57,7 +55,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The AI Artist Mindset" href="Grimoire.html" />
-    <link rel="prev" title="Usage" href="Usage.html" />
+    <link rel="prev" title="A brief history of PyTTI" href="history.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -86,7 +84,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Python Text-To-Image Tools</h1>
+      <h1 class="site-logo" id="site-title">PyTTI-Tools</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -117,6 +115,11 @@
    Usage
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="history.html">
+   A brief history of PyTTI
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -126,7 +129,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   PyTTI Crash Course
+   PyTTI (local) Crash Course
   </a>
  </li>
  <li class="toctree-l1">
@@ -141,6 +144,11 @@
  </span>
 </p>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="SceneDSL.html">
+   Scene Syntax
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Settings.html">
    Settings
@@ -276,7 +284,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>PyTTI Crash Course</h1>
+                <h1>PyTTI (local) Crash Course</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -287,31 +295,59 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="pytti-crash-course">
-<h1>PyTTI Crash Course<a class="headerlink" href="#pytti-crash-course" title="Permalink to this headline">¶</a></h1>
-<p>The next cell just creates the default configs and folders if they aren’t already present.
-You normally shouldn’t need to do this, but if you want to “factory reset” to the defaults pytti ships with, delete the <code class="docutils literal notranslate"><span class="pre">config/</span></code> directory and run the following command. If you have config files, don’t worry: it won’t overwrite them. It’ll just do nothing.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="pytti-local-crash-course">
+<h1>PyTTI (local) Crash Course<a class="headerlink" href="#pytti-local-crash-course" title="Permalink to this headline">¶</a></h1>
+<p>To get started in google colab, just follow the instructions in the notebook. Running PyTTI with the yaml config system is a bit more DIY, so we’ll walk through that here. If you’re planning on only ever using the UI in the colab notebook, you might still find this demo useful to better understand how different settings impact the image generation process.</p>
+<p>We’ll start by doing a kind of “factory reset”  by deleting a few folders. You don’t necessarily need to do this, but for the purpose of the demo we’ll make sure we’ve got a clean workspace. Make sure you’ve moved or copied anything you want to hold on to before deleting.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!rm -rf config/
+
+# these will be rebuilt when we generate images
 !rm -rf images_out/
 !rm -rf outputs/
-!python -m pytti.warmup
+!rm -rf logs/
+!rm -rf backup/
+!rm -rf multirun/
+
+# this will be rebuild when we run pytti.warmup
+!rm -rf config/
 </pre></div>
 </div>
 </div>
 </div>
+<p>The next cell just creates the default configs and folders if they aren’t already present.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rebuild config files using &quot;factory defaults&quot;</span>
+<span class="o">!</span>python -m pytti.warmup
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-03-04 19:44:39.113</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">13</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+<span class=" -Color -Color-Green">2022-03-04 19:44:39.113</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">27</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+<span class=" -Color -Color-Green">2022-03-04 19:44:39.114</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">ensure_configs_exist</span>:<span class=" -Color -Color-Cyan">45</span> - <span class=" -Color -Color-Bold">Local config directory not detected.</span>
+<span class=" -Color -Color-Green">2022-03-04 19:44:39.114</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">ensure_configs_exist</span>:<span class=" -Color -Color-Cyan">46</span> - <span class=" -Color -Color-Bold">Creating local config directory with default and demo configs</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-03-04 19:44:39.797</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">13</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+<span class=" -Color -Color-Green">2022-03-04 19:44:39.797</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">27</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Those outputs there are normal logging messages. We’ll suppress those in subsequent cells to make this tutorial easier to read by adding <code class="docutils literal notranslate"><span class="pre">%%capture</span></code> to the tops of cells where we’re running pytti. This will also suppress displaying image frames and reporting loss values, so unless you’re tracking your experiment extrnally with tensorboard (or even just watching the images pop up as thumbnails in a file browser), you probably won’t want to suppress the notebook outputs like this.</p>
 <p>Next, we’ll author a config *.yaml file containing the settings that describe the experiment we want to run.</p>
 <p>The file needs to go in the <code class="docutils literal notranslate"><span class="pre">config/conf</span></code> subdirectory and can be named whatever we want.</p>
-<p>Under the current config system, the first line of the file needs to be: <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">&#64;package</span> <span class="pre">_global_</span></code></p>
-<p>After that, each setting goes on its own line. The order in which they appear does not matter, as long as each setting appears on a line of its own.</p>
+<p>Under the current config system, the <em>first line</em> of the file needs to be: <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">&#64;package</span> <span class="pre">_global_</span></code></p>
+<p>After that, each setting goes on its own line. The order in which they appear does not matter, as long as each setting appears on a line of its own. It’s also ok to separate entries with white space and you can even add comments by starting the line with a <code class="docutils literal notranslate"><span class="pre">#</span></code> symbol.</p>
 <p>We’ll start by specifying a text prompt and see what happens. We’ll also specify a random seed as well, just to ensure the outputs are deterministic. This helps us understand exactly how changing a setting modifies the generated image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
 <span class="c1"># @package _global_</span>
-<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">The</span> <span class="n">swirling</span> <span class="n">cloud</span> <span class="n">of</span> <span class="n">the</span> <span class="n">wormhole</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">metaphor</span> <span class="k">for</span> <span class="n">the</span> <span class="n">inner</span> <span class="n">workings</span> <span class="n">of</span> <span class="n">the</span> <span class="n">mind</span><span class="o">.</span>
 <span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
 </pre></div>
 </div>
@@ -326,356 +362,9 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 <p>We just need to provide the CLI the name of the file without the <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> file extension.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python -m pytti.workhorse <span class="nv">conf</span><span class="o">=</span>my_first_pytti_art
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:30.036</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">13</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:30.036</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">27</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:30.036</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.warmup</span>:<span class=" -Color -Color-Cyan">ensure_configs_exist</span>:<span class=" -Color -Color-Cyan">43</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Local config directory detected.</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:31.563</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">30</span> - <span class=" -Color -Color-Bold">Loading pytti...</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:33.176</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">66</span> - <span class=" -Color -Color-Bold">pytti loaded.</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:33.177</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">&lt;module&gt;</span>:<span class=" -Color -Color-Cyan">70</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">[&#39;/home/dmarx/proj/pytti-book&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python39.zip&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/lib-dynload&#39;, &#39;/home/dmarx/.local/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages&#39;, &#39;/home/dmarx/proj/hypernerf&#39;, &#39;/home/dmarx/proj/disco-diffusion/guided-diffusion&#39;, &#39;/home/dmarx/proj/disco-diffusion/taming-transformers&#39;]</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:33.185</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">hydra_plugins.pytti_local_config_searchpath_plugin.searchpath_append_cwd</span>:<span class=" -Color -Color-Cyan">manipulate_search_path</span>:<span class=" -Color -Color-Cyan">18</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/config/</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:33.273</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">187</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;${user_cache:}&#39;, &#39;gradient_accumulation_steps&#39;: 1}</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:33.273</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">188</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">{&#39;scenes&#39;: &#39;Everybody knows that the bird is the word&#39;, &#39;scene_prefix&#39;: &#39;&#39;, &#39;scene_suffix&#39;: &#39;&#39;, &#39;direct_image_prompts&#39;: &#39;&#39;, &#39;init_image&#39;: &#39;&#39;, &#39;direct_init_weight&#39;: &#39;&#39;, &#39;semantic_init_weight&#39;: &#39;&#39;, &#39;image_model&#39;: &#39;Limited Palette&#39;, &#39;vqgan_model&#39;: &#39;sflckr&#39;, &#39;animation_mode&#39;: &#39;3D&#39;, &#39;width&#39;: 180, &#39;height&#39;: 112, &#39;steps_per_scene&#39;: 100, &#39;steps_per_frame&#39;: 50, &#39;interpolation_steps&#39;: 0, &#39;learning_rate&#39;: None, &#39;reset_lr_each_frame&#39;: True, &#39;seed&#39;: 123, &#39;cutouts&#39;: 40, &#39;cut_pow&#39;: 2, &#39;cutout_border&#39;: 0.25, &#39;border_mode&#39;: &#39;clamp&#39;, &#39;field_of_view&#39;: 60, &#39;near_plane&#39;: 1, &#39;far_plane&#39;: 10000, &#39;translate_x&#39;: &#39;-1700*sin(radians(1.5))&#39;, &#39;translate_y&#39;: &#39;0&#39;, &#39;translate_z_3d&#39;: &#39;(50+10*t)*sin(t/10*pi)**2&#39;, &#39;rotate_3d&#39;: &#39;[cos(radians(1.5)), 0, -sin(radians(1.5))/sqrt(2), sin(radians(1.5))/sqrt(2)]&#39;, &#39;rotate_2d&#39;: &#39;5&#39;, &#39;zoom_x_2d&#39;: &#39;0&#39;, &#39;zoom_y_2d&#39;: &#39;0&#39;, &#39;sampling_mode&#39;: &#39;bicubic&#39;, &#39;infill_mode&#39;: &#39;wrap&#39;, &#39;pre_animation_steps&#39;: 100, &#39;lock_camera&#39;: True, &#39;pixel_size&#39;: 4, &#39;smoothing_weight&#39;: 0.02, &#39;random_initial_palette&#39;: False, &#39;palette_size&#39;: 6, &#39;palettes&#39;: 9, &#39;gamma&#39;: 1, &#39;hdr_weight&#39;: 0.01, &#39;palette_normalization_weight&#39;: 0.2, &#39;show_palette&#39;: False, &#39;target_palette&#39;: &#39;&#39;, &#39;lock_palette&#39;: False, &#39;frames_per_second&#39;: 12, &#39;direct_stabilization_weight&#39;: &#39;&#39;, &#39;semantic_stabilization_weight&#39;: &#39;&#39;, &#39;depth_stabilization_weight&#39;: &#39;&#39;, &#39;edge_stabilization_weight&#39;: &#39;&#39;, &#39;flow_stabilization_weight&#39;: &#39;&#39;, &#39;video_path&#39;: &#39;&#39;, &#39;frame_stride&#39;: 1, &#39;reencode_each_frame&#39;: True, &#39;flow_long_term_samples&#39;: 1, &#39;ViTB32&#39;: True, &#39;ViTB16&#39;: False, &#39;RN50&#39;: False, &#39;RN50x4&#39;: False, &#39;file_namespace&#39;: &#39;default&#39;, &#39;allow_overwrite&#39;: False, &#39;display_every&#39;: 50, &#39;clear_every&#39;: 0, &#39;display_scale&#39;: 1, &#39;save_every&#39;: 50, &#39;backups&#39;: 5, &#39;show_graphs&#39;: False, &#39;approximate_vram_usage&#39;: False, &#39;models_parent_dir&#39;: &#39;/home/dmarx/.cache&#39;, &#39;gradient_accumulation_steps&#39;: 1}</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:33.385</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">242</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Loading CLIP...</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.099</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.Notebook</span>:<span class=" -Color -Color-Cyan">load_clip</span>:<span class=" -Color -Color-Cyan">244</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">CLIP loaded.</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:38.099</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">242</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">40</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:38.101</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">parse_scenes</span>:<span class=" -Color -Color-Cyan">110</span> - <span class=" -Color -Color-Bold">Loading prompts...</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.516</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">parse_scenes</span>:<span class=" -Color -Color-Cyan">120</span> - <span class=" -Color -Color-Bold">Prompts loaded.</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:38.517</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">520</span> - <span class=" -Color -Color-Bold">Settings saved to /home/dmarx/proj/pytti-book/images_out//default/default_settings.txt</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.522</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">do_run</span>:<span class=" -Color -Color-Cyan">533</span> - <span class=" -Color -Color-Bold">Running prompt:</span>
-
-  0%|                                                   | 0/100 [00:00&lt;?, ?it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:38.523</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:38.523</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">report_out</span>:<span class=" -Color -Color-Cyan">364</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 0 losses:</span>
-&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7F97D81881F0&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  /opt/conda/conda-bld/pytorch_1639180487213/work/aten/src/ATen/native/TensorShape.cpp:2157.)
-  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|▍                                          | 1/100 [00:00&lt;00:36,  2.71it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:38.893</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:38.988</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3%|█▎                                         | 3/100 [00:00&lt;00:15,  6.09it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.077</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.175</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|██▏                                        | 5/100 [00:00&lt;00:12,  7.87it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.261</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.345</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|███                                        | 7/100 [00:00&lt;00:10,  9.23it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.427</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.509</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|███▊                                       | 9/100 [00:01&lt;00:09, 10.06it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.596</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.689</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|████▌                                     | 11/100 [00:01&lt;00:08, 10.31it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.782</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:39.872</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█████▍                                    | 13/100 [00:01&lt;00:08, 10.55it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:39.962</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.051</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|██████▎                                   | 15/100 [00:01&lt;00:07, 10.72it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.142</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.233</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|███████▏                                  | 17/100 [00:01&lt;00:07, 10.78it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.325</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.419</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|███████▉                                  | 19/100 [00:01&lt;00:07, 10.78it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.511</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.598</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|████████▊                                 | 21/100 [00:02&lt;00:07, 10.96it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.687</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.774</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|█████████▋                                | 23/100 [00:02&lt;00:06, 11.04it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:40.865</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:40.956</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██████████▌                               | 25/100 [00:02&lt;00:06, 11.09it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.043</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.129</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|███████████▎                              | 27/100 [00:02&lt;00:06, 11.21it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.217</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.305</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 29%|████████████▏                             | 29/100 [00:02&lt;00:06, 11.32it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.390</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.478</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 31%|█████████████                             | 31/100 [00:03&lt;00:06, 11.33it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.566</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.649</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|█████████████▊                            | 33/100 [00:03&lt;00:05, 11.47it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.735</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.822</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|██████████████▋                           | 35/100 [00:03&lt;00:05, 11.45it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:41.911</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:41.998</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 37%|███████████████▌                          | 37/100 [00:03&lt;00:05, 11.48it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.084</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.174</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 39%|████████████████▍                         | 39/100 [00:03&lt;00:05, 11.41it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.262</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.350</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|█████████████████▏                        | 41/100 [00:03&lt;00:05, 11.43it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.436</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.523</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|██████████████████                        | 43/100 [00:04&lt;00:05, 11.39it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.613</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.701</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|██████████████████▉                       | 45/100 [00:04&lt;00:04, 11.38it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.789</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:42.874</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 47%|███████████████████▋                      | 47/100 [00:04&lt;00:04, 11.46it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:42.961</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.047</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 49%|████████████████████▌                     | 49/100 [00:04&lt;00:04, 11.42it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.137</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:43.140</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">save_out</span>:<span class=" -Color -Color-Cyan">416</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/images_out//default/default_1.png</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.274</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:43.274</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">report_out</span>:<span class=" -Color -Color-Cyan">364</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Step 50 losses:</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:43.275</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">report_out</span>:<span class=" -Color -Color-Cyan">367</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">Everybody knows that.. word    0.867234</span>
-<span class=" -Color -Color-Bold -Color-Bold-Blue">Name: 49, dtype: float64</span>
-&lt;PIL.Image.Image image mode=RGB size=720x448 at 0x7F97D8132C70&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████████████████████▍                    | 51/100 [00:04&lt;00:04, 10.52it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.362</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.448</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|██████████████████████▎                   | 53/100 [00:05&lt;00:04, 10.84it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.534</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.622</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|███████████████████████                   | 55/100 [00:05&lt;00:04, 11.01it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.709</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.797</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 57%|███████████████████████▉                  | 57/100 [00:05&lt;00:03, 11.12it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:43.884</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:43.969</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 59%|████████████████████████▊                 | 59/100 [00:05&lt;00:03, 11.24it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.058</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.147</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|█████████████████████████▌                | 61/100 [00:05&lt;00:03, 11.26it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.235</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.325</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████████████████████████▍               | 63/100 [00:05&lt;00:03, 11.27it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.412</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.502</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|███████████████████████████▎              | 65/100 [00:06&lt;00:03, 11.25it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.591</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.677</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 67%|████████████████████████████▏             | 67/100 [00:06&lt;00:02, 11.25it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.769</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:44.855</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 69%|████████████████████████████▉             | 69/100 [00:06&lt;00:02, 11.35it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:44.941</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.029</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|█████████████████████████████▊            | 71/100 [00:06&lt;00:02, 11.35it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.117</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.204</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 73%|██████████████████████████████▋           | 73/100 [00:06&lt;00:02, 11.22it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.300</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.386</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████████████████████████████▌          | 75/100 [00:06&lt;00:02, 11.37it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.470</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.555</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 77%|████████████████████████████████▎         | 77/100 [00:07&lt;00:01, 11.53it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.638</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.721</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|█████████████████████████████████▏        | 79/100 [00:07&lt;00:01, 11.69it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.804</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:45.889</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 81%|██████████████████████████████████        | 81/100 [00:07&lt;00:01, 11.76it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:45.972</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.052</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|██████████████████████████████████▊       | 83/100 [00:07&lt;00:01, 11.86it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.137</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.220</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 85%|███████████████████████████████████▋      | 85/100 [00:07&lt;00:01, 11.94it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.302</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.386</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 87%|████████████████████████████████████▌     | 87/100 [00:07&lt;00:01, 11.94it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.469</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.553</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 89%|█████████████████████████████████████▍    | 89/100 [00:08&lt;00:00, 12.00it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.634</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.717</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 91%|██████████████████████████████████████▏   | 91/100 [00:08&lt;00:00, 12.05it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.798</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:46.884</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 93%|███████████████████████████████████████   | 93/100 [00:08&lt;00:00, 11.99it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:46.967</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:47.050</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|███████████████████████████████████████▉  | 95/100 [00:08&lt;00:00, 12.04it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:47.132</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:47.217</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|████████████████████████████████████████▋ | 97/100 [00:08&lt;00:00, 11.99it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:47.300</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Green">2022-02-23 19:48:47.382</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 99%|█████████████████████████████████████████▌| 99/100 [00:08&lt;00:00, 11.99it/s]<span class=" -Color -Color-Green">2022-02-23 19:48:47.467</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">update</span>:<span class=" -Color -Color-Cyan">456</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">model.update called</span>
-<span class=" -Color -Color-Green">2022-02-23 19:48:47.469</span> | <span class=" -Color -Color-Bold -Color-Bold-Blue">DEBUG   </span> | <span class=" -Color -Color-Cyan">pytti.ImageGuide</span>:<span class=" -Color -Color-Cyan">save_out</span>:<span class=" -Color -Color-Cyan">416</span> - <span class=" -Color -Color-Bold -Color-Bold-Blue">/home/dmarx/proj/pytti-book/images_out//default/default_2.png</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████| 100/100 [00:09&lt;00:00, 11.03it/s]
-<span class=" -Color -Color-Green">2022-02-23 19:48:47.594</span> | <span class=" -Color -Color-Bold">INFO    </span> | <span class=" -Color -Color-Cyan">__main__</span>:<span class=" -Color -Color-Cyan">_main</span>:<span class=" -Color -Color-Cyan">587</span> - <span class=" -Color -Color-Bold">Complete.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!python -m pytti.workhorse conf=my_first_pytti_art
+# this takes 48s on an RTX 3090
 </pre></div>
 </div>
 </div>
@@ -694,35 +383,34 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 </div>
 </div>
 </div>
-<p>Our run generated a single image, <code class="docutils literal notranslate"><span class="pre">default_1.png</span></code>, and saved our settings as well, <code class="docutils literal notranslate"><span class="pre">default_settings.txt</span></code>. Both output files are named “default” here because we didn’t provide a <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code> parameter. Let’s see what we generated!</p>
+<p>Our run generated two images because the default behavior is to save every 50 steps and run for a total of 100 steps. Let’s take a look at our 100 step result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 
-<span class="n">path_to_image</span> <span class="o">=</span> <span class="s2">&quot;images_out/default/default_1.png&quot;</span>
+<span class="n">path_to_image</span> <span class="o">=</span> <span class="s2">&quot;images_out/default/default_2.png&quot;</span>
 <span class="n">Image</span><span class="p">(</span><span class="n">path_to_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/CrashCourse_10_0.png" src="_images/CrashCourse_10_0.png" />
+<img alt="_images/CrashCourse_12_0.png" src="_images/CrashCourse_12_0.png" />
 </div>
 </div>
-<p>I see some hints of birds in that image, but mostly it’s pretty chaotic. This is because we didn’t give PyTTI much opportunity to generate an image for us, and we didn’t provide an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> as a starting place. Without an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> the process defaults to initializing from random noise. This isn’t necessarily a bad thing, but because we didn’t give PyTTI time to do its thing, we mostly got random noise back out. Let’s let it run a bit longer, say <code class="docutils literal notranslate"><span class="pre">steps_per_scene:</span> <span class="pre">500</span></code> (the default was 50).</p>
-<p>To better understand how the step number affects the image, we’ll tell PyTTI to show us the current state of the image periodically with <code class="docutils literal notranslate"><span class="pre">display_every:</span> <span class="pre">50</span></code>: we’re generating for 500 steps, so checking progress every 50 steps let’s us see check in on our progress at 10% increments, which feels about right. For the purpose of this tutorial though, we’ll suppress the output to the notebook with the <code class="docutils literal notranslate"><span class="pre">%%capture</span></code> command at the top of the cell and just look at the results after.</p>
-<p>Just to make sure there’s nothing unexpected in the defaults, I’ll also suppress any animations by setting the <code class="docutils literal notranslate"><span class="pre">pre_animation_steps</span></code> to a value greater than or equal to our <code class="docutils literal notranslate"><span class="pre">steps_per_scene</span></code>. Also, that whole “default” namespace thing was confusing, so let’s specify a namespace too.</p>
+<p>An interesting start, but mostly it’s pretty chaotic. This is because we didn’t give PyTTI much opportunity to generate an image for us, and we didn’t provide an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> as a starting place. Without an <code class="docutils literal notranslate"><span class="pre">init_image</span></code> the process defaults to initializing from random noise. This isn’t necessarily a bad thing, but because we didn’t give PyTTI time to do its thing, we mostly got random noise back out. Let’s let it run a bit longer, say <code class="docutils literal notranslate"><span class="pre">steps_per_scene:</span> <span class="pre">500</span></code> (the default was 100).</p>
+<p>To better understand how the step number affects the image, we’ll tell PyTTI to show us the current state of the image periodically with <code class="docutils literal notranslate"><span class="pre">display_every:</span> <span class="pre">50</span></code>: we’re generating for 500 steps, so checking progress every 50 steps let’s us see check in on our progress at 10% increments, which feels about right.</p>
+<p>Also, that whole “default” namespace thing was confusing, so let’s specify a namespace too. Going forward, I’ll set the <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code> to the same name as my config file to make it clearer how things group together.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
 <span class="c1"># @package _global_</span>
-<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">The</span> <span class="n">swirling</span> <span class="n">cloud</span> <span class="n">of</span> <span class="n">the</span> <span class="n">wormhole</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">metaphor</span> <span class="k">for</span> <span class="n">the</span> <span class="n">inner</span> <span class="n">workings</span> <span class="n">of</span> <span class="n">the</span> <span class="n">mind</span><span class="o">.</span>
 
 <span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
 <span class="n">save_every</span><span class="p">:</span> <span class="mi">50</span>
 <span class="n">display_every</span><span class="p">:</span> <span class="mi">50</span>
-<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
 
-<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird</span>
+<span class="n">file_namespace</span><span class="p">:</span> <span class="n">my_first_pytti_art</span>
 <span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
 </pre></div>
 </div>
@@ -737,40 +425,51 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
 !python -m pytti.workhorse conf=my_first_pytti_art
+# just under 3 min on RTX 3090
 </pre></div>
 </div>
 </div>
 </div>
-<p>Just in case the image output is being finnicky, let’s pull up those images here:</p>
-<p><img alt="50 steps" src="_images/bird_1.png" />
-<img alt="100 steps" src="_images/bird_2.png" />
-<img alt="150 steps" src="_images/bird_3.png" />
-<img alt="200 steps" src="_images/bird_4.png" />
-<img alt="250 steps" src="_images/bird_5.png" />
-<img alt="300 steps" src="_images/bird_6.png" />
-<img alt="350 steps" src="_images/bird_7.png" />
-<img alt="400 steps" src="_images/bird_8.png" />
-<img alt="450 steps" src="_images/bird_9.png" /></p>
-<p>Great! We have some birds! ….and we also have a bunch of words. This isn’t surprising: PyTTI likes to draw text into images, and also we had “word” in our prompt, biasing our image even more towards having “words” in it. But I don’t want to see words, I just like that song lyric and want to see the AI draw birds. The bird is already “the word” (or haven’t you heard?).</p>
-<p>We can tell PyTTI we want a particular prompt to influence it more or less by applying a weight to the prompt. If we don’t specify a weight, the default weight value is <code class="docutils literal notranslate"><span class="pre">1</span></code>. To try to get rid of the text in the image, let’s try adding the prompt <code class="docutils literal notranslate"><span class="pre">&quot;text:-1&quot;</span></code> to our scene.</p>
+<p>Let’s see what we got!</p>
+<p>50 steps</p>
+<p><img alt="50 steps" src="_images/my_first_pytti_art_1.png" /></p>
+<p>100 steps</p>
+<p><img alt="100 steps" src="_images/my_first_pytti_art_2.png" /></p>
+<p>150 steps</p>
+<p><img alt="150 steps" src="_images/my_first_pytti_art_3.png" /></p>
+<p>200 steps</p>
+<p><img alt="200 steps" src="_images/my_first_pytti_art_4.png" /></p>
+<p>250 steps</p>
+<p><img alt="250 steps" src="_images/my_first_pytti_art_5.png" /></p>
+<p>300 steps</p>
+<p><img alt="300 steps" src="_images/my_first_pytti_art_6.png" /></p>
+<p>350 steps</p>
+<p><img alt="350 steps" src="_images/my_first_pytti_art_7.png" /></p>
+<p>400 steps</p>
+<p><img alt="400 steps" src="_images/my_first_pytti_art_8.png" /></p>
+<p>450 steps</p>
+<p><img alt="450 steps" src="_images/my_first_pytti_art_9.png" /></p>
+<p>500 steps</p>
+<p><img alt="500 steps" src="_images/my_first_pytti_art_10.png" /></p>
+<p>Great! We have… a trippy image! It looks like the image generation process stabilized around the 6th image there. Each image was 50 steps, so let’s reduce <code class="docutils literal notranslate"><span class="pre">steps_per_scene</span></code> to <code class="docutils literal notranslate"><span class="pre">300</span></code>, which will give us outputs a bit faster.</p>
+<p>I’m digging the random clouds, but I’m not seeing as much “swirling” as I’d like. Let’s see what happens if instead of one big chunk of text, we break our prompt up into several smaller prompts.</p>
+<p>just to make it a little easier to compare experiments, I’ll add a “2” to the config filename and also to the file_namespace.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art2.yaml
 <span class="c1"># @package _global_</span>
-<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span> <span class="o">|</span> <span class="n">text</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">swirling</span> <span class="n">clouds</span> <span class="o">|</span> <span class="n">swirling</span> <span class="n">wormhole</span> <span class="o">|</span> <span class="n">inner</span> <span class="n">workings</span> <span class="n">of</span> <span class="n">the</span> <span class="n">mind</span>
 
-<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
-<span class="c1">#save_every: 500</span>
-<span class="c1">#display_every: 500</span>
-<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
+<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">300</span>
+<span class="n">save_every</span><span class="p">:</span> <span class="mi">300</span>
 
-<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird2</span>
+<span class="n">file_namespace</span><span class="p">:</span> <span class="n">my_first_pytti_art2</span>
 <span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting config/conf/my_first_pytti_art.yaml
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing config/conf/my_first_pytti_art2.yaml
 </pre></div>
 </div>
 </div>
@@ -778,33 +477,32 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!python -m pytti.workhorse conf=my_first_pytti_art
+!python -m pytti.workhorse conf=my_first_pytti_art2
+# 1m44s
 </pre></div>
 </div>
 </div>
 </div>
 <p>Let’s compare the same step from those two runs and see the difference:</p>
-<p><img alt="Text unsuppressed" src="_images/bird_9.png" />
-<img alt="Text suppressed" src="_images/bird2_9.png" /></p>
-<p>Much Better! And quite difference! Obviously, the change we made affected the whole image, not just the text that was popping up. We can try to be more surgical with our modifications by using “semantic mask”. The semantic mask is a prompt which PyTTI uses to score the image, and masks out the image where the semantic mask’s prompt doesn’t match. We attach a semantic mask with an underscore. Let’s see if instead of “subtracting” the text from the image like we did before, we can convert it into something else. We’ve got birds already: let’s try eggs. That feels on-theme.</p>
+<p><img alt="Single long prompt" src="_images/my_first_pytti_art_10.png" />
+<img alt="Several short prompts" src="_images/my_first_pytti_art2_1.png" /></p>
+<p>OK, similar but different. Let’s see if we can get those clouds back by adding some weight to just that prompt. The default weight is 1: let’s try trippling the influence of “swirling clouds” on our image by applying a weight of 3.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art3.yaml
 <span class="c1"># @package _global_</span>
-<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span> <span class="o">|</span> <span class="n">eggs</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">nest_text</span>
+<span class="n">scenes</span><span class="p">:</span> <span class="n">swirling</span> <span class="n">clouds</span><span class="p">:</span><span class="mi">2</span> <span class="o">|</span> <span class="n">swirling</span> <span class="n">wormhole</span> <span class="o">|</span> <span class="n">inner</span> <span class="n">workings</span> <span class="n">of</span> <span class="n">the</span> <span class="n">mind</span>
 
-<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
-<span class="c1">#save_every: 500</span>
-<span class="c1">#display_every: 500</span>
-<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
+<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">300</span>
+<span class="n">save_every</span><span class="p">:</span> <span class="mi">300</span>
 
-<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird3</span>
+<span class="n">file_namespace</span><span class="p">:</span> <span class="n">my_first_pytti_art3</span>
 <span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting config/conf/my_first_pytti_art.yaml
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing config/conf/my_first_pytti_art3.yaml
 </pre></div>
 </div>
 </div>
@@ -812,61 +510,136 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!python -m pytti.workhorse conf=my_first_pytti_art
+!python -m pytti.workhorse conf=my_first_pytti_art3
+# 1m44s
 </pre></div>
 </div>
 </div>
 </div>
-<p><img alt="Text unsuppressed" src="_images/bird_9.png" />
-<img alt="Text suppressed" src="_images/bird2_9.png" />
-<img alt="Text suppressed" src="_images/bird3_9.png" /></p>
-<p>Ok, so that sort of worked, but I liked the other way better. Let’s try using both methods, but reduce the weight on each to try to let the original version of the image dominate a bit more.</p>
+<p><img alt="Single long prompt" src="_images/my_first_pytti_art_10.png" />
+<img alt="Several short prompts" src="_images/my_first_pytti_art2_1.png" />
+<img alt="Added weight to clouds" src="_images/my_first_pytti_art3_1.png" /></p>
+<p>Very different! I like it.</p>
+<p>I’m curious how our choice of VQGAN and CLIP model(s) affects this image. To experiment, I’m going to use the “multirun” feature of the CLI, which PyTTI adopts from hydra. You can learn more about how hydra works here: <a class="reference external" href="https://hydra.cc/docs/intro/">https://hydra.cc/docs/intro/</a></p>
+<p>Here’s how this will work: I’m going to create a subfolder under <code class="docutils literal notranslate"><span class="pre">config/</span></code> which I can name whatever I want, as long as it doesn’t collide with a name we’re already using for settings. I’d like it to be moderately descriptive, so I’ll call it <code class="docutils literal notranslate"><span class="pre">perceptors</span></code> for the CLIP model settings. Inside this folder, I’ll add a separate config file for each set of parameters I wanna try. In my experiment config, I can now add a <code class="docutils literal notranslate"><span class="pre">perceptors:</span> <span class="pre">___</span></code> argument to specify which set of parameters I want to use.</p>
+<p>Let’s separately try each CLIP model against the parameters we’re currently using. We can also use multiple CLIP models together, so we’ll experiment with a few pairs of models as well.</p>
+<p>I’m going to illustrate how you could use python to automate generating those config files. Don’t let the code here intimidate you: it’s not necessary, and frankly this is something you could probably achieve just as quickly by creating the files manually.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> config/conf/my_first_pytti_art.yaml
-<span class="c1"># @package _global_</span>
-<span class="n">scenes</span><span class="p">:</span> <span class="n">Everybody</span> <span class="n">knows</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bird</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">word</span><span class="p">:</span><span class="mi">2</span> <span class="o">|</span> <span class="n">eggs</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">nest</span><span class="p">:</span><span class="mf">.5</span><span class="n">_text</span> <span class="o">|</span> <span class="n">test</span><span class="p">:</span><span class="o">-</span><span class="mf">.8</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir -p config/perceptors
 
-<span class="n">steps_per_scene</span><span class="p">:</span> <span class="mi">500</span>
-<span class="c1">#save_every: 500</span>
-<span class="c1">#display_every: 500</span>
-<span class="n">pre_animation_steps</span><span class="p">:</span> <span class="mi">500</span>
+<span class="n">fpath</span> <span class="o">=</span> <span class="s2">&quot;config/perceptors/&quot;</span>
 
-<span class="n">file_namespace</span><span class="p">:</span> <span class="n">bird4</span>
-<span class="n">seed</span><span class="p">:</span> <span class="mi">123</span>
+<span class="kn">from</span> <span class="nn">pytti.Notebook</span> <span class="kn">import</span> <span class="n">SUPPORTED_CLIP_MODELS</span>
+
+<span class="n">file_template_header</span> <span class="o">=</span> <span class="s2">&quot;# @package _global_</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+<span class="n">conf_fnames</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Write a config file for each CLIP model</span>
+<span class="k">for</span> <span class="n">clip_model_name</span> <span class="ow">in</span> <span class="n">SUPPORTED_CLIP_MODELS</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">clip_model_name</span> <span class="o">==</span> <span class="s2">&quot;ViTB32&quot;</span><span class="p">:</span> <span class="c1"># we&#39;ve already seen this one</span>
+        <span class="k">continue</span>
+
+    <span class="n">conf_str</span> <span class="o">=</span> <span class="n">file_template_header</span> 
+    <span class="n">conf_str</span> <span class="o">+=</span> <span class="s2">&quot;ViTB32: false</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="c1"># turn off the default model</span>
+    <span class="n">conf_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">clip_model_name</span><span class="si">}</span><span class="s2">: true</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">clip_model_name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">conf_fnames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fpath</span><span class="si">}{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.yaml&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">conf_str</span><span class="p">)</span>
+
+<span class="c1"># try a few multi-clip runs adding different ResNet CLIP models to our default ViT CLIP model</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">clip_model_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">SUPPORTED_CLIP_MODELS</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">clip_model_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">):</span>
+        <span class="k">continue</span>
+    <span class="c1"># we don&#39;t want to turn off the default model this time, we&#39;re just adding additional models</span>
+    <span class="n">conf_str</span> <span class="o">=</span> <span class="n">file_template_header</span>
+    <span class="n">conf_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">clip_model_name</span><span class="si">}</span><span class="s2">: true</span><span class="se">\n</span><span class="s2">&quot;</span>
+    
+    <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ViTB32_</span><span class="si">{</span><span class="n">clip_model_name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">conf_fnames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fpath</span><span class="si">}{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.yaml&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">conf_str</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span><span class="mi">2</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conf_fnames</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting config/conf/my_first_pytti_art.yaml
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-04 19:50:54.943 | DEBUG    | pytti.warmup:&lt;module&gt;:13 - /home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-04 19:50:54.943 | DEBUG    | pytti.warmup:&lt;module&gt;:27 - /home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/pytti
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-04 19:50:54.944 | DEBUG    | pytti.warmup:ensure_configs_exist:43 - Local config directory detected.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-04 19:50:55.646 | DEBUG    | pytti.Notebook:&lt;module&gt;:238 - {&#39;RN50&#39;: &#39;RN50&#39;, &#39;RN101&#39;: &#39;RN101&#39;, &#39;RN50x4&#39;: &#39;RN50x4&#39;, &#39;RN50x16&#39;: &#39;RN50x16&#39;, &#39;RN50x64&#39;: &#39;RN50x64&#39;, &#39;ViTB32&#39;: &#39;ViT-B/32&#39;, &#39;ViTB16&#39;: &#39;ViT-B/16&#39;, &#39;ViTL14&#39;: &#39;ViT-L/14&#39;}
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RN50,RN101,RN50x4,RN50x16,RN50x64,ViTB16,ViTL14,ViTB32_RN50,ViTB32_RN101,ViTB32_RN50x4
 </pre></div>
 </div>
 </div>
 </div>
+<p>Now for this to work, we need to make some small changes to how we invoke the CLI:</p>
+<ol class="simple">
+<li><p>Because we’re going to be sweeping over parameters, we need to add the <code class="docutils literal notranslate"><span class="pre">--multirun</span></code> argument to the command line.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">perceptors</span></code> was a setting that already appeared in <code class="docutils literal notranslate"><span class="pre">default.yaml</span></code> or <code class="docutils literal notranslate"><span class="pre">my_first_pytti_art3.yaml</span></code>, we could override it by just adding <code class="docutils literal notranslate"><span class="pre">perceptors=...</span></code> to our command. However, because this “setting” doesn’t appear in either of those files, there’s nothing to override and hydra will throw an error. So instead of “overriding” the nonexistent parameter, we need to “concatenate” it to our configuration by adding a <code class="docutils literal notranslate"><span class="pre">+</span></code> in front of it, i.e. <code class="docutils literal notranslate"><span class="pre">+perceptors=...</span></code></p></li>
+</ol>
+<p>Considering this is just a tutorial, we’re only going to do a handful of different CLIP/VQGAN model combinations. But hopefully you get the idea how you could significantly expand experiments like this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!python -m pytti.workhorse conf=my_first_pytti_art
+!python -m pytti.workhorse \
+    --multirun \
+    conf=my_first_pytti_art3 \
+    vqgan_model=sflckr,imagenet,coco \
+    +perceptors=RN50x4,ViTB16,ViTB32_RN50x4
+
+# 9 runs is plenty. this is just a tutorial. Changing it to the following would result in 50 runs (5*10):
+#    vqgan_model=sflckr,imagenet,coco,wikiart,openimages \
+#    +perceptors=RN50,RN101,RN50x4,RN50x16,RN50x64,ViTB16,ViTL14,ViTB32_RN50,ViTB32_RN101,ViTB32_RN50x4
 </pre></div>
 </div>
 </div>
 </div>
-<p><img alt="Text unsuppressed" src="_images/bird_9.png" />
-<img alt="Text suppressed" src="_images/bird2_9.png" />
-<img alt="Text suppressed" src="_images/bird3_9.png" />
-<img alt="Text suppressed" src="_images/bird4_9.png" /></p>
-<p>Much better! I’m not really feeling the pixel art thing though: let’s try switching from the default “Limited Palette” image model to <code class="docutils literal notranslate"><span class="pre">image_model:</span> <span class="pre">VQGAN</span></code> and see what that looks like. I’m feeling lazy though, so instead of modifying the config file like we were before, I’m just gonna use the same config from last time but override the <code class="docutils literal notranslate"><span class="pre">image_model</span></code> and <code class="docutils literal notranslate"><span class="pre">file_namespace</span></code> arguments directly from the command line.</p>
+<p>Hydra is… funny. It’s very useful for a lot of stuff, but it’s sort of too helpful for some of the things we’re doing. Specifically, if we downloaded any new models as part of that multirun, hydra noticed that we tried to save that model locally and saved a copy of its own in a sudirectory of <code class="docutils literal notranslate"><span class="pre">multirun</span></code>. So let’s just go ahead and delete that whole directory for now.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!python -m pytti.workhorse conf=my_first_pytti_art image_model=VQGAN file_namespace=bird5
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>rm -r multirun
 </pre></div>
 </div>
 </div>
 </div>
-<p><img alt="Text suppressed" src="_images/bird5_9.png" /></p>
-<p>As you can see, changing the image model doesn’t just add realism: it basically changes everything. Bye bye nests, bye bye eggs, hello chicks?</p>
-<p>Moral of the story: your prompt-engineering will largely be model-dependent. Now that we’ve changed our image model, we need to re-tune our prompt for that model.</p>
+<p>Allright, with that taken care of, let’s take a look at our results!</p>
+<p>sflckr, ViTB32 (what we had before, not part of the multirun)</p>
+<p><img alt="" src="_images/my_first_pytti_art3_1.png" /></p>
+<p>sflckr , RN50x4</p>
+<p><img alt="" src="_images/my_first_pytti_art3(1)_1.png" /></p>
+<p>sflckr , ViTB16</p>
+<p><img alt="" src="_images/my_first_pytti_art3(2)_1.png" /></p>
+<p>sflckr , ViTB32_RN50x4</p>
+<p><img alt="" src="_images/my_first_pytti_art3(3)_1.png" /></p>
+<p>imagenet, RN50x4</p>
+<p><img alt="" src="_images/my_first_pytti_art3(4)_1.png" /></p>
+<p>imagenet, ViTB16</p>
+<p><img alt="" src="_images/my_first_pytti_art3(5)_1.png" /></p>
+<p>imagenet, ViTB32_RN50x4</p>
+<p><img alt="" src="_images/my_first_pytti_art3(6)_1.png" /></p>
+<p>coco , RN50x4</p>
+<p><img alt="" src="_images/my_first_pytti_art3(7)_1.png" /></p>
+<p>coco, ViTB16</p>
+<p><img alt="" src="_images/my_first_pytti_art3(8)_1.png" /></p>
+<p>coco, ViTB32_RN50x4</p>
+<p><img alt="" src="_images/my_first_pytti_art3(9)_1.png" /></p>
+<p>As you can see, changing either the image model or the CLIP model can have a big impact, and may require retuning paramters you had previously tuned for better results.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -894,11 +667,11 @@ You normally shouldn’t need to do this, but if you want to “factory reset”
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="Usage.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="history.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Usage</p>
+            <p class="prev-next-title">A brief history of PyTTI</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Grimoire.html" title="next page">
