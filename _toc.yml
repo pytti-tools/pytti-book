@@ -2,11 +2,11 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: root
+root: intro
+title: Introduction
 parts:
   - caption: Getting Started
     chapters:
-    - file: intro
     - file: Setup
     - file: Usage
     - file: history

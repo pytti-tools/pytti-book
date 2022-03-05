@@ -1,11 +1,10 @@
-# Introduction
+# Introduction 
 
 Recent advances in machine learning have created opportunities for "AI" technologies to assist unlocking creativity in powerful ways. PyTTI is a toolkit that facilitates image generation, animation, and manipulation using processes that could be thought of as a human artist collaborating with AI assistants.
 
-The underlying technology is complex, but you don't need to be a deep learning expert or even know coding of any kind to use these tools. Understanding the underlying technology can be extremely helpful to leveraging it effectively, but it's absolutely not a pre-requisite. You don't even need a powerful computer of your own: you can play with this right now on completely free resources provided by google:
+If you're interested in contributing (even if you aren't a coder and just have an idea for something to add to the documentation), please visit our issue tracker: https://github.com/pytti-tools/pytti-core/issues
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb)
-
+The underlying technology is complex, but you don't need to be a deep learning expert or even know coding of any kind to use these tools. Understanding the underlying technology can be extremely helpful to leveraging it effectively, but it's absolutely not a pre-requisite. You don't even need a powerful computer of your own: you can play with this right now on completely free resources provided by google: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb)
 
 # How it works
 

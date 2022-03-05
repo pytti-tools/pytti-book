@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Python Text-To-Image Tools
+title: PyTTI-Tools
 author: David Marx
 logo: logo.png
 copyright: "2021"
