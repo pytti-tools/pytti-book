@@ -55,11 +55,12 @@ Follow the installation steps for installing pytorch with CUDA/GPU support here:
 
 ### 8. ... More conda installations
 
-    conda install -c conda-forge imageio
-    conda install -c conda-forge pytorch-lightning
-    conda install -c conda-forge kornia
-    conda install -c huggingface transformers
-    conda install scikit-learn pandas
+    conda install conda-forge::imageio \
+     conda-forge::pytorch-lightning \
+     conda-forge::kornia \
+     huggingface::transformers \
+     defaults::scikit-learn \
+     defaults::pandas
 
 ### 9. Install pip dependencies
 
