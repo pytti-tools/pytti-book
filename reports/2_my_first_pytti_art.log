@@ -1,0 +1,55 @@
+Traceback (most recent call last):
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/dmarx/miniconda3/envs/sandbox/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+%%writefile config/conf/my_first_pytti_art.yaml
+# @package _global_
+scenes: The swirling cloud of the wormhole is a metaphor for the inner workings of the mind.
+seed: 123
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+[0;32m/tmp/ipykernel_2270481/386222033.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mget_ipython[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mrun_cell_magic[0m[0;34m([0m[0;34m'writefile'[0m[0;34m,[0m [0;34m'config/conf/my_first_pytti_art.yaml'[0m[0;34m,[0m [0;34m'# @package _global_\nscenes: The swirling cloud of the wormhole is a metaphor for the inner workings of the mind.\nseed: 123\n'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/miniconda3/envs/sandbox/lib/python3.9/site-packages/IPython/core/interactiveshell.py[0m in [0;36mrun_cell_magic[0;34m(self, magic_name, line, cell)[0m
+[1;32m   2417[0m             [0;32mwith[0m [0mself[0m[0;34m.[0m[0mbuiltin_trap[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2418[0m                 [0margs[0m [0;34m=[0m [0;34m([0m[0mmagic_arg_s[0m[0;34m,[0m [0mcell[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2419[0;31m                 [0mresult[0m [0;34m=[0m [0mfn[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2420[0m             [0;32mreturn[0m [0mresult[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2421[0m [0;34m[0m[0m
+
+[0;32m<decorator-gen-98>[0m in [0;36mwritefile[0;34m(self, line, cell)[0m
+
+[0;32m~/miniconda3/envs/sandbox/lib/python3.9/site-packages/IPython/core/magic.py[0m in [0;36m<lambda>[0;34m(f, *a, **k)[0m
+[1;32m    185[0m     [0;31m# but it's overkill for just that one bit of state.[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    186[0m     [0;32mdef[0m [0mmagic_deco[0m[0;34m([0m[0marg[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 187[0;31m         [0mcall[0m [0;34m=[0m [0;32mlambda[0m [0mf[0m[0;34m,[0m [0;34m*[0m[0ma[0m[0;34m,[0m [0;34m**[0m[0mk[0m[0;34m:[0m [0mf[0m[0;34m([0m[0;34m*[0m[0ma[0m[0;34m,[0m [0;34m**[0m[0mk[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    188[0m [0;34m[0m[0m
+[1;32m    189[0m         [0;32mif[0m [0mcallable[0m[0;34m([0m[0marg[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/sandbox/lib/python3.9/site-packages/IPython/core/magics/osm.py[0m in [0;36mwritefile[0;34m(self, line, cell)[0m
+[1;32m    854[0m [0;34m[0m[0m
+[1;32m    855[0m         [0mmode[0m [0;34m=[0m [0;34m'a'[0m [0;32mif[0m [0margs[0m[0;34m.[0m[0mappend[0m [0;32melse[0m [0;34m'w'[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 856[0;31m         [0;32mwith[0m [0mio[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mfilename[0m[0;34m,[0m [0mmode[0m[0;34m,[0m [0mencoding[0m[0;34m=[0m[0;34m'utf-8'[0m[0;34m)[0m [0;32mas[0m [0mf[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    857[0m             [0mf[0m[0;34m.[0m[0mwrite[0m[0;34m([0m[0mcell[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'config/conf/my_first_pytti_art.yaml'
+FileNotFoundError: [Errno 2] No such file or directory: 'config/conf/my_first_pytti_art.yaml'
+

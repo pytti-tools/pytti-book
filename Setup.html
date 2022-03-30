@@ -45,6 +45,8 @@
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -55,7 +57,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage" href="Usage.html" />
-    <link rel="prev" title="PyTTI: Python Text-To-Image Tools" href="intro.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -95,7 +97,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   PyTTI: Python Text-To-Image Tools
+   Introduction
   </a>
  </li>
 </ul>
@@ -483,6 +485,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
+<p>Pytti-Tools can be run without any complex setup – completely for free! – via google colab. The instructions below are for users who would like to install pytti-tools locally. If you would like to use pytti-tools on google colab, click this button to open the colab notebook: <a class="reference external" href="https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -563,16 +566,7 @@ conda install scikit-learn pandas
 </div>
 <div class="section" id="download-pytti-core">
 <h3>10. Download pytti-core<a class="headerlink" href="#download-pytti-core" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  git clone --recurse-submodules -j8 --branch dev https://github.com/pytti-tools/pytti-core
-</pre></div>
-</div>
-<p>Your local directory structure probably looks like this now:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        ├── pytti-notebook
-        │   ├── config
-        │   ├── images_out
-        │   ├── pretrained
-        │   ├── pytti-core
-        │   └── videos
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  git clone --recurse-submodules -j8 https://github.com/pytti-tools/pytti-core
 </pre></div>
 </div>
 </div>
@@ -592,7 +586,13 @@ pip install ./pytti-core
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytti</span><span class="o">.</span><span class="n">warmup</span>
 </pre></div>
 </div>
-<p>If you want to “factory reset” your default.yaml, just delete the config folder and run the command above to rebuild it with PyTTI’s shipped defaults.</p>
+<p>Your local directory structure probably looks something like this now:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        ├── pytti-notebook
+        │   ├── config
+        │   └── pytti-core
+</pre></div>
+</div>
+<p>If you want to “factory reset” your default.yaml, just delete the config folder and run the warmup command above to rebuild it with PyTTI’s shipped defaults.</p>
 </div>
 </div>
 </div>
@@ -661,7 +661,7 @@ pip install ./pytti-core
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">PyTTI: Python Text-To-Image Tools</p>
+            <p class="prev-next-title">Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Usage.html" title="next page">

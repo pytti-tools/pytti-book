@@ -1,5 +1,7 @@
 # Setup
 
+Pytti-Tools can be run without any complex setup -- completely for free! -- via google colab. The instructions below are for users who would like to install pytti-tools locally. If you would like to use pytti-tools on google colab, click this button to open the colab notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pytti-tools/pytti-notebook/blob/main/pyttitools-PYTTI.ipynb)
+
 ## Requirements
 
 * Python 3.x
@@ -65,17 +67,7 @@ Follow the installation steps for installing pytorch with CUDA/GPU support here:
 
 ### 10. Download pytti-core
 
-      git clone --recurse-submodules -j8 --branch dev https://github.com/pytti-tools/pytti-core
-
-Your local directory structure probably looks like this now:
-
-            ├── pytti-notebook
-            │   ├── config
-            │   ├── images_out
-            │   ├── pretrained
-            │   ├── pytti-core
-            │   └── videos
-
+      git clone --recurse-submodules -j8 https://github.com/pytti-tools/pytti-core
 ### 11. Install pytti-core
 
     pip install ./pytti-core/vendor/AdaBins
@@ -92,7 +84,13 @@ If you skip this step, PyTTI will do it for you anyway the first time you import
 python -m pytti.warmup
 ```
 
-If you want to "factory reset" your default.yaml, just delete the config folder and run the command above to rebuild it with PyTTI's shipped defaults.
+Your local directory structure probably looks something like this now:
+
+            ├── pytti-notebook
+            │   ├── config
+            │   └── pytti-core
+
+If you want to "factory reset" your default.yaml, just delete the config folder and run the warmup command above to rebuild it with PyTTI's shipped defaults.
 
 
 # Uninstalling and/or Updating
