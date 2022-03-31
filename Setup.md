@@ -105,9 +105,7 @@ pip uninstall -y pyttitools-adabins pyttitools-gma pyttitools-taming-transformer
 ### 2. Delete PyTTI and any remaining build artifacts from installing it
 
 ```
-rm -rf build
-rm -rf config
-rm -rf pytti-core
+rm -rf build config pytti-core
 ```
 
 ### 3. Downloaded the latest pytti-core and re-install
@@ -116,10 +114,10 @@ rm -rf pytti-core
 git clone --recurse-submodules -j8 https://github.com/pytti-tools/pytti-core
 
 pip install ./pytti-core/vendor/AdaBins
-pip install ./pytti-core/vendor/CLIP
-pip install ./pytti-core/vendor/GMA
-pip install ./pytti-core/vendor/taming-transformers
-pip install ./pytti-core
+ ./pytti-core/vendor/CLIP \
+ ./pytti-core/vendor/GMA \
+ ./pytti-core/vendor/taming-transformers \
+ ./pytti-core
 
 python -m pytti.warmup
 ```
