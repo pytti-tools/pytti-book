@@ -69,6 +69,19 @@ Follow the installation steps for installing pytorch with CUDA/GPU support here:
 ### 10. Download pytti-core
 
       git clone --recurse-submodules -j8 https://github.com/pytti-tools/pytti-core
+<<<<<<< HEAD
+=======
+
+Your local directory structure probably looks like this now:
+
+            ├── pytti-notebook
+            │   ├── config
+            │   ├── images_out
+            │   ├── pretrained
+            │   ├── pytti-core
+            │   └── videos
+
+>>>>>>> Make git clone more concise
 ### 11. Install pytti-core
 
     pip install ./pytti-core/vendor/AdaBins \
