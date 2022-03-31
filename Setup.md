@@ -99,11 +99,7 @@ If you want to "factory reset" your default.yaml, just delete the config folder 
 ### 1. Uninstall PyTTI
 
 ```
-pip uninstall -y ./pytti-core/vendor/AdaBins
-pip uninstall -y ./pytti-core/vendor/CLIP
-pip uninstall -y ./pytti-core/vendor/GMA
-pip uninstall -y ./pytti-core/vendor/taming-transformers
-pip uninstall -y pyttitools-core;
+pip uninstall -y pyttitools-adabins pyttitools-gma pyttitools-taming-transformers clip pyttitools-core
 ```
 
 ### 2. Delete PyTTI and any remaining build artifacts from installing it
