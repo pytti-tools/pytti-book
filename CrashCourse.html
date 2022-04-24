@@ -434,25 +434,25 @@
 </div>
 <p>Let’s see what we got!</p>
 <p>50 steps</p>
-<p><img alt="50 steps" src="_images/my_first_pytti_art_1.png" /></p>
+<p><img alt="50 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_1.png" /></p>
 <p>100 steps</p>
-<p><img alt="100 steps" src="_images/my_first_pytti_art_2.png" /></p>
+<p><img alt="100 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_2.png" /></p>
 <p>150 steps</p>
-<p><img alt="150 steps" src="_images/my_first_pytti_art_3.png" /></p>
+<p><img alt="150 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_3.png" /></p>
 <p>200 steps</p>
-<p><img alt="200 steps" src="_images/my_first_pytti_art_4.png" /></p>
+<p><img alt="200 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_4.png" /></p>
 <p>250 steps</p>
-<p><img alt="250 steps" src="_images/my_first_pytti_art_5.png" /></p>
+<p><img alt="250 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_5.png" /></p>
 <p>300 steps</p>
-<p><img alt="300 steps" src="_images/my_first_pytti_art_6.png" /></p>
+<p><img alt="300 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_6.png" /></p>
 <p>350 steps</p>
-<p><img alt="350 steps" src="_images/my_first_pytti_art_7.png" /></p>
+<p><img alt="350 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_7.png" /></p>
 <p>400 steps</p>
-<p><img alt="400 steps" src="_images/my_first_pytti_art_8.png" /></p>
+<p><img alt="400 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_8.png" /></p>
 <p>450 steps</p>
-<p><img alt="450 steps" src="_images/my_first_pytti_art_9.png" /></p>
+<p><img alt="450 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_9.png" /></p>
 <p>500 steps</p>
-<p><img alt="500 steps" src="_images/my_first_pytti_art_10.png" /></p>
+<p><img alt="500 steps" src="images_out/my_first_pytti_art/my_first_pytti_art_10.png" /></p>
 <p>Great! We have… a trippy image! It looks like the image generation process stabilized around the 6th image there. Each image was 50 steps, so let’s reduce <code class="docutils literal notranslate"><span class="pre">steps_per_scene</span></code> to <code class="docutils literal notranslate"><span class="pre">300</span></code>, which will give us outputs a bit faster.</p>
 <p>I’m digging the random clouds, but I’m not seeing as much “swirling” as I’d like. Let’s see what happens if instead of one big chunk of text, we break our prompt up into several smaller prompts.</p>
 <p>just to make it a little easier to compare experiments, I’ll add a “2” to the config filename and also to the file_namespace.</p>
@@ -486,8 +486,8 @@
 </div>
 </div>
 <p>Let’s compare the same step from those two runs and see the difference:</p>
-<p><img alt="Single long prompt" src="_images/my_first_pytti_art_10.png" />
-<img alt="Several short prompts" src="_images/my_first_pytti_art2_1.png" /></p>
+<p><img alt="Single long prompt" src="images_out/my_first_pytti_art/my_first_pytti_art_10.png" />
+<img alt="Several short prompts" src="images_out/my_first_pytti_art2/my_first_pytti_art2_1.png" /></p>
 <p>OK, similar but different. Let’s see if we can get those clouds back by adding some weight to just that prompt. The default weight is 1: let’s try trippling the influence of “swirling clouds” on our image by applying a weight of 3.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -518,9 +518,9 @@
 </div>
 </div>
 </div>
-<p><img alt="Single long prompt" src="_images/my_first_pytti_art_10.png" />
-<img alt="Several short prompts" src="_images/my_first_pytti_art2_1.png" />
-<img alt="Added weight to clouds" src="_images/my_first_pytti_art3_1.png" /></p>
+<p><img alt="Single long prompt" src="images_out/my_first_pytti_art/my_first_pytti_art_10.png" />
+<img alt="Several short prompts" src="images_out/my_first_pytti_art2/my_first_pytti_art2_1.png" />
+<img alt="Added weight to clouds" src="images_out/my_first_pytti_art3/my_first_pytti_art3_1.png" /></p>
 <p>Very different! I like it.</p>
 <p>I’m curious how our choice of VQGAN and CLIP model(s) affects this image. To experiment, I’m going to use the “multirun” feature of the CLI, which PyTTI adopts from hydra. You can learn more about how hydra works here: <a class="reference external" href="https://hydra.cc/docs/intro/">https://hydra.cc/docs/intro/</a></p>
 <p>Here’s how this will work: I’m going to create a subfolder under <code class="docutils literal notranslate"><span class="pre">config/</span></code> which I can name whatever I want, as long as it doesn’t collide with a name we’re already using for settings. I’d like it to be moderately descriptive, so I’ll call it <code class="docutils literal notranslate"><span class="pre">perceptors</span></code> for the CLIP model settings. Inside this folder, I’ll add a separate config file for each set of parameters I wanna try. In my experiment config, I can now add a <code class="docutils literal notranslate"><span class="pre">perceptors:</span> <span class="pre">___</span></code> argument to specify which set of parameters I want to use.</p>
@@ -622,25 +622,25 @@
 </div>
 <p>Allright, with that taken care of, let’s take a look at our results!</p>
 <p>sflckr, ViTB32 (what we had before, not part of the multirun)</p>
-<p><img alt="" src="_images/my_first_pytti_art3_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3_1.png" /></p>
 <p>sflckr , RN50x4</p>
-<p><img alt="" src="_images/my_first_pytti_art3(1)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(1)_1.png" /></p>
 <p>sflckr , ViTB16</p>
-<p><img alt="" src="_images/my_first_pytti_art3(2)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(2)_1.png" /></p>
 <p>sflckr , ViTB32_RN50x4</p>
-<p><img alt="" src="_images/my_first_pytti_art3(3)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(3)_1.png" /></p>
 <p>imagenet, RN50x4</p>
-<p><img alt="" src="_images/my_first_pytti_art3(4)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(4)_1.png" /></p>
 <p>imagenet, ViTB16</p>
-<p><img alt="" src="_images/my_first_pytti_art3(5)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(5)_1.png" /></p>
 <p>imagenet, ViTB32_RN50x4</p>
-<p><img alt="" src="_images/my_first_pytti_art3(6)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(6)_1.png" /></p>
 <p>coco , RN50x4</p>
-<p><img alt="" src="_images/my_first_pytti_art3(7)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(7)_1.png" /></p>
 <p>coco, ViTB16</p>
-<p><img alt="" src="_images/my_first_pytti_art3(8)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(8)_1.png" /></p>
 <p>coco, ViTB32_RN50x4</p>
-<p><img alt="" src="_images/my_first_pytti_art3(9)_1.png" /></p>
+<p><img alt="" src="images_out/my_first_pytti_art3/my_first_pytti_art3(9)_1.png" /></p>
 <p>As you can see, changing either the image model or the CLIP model can have a big impact, and may require retuning paramters you had previously tuned for better results.</p>
 </div>
 

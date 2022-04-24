@@ -171,7 +171,72 @@ near_plane
 far_plane
 : Farthest depth distance in pixels. (only for `animation_mode:3D`)
 
-## Output controls
+## Audio Reactivity controls
+
+:::{admonition} Experimental Feature
+As of 2022-04-24, this section describes features that are available on the 'test' branch but have not yet been merged into the main release
+:::
+
+input_audio
+: path to audio file.
+
+input_audio_offset
+: timestamp (in seconds) where pytti should start reading audio. Defaults to `0`.
+
+input_audio_filters
+: list of specifications for individual Butterworth bandpass filters.
+
+### Bandpass filter specification
+
+For technical details on how these filters work, see: [Butterworth Bandpass Filters](https://en.wikipedia.org/wiki/Butterworth_filter)
+
+
+variable_name
+: the variable name through which the value of the filter will be referenced in the `weight` expression of the prompt. Subject to rules of python variable naming.
+
+f_center
+: The target frequency of the bandpass filter.
+
+f_width
+: the range of frequencies about the central frequency which the filter will be responsive to.
+
+order
+: the slope of the frequency response. Default is 5. The higher the "order" of the filter, the more closely the frequency response will resemble a square/step function. Decreasing order will make the filter more permissive of frequencies outside of the range strictly specified by the center and width above. See [https://en.wikipedia.org/wiki/Butterworth_filter#Transfer_function](https://en.wikipedia.org/wiki/Butterworth_filter#Transfer_function) for details.
+
+:::{admonition} Example: Audio reactivity specification
+```
+
+scenes:"
+  a photograph of a beautiful spring day:2 | 
+  flowers blooming: 10*fHi |
+
+  coloful sparks: (fHi+fLo) | 
+  sun rays: fHi | 
+  forest: fLo | 
+
+  ominous: fLo/(fLo + fHi) | 
+  hopeful: fHi/(fLo + fHi) | 
+  "
+
+input_audio: '/path/to/audio/source.mp3'
+input_audio_offset: 0
+input_audio_filters:
+- variable_name: fLo
+  f_center: 105
+  f_width: 65
+  order: 5
+- variable_name: fHi
+  f_center: 900
+  f_width: 600
+  order: 5
+
+frames_per_second: 30
+``` 
+Would create two filters named `fLo` and `fHi`, which could then be referenced in the scene specification DSL to tie prompt weights to properties of the input audio at the appropriate time stamp per the specified FPS.
+:::
+
+
+## Output Controls
 
 file_namespace
 : Output directory name.

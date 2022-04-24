@@ -285,8 +285,20 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#audio-reactivity-controls">
+   Audio Reactivity controls
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandpass-filter-specification">
+     Bandpass filter specification
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#output-controls">
-   Output controls
+   Output Controls
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -335,8 +347,20 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#audio-reactivity-controls">
+   Audio Reactivity controls
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bandpass-filter-specification">
+     Bandpass filter specification
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#output-controls">
-   Output controls
+   Output Controls
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -495,8 +519,69 @@
 </dd>
 </dl>
 </div>
+<div class="section" id="audio-reactivity-controls">
+<h2>Audio Reactivity controls<a class="headerlink" href="#audio-reactivity-controls" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-experimental-feature admonition">
+<p class="admonition-title">Experimental Feature</p>
+<p>As of 2022-04-24, this section describes features that are available on the ‘test’ branch but have not yet been merged into the main release</p>
+</div>
+<dl class="simple myst">
+<dt>input_audio</dt><dd><p>path to audio file.</p>
+</dd>
+<dt>input_audio_offset</dt><dd><p>timestamp (in seconds) where pytti should start reading audio. Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt>input_audio_filters</dt><dd><p>list of specifications for individual Butterworth bandpass filters.</p>
+</dd>
+</dl>
+<div class="section" id="bandpass-filter-specification">
+<h3>Bandpass filter specification<a class="headerlink" href="#bandpass-filter-specification" title="Permalink to this headline">¶</a></h3>
+<p>For technical details on how these filters work, see: <a class="reference external" href="https://en.wikipedia.org/wiki/Butterworth_filter">Butterworth Bandpass Filters</a></p>
+<dl class="simple myst">
+<dt>variable_name</dt><dd><p>the variable name through which the value of the filter will be referenced in the <code class="docutils literal notranslate"><span class="pre">weight</span></code> expression of the prompt. Subject to rules of python variable naming.</p>
+</dd>
+<dt>f_center</dt><dd><p>The target frequency of the bandpass filter.</p>
+</dd>
+<dt>f_width</dt><dd><p>the range of frequencies about the central frequency which the filter will be responsive to.</p>
+</dd>
+<dt>order</dt><dd><p>the slope of the frequency response. Default is 5. The higher the “order” of the filter, the more closely the frequency response will resemble a square/step function. Decreasing order will make the filter more permissive of frequencies outside of the range strictly specified by the center and width above. See <a class="reference external" href="https://en.wikipedia.org/wiki/Butterworth_filter#Transfer_function">https://en.wikipedia.org/wiki/Butterworth_filter#Transfer_function</a> for details.</p>
+</dd>
+</dl>
+<div class="admonition-example-audio-reactivity-specification admonition">
+<p class="admonition-title">Example: Audio reactivity specification</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">scenes</span><span class="p">:</span><span class="s2">&quot;</span>
+  <span class="n">a</span> <span class="n">photograph</span> <span class="n">of</span> <span class="n">a</span> <span class="n">beautiful</span> <span class="n">spring</span> <span class="n">day</span><span class="p">:</span><span class="mi">2</span> <span class="o">|</span> 
+  <span class="n">flowers</span> <span class="n">blooming</span><span class="p">:</span> <span class="mi">10</span><span class="o">*</span><span class="n">fHi</span> <span class="o">|</span>
+
+  <span class="n">coloful</span> <span class="n">sparks</span><span class="p">:</span> <span class="p">(</span><span class="n">fHi</span><span class="o">+</span><span class="n">fLo</span><span class="p">)</span> <span class="o">|</span> 
+  <span class="n">sun</span> <span class="n">rays</span><span class="p">:</span> <span class="n">fHi</span> <span class="o">|</span> 
+  <span class="n">forest</span><span class="p">:</span> <span class="n">fLo</span> <span class="o">|</span> 
+
+  <span class="n">ominous</span><span class="p">:</span> <span class="n">fLo</span><span class="o">/</span><span class="p">(</span><span class="n">fLo</span> <span class="o">+</span> <span class="n">fHi</span><span class="p">)</span> <span class="o">|</span> 
+  <span class="n">hopeful</span><span class="p">:</span> <span class="n">fHi</span><span class="o">/</span><span class="p">(</span><span class="n">fLo</span> <span class="o">+</span> <span class="n">fHi</span><span class="p">)</span> <span class="o">|</span> 
+  <span class="s2">&quot;</span>
+
+<span class="n">input_audio</span><span class="p">:</span> <span class="s1">&#39;/path/to/audio/source.mp3&#39;</span>
+<span class="n">input_audio_offset</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">input_audio_filters</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">fLo</span>
+  <span class="n">f_center</span><span class="p">:</span> <span class="mi">105</span>
+  <span class="n">f_width</span><span class="p">:</span> <span class="mi">65</span>
+  <span class="n">order</span><span class="p">:</span> <span class="mi">5</span>
+<span class="o">-</span> <span class="n">variable_name</span><span class="p">:</span> <span class="n">fHi</span>
+  <span class="n">f_center</span><span class="p">:</span> <span class="mi">900</span>
+  <span class="n">f_width</span><span class="p">:</span> <span class="mi">600</span>
+  <span class="n">order</span><span class="p">:</span> <span class="mi">5</span>
+
+<span class="n">frames_per_second</span><span class="p">:</span> <span class="mi">30</span>
+</pre></div>
+</div>
+<p>Would create two filters named <code class="docutils literal notranslate"><span class="pre">fLo</span></code> and <code class="docutils literal notranslate"><span class="pre">fHi</span></code>, which could then be referenced in the scene specification DSL to tie prompt weights to properties of the input audio at the appropriate time stamp per the specified FPS.</p>
+</div>
+</div>
+</div>
 <div class="section" id="output-controls">
-<h2>Output controls<a class="headerlink" href="#output-controls" title="Permalink to this headline">¶</a></h2>
+<h2>Output Controls<a class="headerlink" href="#output-controls" title="Permalink to this headline">¶</a></h2>
 <dl class="simple myst">
 <dt>file_namespace</dt><dd><p>Output directory name.</p>
 </dd>
