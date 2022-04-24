@@ -6,6 +6,8 @@ When we call a particular technology an "AI", we are being extremely generous. I
 * How AI models "perceive" images (hierarchical feature learning): https://distill.pub/2017/feature-visualization/
 * How AI models "perceive" text (contextualized token embeddings, masked language modeling): https://jalammar.github.io/illustrated-bert/
 
+Another rich resource that has a lot of tips for AI art generally and also PyTTI specifically is the [Way of The TTI Artist](https://docs.google.com/document/d/1EvkiHa12ButetruSBr82MJeomHfVRkvczB9-FgqtJ48/mobilebasic#h.43aw9whbrrag), a living document authored/edited by @HeavensLastAngel. 
+
 
 ## Tips for Prompt Engineering
 
