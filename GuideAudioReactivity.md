@@ -2,9 +2,12 @@
 
 PyTTI provides audio reactivity in the form of arbitrary bandpass filters, the signal amplitude of which gets passed into the animation functions.
 
-It may seem like a daunting task to perform tasks like rudimentary beat detection using this basic tool. However, with some basic knowledge about audio signals, we can easily make PyTTI animations "dance" to the input audio.
+## Introduction
 
-## Example: beat detection using bandpass filters
+
+## Advanced Example: beat detection using bandpass filters
+
+It may seem like a daunting task to perform rudimentary beat detection just using filters. However, with some basic knowledge about audio signals, we can easily make PyTTI animations "dance" to the input audio rather accurately.
 
 For this example, we will implement a simple "beat detection" type of animation, where the animation will react simply to the kick drum in a song.
 
@@ -93,7 +96,7 @@ near_plane: 20
 far_plane: 12000
 ```
 
-<video src='assets/dazzled_cut.mp4' width=480/>
+<video src='_static/dazzled_cut.mp4' width=480 controls/>
 
 
 Of course, these concepts can now be applied to almost any characteristic in your audio. You can use filters to react to specific notes in a song, or make it react to other pieces of percussion.
