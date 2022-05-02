@@ -104,7 +104,7 @@ If you've chosen a good value for the upper frequency bound, you may already obs
 
 ![](assets/audio_amplitude_lowpassed.png)
 
-However, in this example, which is an electronic song with a deep sub bass, marked in red, we also have some rhythmic bass notes that still have a high amplitude and would make our animation react to the kick drum too heavily.
+However, in this example, which is an electronic song with a deep sub bass, marked in red, we also have some rhythmic bass notes that still have a high amplitude and would make our animation react to the bass notes too heavily.
 
 To remedy this, we now apply the lower frequency bound of our bandpass filter, by applying a high-pass filter to the signal, at the `f_center-(f_width/2)` frequency. If we want to use the filter order we also used in Audacity, it would be `order=24/6=4` here, as we chose a 24db/octave filter slope.
 
