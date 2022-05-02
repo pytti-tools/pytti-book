@@ -20,6 +20,8 @@ parts:
     - file: Settings
     - file: StudyMatrix
       title: "Study: Cutouts vs. Steps Per Frame"
+    - file: GuideAudioReactivity
+      title: "Guide to Audio Reactivity"
   - caption: Reference
     chapters:
     - file: MiscResources

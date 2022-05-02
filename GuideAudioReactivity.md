@@ -1,0 +1,96 @@
+# Guide to Audio Reactivity
+
+PyTTI provides audio reactivity in the form of arbitrary bandpass filters, the signal amplitude of which gets passed into the animation functions.
+
+It may seem like a daunting task to perform tasks like rudimentary beat detection using this basic tool. However, with some basic knowledge about audio signals, we can easily make PyTTI animations "dance" to the input audio.
+
+## Example: beat detection using bandpass filters
+
+For this example, we will implement a simple "beat detection" type of animation, where the animation will react simply to the kick drum in a song.
+
+### Analyzing audio: spectrogram view
+
+In order to do this, we will need to understand the audio spectrum of our song in its basic form.
+There are several tools that can be helpful here.
+
+Some rudimentary tools to view the spectrogram of any song include [this spectrum analyzer on academo](https://academo.org/demos/spectrum-analyzer/) and [Audacity's spectrogram view](https://manual.audacityteam.org/man/spectrogram_view.html#select).
+Note: Make sure to use a logarithmic frequency scale in any case, as the frequency of a kickdrum usually lies very low on the spectrum and is difficult to observe on a linear frequency scale.
+
+Users of DAWs will also be able to use their respective workstations builtin tools to perform this task.
+
+![Audio spectrogram example with highlighted kickdrums](assets/audio_spectrogram.png)
+
+### Analyzing audio: honing in on the frequency band of the kick drum
+
+For many genres, you may be able to figure out the kick drum's frequency range by simply looking at the spectrogram already.
+When playing the audio, you may be able to simply see the change in amplitude in the lower bass frequency range (~40-100Hz typically) and set your bandpass filter parameters based on that.
+
+However, if you want to or need to hone in more accurately on the exact band the kick drum, you will need to perform some additional analysis.
+
+If you are using a DAW, this is easily done throwing an EQ with a bandpass filter on your audio and sweeping through the spectrum, honing in on the spot where the output amplitude most accurately reflects the kick drum signal.
+For additional context when working with a parametric EQ: the butterworth order can also be easily understood in a typical parametric EQ as the dB/octave parameter: A single butterworth filter-order corresponds to a 6dB/octave slope on the filter, thus a 5th order butterworth filter has a 30dB/octave slope.
+
+If you are using audio editing tools like Audacity, you can use its builtin filtering tools for testing your filter parameter's quality.
+
+First, apply a low-pass filter with a frequency of `f_center+(f_width/2)` and a slope close to the `order` of your desired filter. If you've used the spectrogram until now, you can just guesstimate and progressively get close to the optimal `f_center` and `f_width` (or simply, upper bound) here and start with a 24dB/octave filter.
+
+![](assets/audio_amplitude_lowpass.png)
+
+If you've chosen a good value for the upper frequency bound, you may already observe that the peaks of the amplitude now roughly resemble where the kick drums in the song are located.
+
+![](assets/audio_amplitude_lowpassed.png)
+
+However, in this example, which is an electronic song with a deep sub bass, marked in red, we also have some rhythmic bass notes that still have a high amplitude and would make our animation react to the kick drum too heavily.
+
+To remedy this, we now apply the lower frequency bound of our bandpass filter, by applying a high-pass filter to the signal, at the `f_center-(f_width/2)` frequency. If we want to use the filter order we also used in Audacity, it would be `order=24/6=4` here, as we chose a 24db/octave filter slope.
+
+![](assets/audio_amplitude_hipass.png)
+
+After applying this filter, if the frequency was chosen well, the amplitude of the bass notes should be greatly reduced:
+
+![](assets/audio_amplitude_hipassed.png)
+
+If the signal now resembles the kick drum rhythm relatively accurately (the result above is OK enough to move on), we can now start building animation functions with the filter parameters we chose.
+
+For this example, we chose `(70+112)/2=91` as our `f_center` and `(112-91)*2=42` as our `f_width`.
+
+### Using the signal in animation functions
+
+As you can see in the example amplitude plot, we still have some residual bass signal in our amplitude output, even after all this filtering.
+
+However, the difference in amplitude is significant enough to just deal with it in the animation function.
+
+A simple trick to get rid of the residual signal is to use a function that is reminiscient of a ReLU function:
+`max(fLo-undesired_peak, 0)`
+
+To figure out the `undesired_peak` offset, which corresponds to the peak of the undesired signal which we don't want our animation influenced by, we can simply normalize our filtered audio to 0dB (this is what the PyTTI does internally to give you a full `[0..1]` range of input values from the filtered signal), zoom in to the amplitude peak of the residual signal, and use the amplitude value as the `undesired_peak` offset.
+
+![](assets/audio_residual_signal.png)
+
+For this example, we will use `max(fLo-0.25, 0)` as our motion induction parameter. Since this parameter now only covers the `[0, 0.75]` range, typically you would now multiply this with a larger factor to make sure the motion is visible in the final video.
+
+The values here now depend on other parameters of your scenario like `field_of_view` as well, but generally it's a good idea to start with larger values (I'd recommend starting with ~200 for a FOV of 42 for example).
+
+Here's the motion induction on the audio highlighted in the previous steps using these animation parameters:
+
+```yaml
+animation_mode: 3D
+
+# Reacts to the beat and uses a tiny bit of smoothing using the `filter_var_prev` variable. This can be used to make the movement less abrupt. The 150*sin(1/4*t) motion scaling factor here also modulates over time to switch between translation in the x and y direction
+translate_x: '(max(0, fLo-0.2)*0.6+max(0, fLo_prev-0.2)*0.4)*(150*sin(1/4*t))+0.5'
+translate_y: '(max(0, fLo-0.2)*0.6+max(0, fLo_prev-0.2)*0.4)*(150*cos(1/3*t))-0.3'
+# Some static zooming with the +55 addition and a static motion scaling factor of 150.
+translate_z_3d: '(max(0, fLo-0.2)*0.6+max(0, fLo_prev-0.2)*0.4)*150+55'
+
+# A continuous slight rotation that slowly changes direction over the course of the animation
+rotate_3d: '[0.9999, 0.002*sin(1/5*t), 0, -0.001*cos(1/4*t)]'
+
+lock_camera: false
+# To make sure we get a decent depth of field
+field_of_view: 42
+# AdaBins adjustment
+near_plane: 20
+far_plane: 12000
+```
+
+<video src='assets/dazzled_cut.mp4' width=480/>

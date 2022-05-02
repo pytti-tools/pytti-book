@@ -235,6 +235,8 @@ frames_per_second: 30
 Would create two filters named `fLo` and `fHi`, which could then be referenced in the scene specification DSL to tie prompt weights to properties of the input audio at the appropriate time stamp per the specified FPS.
 :::
 
+For a more detailed example, see [](GuideAudioReactivity).
+
 
 ## Output Controls
 
