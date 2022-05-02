@@ -16,7 +16,8 @@ In order for PyTTI to generate animations that react to audio, 3 parts are neces
 
 We can use a simple drum beat for our audio input. Here's a classic example: The Amen Break (audio from [Wikipedia](https://en.wikipedia.org/wiki/File:The_Amen_Break,_in_context.ogg))
 
-<audio controls src="https://upload.wikimedia.org/wikipedia/en/8/80/The_Amen_Break%2C_in_context.ogg"/>
+<audio controls src="https://upload.wikimedia.org/wikipedia/en/8/80/The_Amen_Break%2C_in_context.ogg">
+</audio>
 
 If we want to generate an animation that reacts to just the kick drum, we can just guesstimate the frequency range of the kick drum.
 
@@ -62,7 +63,7 @@ Running this scenario, we get a rough, audio-less video using PyTTI. We can then
 ffmpeg -itsoffset 5 -i videos\basic_test.mp4 -i E:\Downloads\The_Amen_Break,_in_context.ogg -c:a copy -c:v libx264 -ss 00:00:5.0 -t 00:00:10.0 basic_test_sound.mp4
 ```
 
-<video src='_static/amen_break_example.mp4' width=480 controls/>
+<video src='_static/amen_break_example.mp4' width=480 controls></video>
 
 
 ## Advanced Example: beat detection using bandpass filters
@@ -156,7 +157,7 @@ near_plane: 20
 far_plane: 12000
 ```
 
-<video src='_static/dazzled_cut.mp4' width=480 controls/>
+<video src='_static/dazzled_cut.mp4' width=480 controls></video>
 
 
 Of course, these concepts can now be applied to almost any characteristic in your audio. You can use filters to react to specific notes in a song, or make it react to other pieces of percussion.
