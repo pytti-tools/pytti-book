@@ -94,3 +94,77 @@ far_plane: 12000
 ```
 
 <video src='assets/dazzled_cut.mp4' width=480/>
+
+
+Of course, these concepts can now be applied to almost any characteristic in your audio. You can use filters to react to specific notes in a song, or make it react to other pieces of percussion.
+
+## Other tips
+
+### Plotting animation functions
+
+If you want to make absolutely sure your animation function will work as expected, you can also plot a graph of how PyTTI will modulate your signal over time using this, admittedly very hacky, script (make sure to run it in PyTTIs conda environment):
+
+```python
+from pytti import AudioParse
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+filter = type('', (), {})()
+filter.variable_name='fLo'
+filter.f_center = 84
+filter.f_width = 30
+filter.order = 5
+
+
+func = 'max(0, fLo-0.25)*10'
+filters = [
+    filter
+]
+
+frames_per_second = 18
+
+SAMPLERATE=44100
+
+interval = 1/frames_per_second
+
+offset = 0
+parser = AudioParse.SpectralAudioParser('C:\\path\\to\\my\\audio.mp3', offset, frames_per_second, filters)
+
+duration = parser.get_duration()
+
+steps = int((duration - offset) / interval)
+
+values = {}
+for filter in filters:
+    values[filter.variable_name] = np.array([], dtype=np.float64)
+
+math_env = {
+    "abs": abs,
+    "max": max,
+    "min": min,
+    "pow": pow,
+    "round": round,
+    "__builtins__": None,
+}
+math_env.update(
+    {key: getattr(math, key) for key in dir(math) if "_" not in key}
+)
+evald_values = np.array([], dtype=np.float64)
+
+for i in range (0, steps):
+    t = i * interval
+    params = parser.get_params(t)
+    for param in params:
+        math_env[param] = params[param]
+        values[param] = np.append(values[param], params[param])
+    evald_values = np.append(evald_values, eval(func, math_env))
+
+tx = np.linspace(0, steps, num=steps) * interval
+
+for filter in filters:
+    plt.plot(tx, values[filter.variable_name], label=f'raw_bp{filter.variable_name}')
+plt.plot(tx, evald_values, label='func')
+
+plt.show()
+```
