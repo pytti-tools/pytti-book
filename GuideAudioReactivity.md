@@ -60,7 +60,7 @@ Running this scenario, we get a rough, audio-less video using PyTTI. We can then
 
 ```shell
 # offset the audio by 5s, then offset the output by 5s and render a total length of 10s of video.
-ffmpeg -itsoffset 5 -i videos\basic_test.mp4 -i E:\Downloads\The_Amen_Break,_in_context.ogg -c:a copy -c:v libx264 -ss 00:00:5.0 -t 00:00:10.0 basic_test_sound.mp4
+ffmpeg -itsoffset 5 -i videos\basic_test.mp4 -i path\to\The_Amen_Break,_in_context.ogg -c:a copy -c:v libx264 -ss 00:00:5.0 -t 00:00:10.0 basic_test_sound.mp4
 ```
 
 <video src='_static/amen_break_example.mp4' width=480 controls></video>
