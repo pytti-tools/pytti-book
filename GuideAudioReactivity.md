@@ -2,7 +2,67 @@
 
 PyTTI provides audio reactivity in the form of arbitrary bandpass filters, the signal amplitude of which gets passed into the animation functions.
 
-## Introduction
+## What's audio reactivity?
+
+In PyTTIs context, audio reactivity describes an animation reacting to an audio input.
+
+In order for PyTTI to generate animations that react to audio, 3 parts are necessary:
+
+- an audio file PyTTI should react to
+- one or more [bandpass filter](https://en.wikipedia.org/wiki/Band-pass_filter) parameters to run on that audio, including a variable name. For filtering out different elements from the audio.
+- an animation function (see also: [Settings](Settings#motion-controls)) that uses the variable name you declared, for generating motion in the resulting video based on your audio.
+
+## Simple Example: reacting to drum beat audio
+
+We can use a simple drum beat for our audio input. Here's a classic example: The Amen Break (audio from [Wikipedia](https://en.wikipedia.org/wiki/File:The_Amen_Break,_in_context.ogg))
+
+<audio controls src="https://upload.wikimedia.org/wikipedia/en/8/80/The_Amen_Break%2C_in_context.ogg"/>
+
+If we want to generate an animation that reacts to just the kick drum, we can just guesstimate the frequency range of the kick drum.
+
+For a general ballpark figure of various percussion pieces, you can look up frequency ranges of various instruments, like [this](https://www.zytrax.com/tech/audio/audio.html) table quoting a range of 60Hz-100Hz for a kick drum.
+
+Using this information we can configure our example scenario:
+
+```yaml
+input_audio: /path/to/The_Amen_Break,_in_context.ogg
+# We want to skip the lead-in context with the brass instruments, so we just skip the first 5 seconds.
+input_audio_offset: 5
+input_audio_filters:
+- # The name of the variable we will use in the animation function
+  variable_name: fLo
+  # We just use an arbitrary frequency from the range quoted above (80Hz)
+  f_center: 80
+  # The filter will pass signals from 70Hz to 90Hz
+  f_width: 20
+  # The filter slope will be 6*6=36dB per octave
+  order: 6
+
+scenes: the winsons performing the song "Amen, Brother", oil on canvas, trending on ArtStation
+
+# We want a 3D animation
+animation_mode: 3D
+# Move in the x direction when the kick drum hits
+translate_x: 'fLo*150'
+# Move in the y direction when the kick drum hits
+translate_y: 'fLo*150'
+# Zoom in the z direction when the kick drum hits
+translate_z_3d: 'fLo*150'
+
+# Just generate a rough sketch at low resolution with low framerate for quick generation
+width: 640
+height: 480
+frames_per_second: 15
+```
+
+Running this scenario, we get a rough, audio-less video using PyTTI. We can then concatenate this with the audio to create a animated video:
+
+```shell
+# offset the audio by 5s, then offset the output by 5s and render a total length of 10s of video.
+ffmpeg -itsoffset 5 -i videos\basic_test.mp4 -i E:\Downloads\The_Amen_Break,_in_context.ogg -c:a copy -c:v libx264 -ss 00:00:5.0 -t 00:00:10.0 basic_test_sound.mp4
+```
+
+<video src='_static/amen_break_example.mp4' width=480 controls/>
 
 
 ## Advanced Example: beat detection using bandpass filters
