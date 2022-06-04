@@ -18,8 +18,10 @@ parts:
     chapters:
     - file: SceneDSL
     - file: Settings
+  - caption: Reference and Research
+    chapters:
     - file: StudyMatrix
       title: "Study: Cutouts vs. Steps Per Frame"
-  - caption: Reference
-    chapters:
+    - file: widget_understanding_limited_palette
     - file: MiscResources
+
