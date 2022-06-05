@@ -23,5 +23,6 @@ parts:
     - file: StudyMatrix
       title: "Study: Cutouts vs. Steps Per Frame"
     - file: widget_understanding_limited_palette
+    - file: widget_vqgans_and_perceptors
     - file: MiscResources
 
