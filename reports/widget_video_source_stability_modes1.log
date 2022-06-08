@@ -1,0 +1,129 @@
+Traceback (most recent call last):
+  File "/home/dmarx/.local/share/virtualenvs/pytti-book-l72HEyWC/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/dmarx/.local/share/virtualenvs/pytti-book-l72HEyWC/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/dmarx/.local/share/virtualenvs/pytti-book-l72HEyWC/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/dmarx/.local/share/virtualenvs/pytti-book-l72HEyWC/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/dmarx/.local/share/virtualenvs/pytti-book-l72HEyWC/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/dmarx/.local/share/virtualenvs/pytti-book-l72HEyWC/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/dmarx/.local/share/virtualenvs/pytti-book-l72HEyWC/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+#import re
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import panel as pn
+
+pn.extension()
+
+outputs_root = Path('images_out')
+folder_prefix = 'exp_video_basic_stability_modes' #'permutations_limited_palette_2D'
+folders = list(outputs_root.glob(f'{folder_prefix}_*'))
+
+def format_val(v):
+    try:
+        v = float(v)
+        if int(v) == v:
+            v = int(v)
+    except:
+        pass
+    return v
+
+# to do-fix this regex
+def parse_folder_name(folder):
+    #metadata_string = folder.name[1+len(folder_prefix):]
+    #pattern = r"_?([a-zA-Z_]+)-([0-9.]+)"
+    #matches = re.findall(pattern, metadata_string)
+    #d_ = {k:format_val(v) for k,v in matches}
+    _, metadata_string = folder.name.split('__')
+    d_ = {k:1 for k in metadata_string.split('_')}
+    d_['fpath'] = folder
+    d_['n_images'] = len(list(folder.glob('*.png')))
+    return d_
+
+#let's just make each model a column
+df_meta = pd.DataFrame([parse_folder_name(f) for f in folders]).fillna(0)
+
+variant_names = [v for v in df_meta.columns.tolist() if v not in ['fpath']]
+variant_ranges = {v:df_meta[v].unique() for v in variant_names}
+[v.sort() for v in variant_ranges.values()]
+
+###########################
+
+url_prefix = "https://raw.githubusercontent.com/dmarx/pytti-settings-test/main/images_out/"
+
+image_paths = [str(p) for p in Path('images_out').glob('**/*.png')]
+d_image_urls = {im_path:im_path.replace('images_out/', url_prefix) for im_path in image_paths}
+
+###########################
+
+def setting_name_shorthand(setting_name):
+    return ''.join([tok[0] for tok in setting_name.split('_')])
+
+n_imgs_per_group = 20
+
+kargs = {k:pn.widgets.DiscreteSlider(name=k, options=list(v), value=v[0]) for k,v in variant_ranges.items()}
+kargs['i'] = pn.widgets.Player(interval=300, name='step', start=1, end=n_imgs_per_group, step=1, value=1, loop_policy='reflect')
+
+
+@pn.interact(
+    **kargs
+)
+def display_images(
+    ref,
+    dsw,
+    ssw,
+    i,
+):
+    folder = df_meta[
+        (ref == df_meta['ref']) &
+        (dsw == df_meta['dsw']) &
+        (ssw == df_meta['ssw'])
+    ]['fpath'].values[0]
+    im_path = str(folder / f"{folder.name}_{i}.png")
+    im_url = d_image_urls[im_path]
+    #im_url = im_path
+    return pn.pane.HTML(f'<img src="{im_url}" width="700">', width=700, height=350, sizing_mode='fixed')
+
+pn.panel(display_images).embed(max_opts=n_imgs_per_group, max_states=999999999)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Input [0;32mIn [1][0m, in [0;36m<cell line: 36>[0;34m()[0m
+[1;32m     33[0m     [38;5;28;01mreturn[39;00m d_
+[1;32m     35[0m [38;5;66;03m#let's just make each model a column[39;00m
+[0;32m---> 36[0m df_meta [38;5;241m=[39m pd[38;5;241m.[39mDataFrame([parse_folder_name(f) [38;5;28;01mfor[39;00m f [38;5;129;01min[39;00m folders])[38;5;241m.[39mfillna([38;5;241m0[39m)
+[1;32m     38[0m variant_names [38;5;241m=[39m [v [38;5;28;01mfor[39;00m v [38;5;129;01min[39;00m df_meta[38;5;241m.[39mcolumns[38;5;241m.[39mtolist() [38;5;28;01mif[39;00m v [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m [[38;5;124m'[39m[38;5;124mfpath[39m[38;5;124m'[39m]]
+[1;32m     39[0m variant_ranges [38;5;241m=[39m {v:df_meta[v][38;5;241m.[39munique() [38;5;28;01mfor[39;00m v [38;5;129;01min[39;00m variant_names}
+
+Input [0;32mIn [1][0m, in [0;36m<listcomp>[0;34m(.0)[0m
+[1;32m     33[0m     [38;5;28;01mreturn[39;00m d_
+[1;32m     35[0m [38;5;66;03m#let's just make each model a column[39;00m
+[0;32m---> 36[0m df_meta [38;5;241m=[39m pd[38;5;241m.[39mDataFrame([[43mparse_folder_name[49m[43m([49m[43mf[49m[43m)[49m [38;5;28;01mfor[39;00m f [38;5;129;01min[39;00m folders])[38;5;241m.[39mfillna([38;5;241m0[39m)
+[1;32m     38[0m variant_names [38;5;241m=[39m [v [38;5;28;01mfor[39;00m v [38;5;129;01min[39;00m df_meta[38;5;241m.[39mcolumns[38;5;241m.[39mtolist() [38;5;28;01mif[39;00m v [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m [[38;5;124m'[39m[38;5;124mfpath[39m[38;5;124m'[39m]]
+[1;32m     39[0m variant_ranges [38;5;241m=[39m {v:df_meta[v][38;5;241m.[39munique() [38;5;28;01mfor[39;00m v [38;5;129;01min[39;00m variant_names}
+
+Input [0;32mIn [1][0m, in [0;36mparse_folder_name[0;34m(folder)[0m
+[1;32m     24[0m [38;5;28;01mdef[39;00m [38;5;21mparse_folder_name[39m(folder):
+[1;32m     25[0m     [38;5;66;03m#metadata_string = folder.name[1+len(folder_prefix):][39;00m
+[1;32m     26[0m     [38;5;66;03m#pattern = r"_?([a-zA-Z_]+)-([0-9.]+)"[39;00m
+[1;32m     27[0m     [38;5;66;03m#matches = re.findall(pattern, metadata_string)[39;00m
+[1;32m     28[0m     [38;5;66;03m#d_ = {k:format_val(v) for k,v in matches}[39;00m
+[0;32m---> 29[0m     _, metadata_string [38;5;241m=[39m folder[38;5;241m.[39mname[38;5;241m.[39msplit([38;5;124m'[39m[38;5;124m__[39m[38;5;124m'[39m)
+[1;32m     30[0m     d_ [38;5;241m=[39m {k:[38;5;241m1[39m [38;5;28;01mfor[39;00m k [38;5;129;01min[39;00m metadata_string[38;5;241m.[39msplit([38;5;124m'[39m[38;5;124m_[39m[38;5;124m'[39m)}
+[1;32m     31[0m     d_[[38;5;124m'[39m[38;5;124mfpath[39m[38;5;124m'[39m] [38;5;241m=[39m folder
+
+[0;31mValueError[0m: not enough values to unpack (expected 2, got 1)
+ValueError: not enough values to unpack (expected 2, got 1)
+
