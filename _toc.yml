@@ -24,5 +24,6 @@ parts:
       title: "Study: Cutouts vs. Steps Per Frame"
     - file: widget_understanding_limited_palette
     - file: widget_vqgans_and_perceptors
+    - file: widget_video_source_stability_modes1
     - file: MiscResources
 
